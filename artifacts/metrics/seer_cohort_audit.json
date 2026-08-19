@@ -1,0 +1,48 @@
+{
+  "eligible_patient_structure": {
+    "ambiguous_tie_records": 0,
+    "eligible_unique_patients": 731278,
+    "maximum_records_per_patient": 4,
+    "patients_with_conflicting_targets": 7760,
+    "patients_with_multiple_records": 24805
+  },
+  "flow": {
+    "eligible_records": 756344,
+    "final_index_records": 731278,
+    "invalid_target_records_after_age_filter": 0,
+    "raw_records": 756356,
+    "records_removed_as_non_index": 25066,
+    "under_age_records": 12,
+    "unparseable_age_records": 0
+  },
+  "index_cohort": {
+    "maximum_age": 90,
+    "maximum_year": 2023,
+    "median_age": 61.0,
+    "minimum_age": 18,
+    "minimum_year": 2010,
+    "n0": 503794,
+    "n_positive": 227484,
+    "n_positive_percent": 31.1077,
+    "records": 731278,
+    "unique_patients": 731278
+  },
+  "private_output": {
+    "columns": 25,
+    "file_name": "seer_index_cohort.parquet",
+    "rows": 731278,
+    "sha256": "5758f119042f67d2153796b3d68a7e740fc13f86ac0cc3d5eb84c588c98939d0",
+    "size_bytes": 8448900
+  },
+  "selection_rule": {
+    "ambiguous_ties_allowed": false,
+    "minimum_age": 18,
+    "primary_sort": "earliest diagnosis year",
+    "secondary_sort": "smallest sequence rank"
+  },
+  "source_file": {
+    "file_name": "seer_breast_nodes_2010_2023_codes.csv",
+    "sha256": "b8ac1b36a21f448851d243970ccdb8ae57f1c5abb4dd6740c88914fbfbfc5edd",
+    "size_bytes": 209252259
+  }
+}
