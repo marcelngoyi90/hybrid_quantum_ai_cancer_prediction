@@ -1,0 +1,5 @@
+split,patients,n0,n_positive,n_positive_percent,minimum_year,maximum_year
+train,461292,316475,144817,31.3938,2010,2019
+id_val,51241,35157,16084,31.3889,2010,2019
+temporal_val,107249,74137,33112,30.8739,2020,2021
+temporal_test,111496,78025,33471,30.0199,2022,2023

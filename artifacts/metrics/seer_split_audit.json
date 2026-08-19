@@ -1,0 +1,86 @@
+{
+  "configuration": {
+    "assignment_method": "sha256_rank_within_stratum",
+    "development_year_end": 2019,
+    "development_year_start": 2010,
+    "hash_salt": "seer_index_cohort_split_v1",
+    "internal_validation_fraction": 0.1,
+    "internal_validation_name": "id_val",
+    "internal_validation_strata": [
+      "year_numeric",
+      "node_positive_target"
+    ],
+    "split_column": "split",
+    "temporal_test_locked": true,
+    "temporal_test_name": "temporal_test",
+    "temporal_test_year_end": 2023,
+    "temporal_test_year_start": 2022,
+    "temporal_validation_name": "temporal_val",
+    "temporal_validation_year_end": 2021,
+    "temporal_validation_year_start": 2020,
+    "training_name": "train",
+    "version": "1.0"
+  },
+  "development_patients": 512533,
+  "files": {
+    "configuration": {
+      "file_name": "seer_splits.json",
+      "sha256": "2c0356959a48f9477bcb0b75a990665d4330c04ea53c345c210f233bb16ad5f0",
+      "size_bytes": 719
+    },
+    "input_cohort": {
+      "file_name": "seer_index_cohort.parquet",
+      "sha256": "5758f119042f67d2153796b3d68a7e740fc13f86ac0cc3d5eb84c588c98939d0",
+      "size_bytes": 8448900
+    },
+    "private_split_cohort": {
+      "columns": 26,
+      "file_name": "seer_index_cohort_with_splits.parquet",
+      "rows": 731278,
+      "sha256": "bb03ce84c542c9c1235d8ec8a5c755c8e61afe2e6d7ac9e389250d102ce462be",
+      "size_bytes": 8540376
+    }
+  },
+  "internal_validation_patients": 51241,
+  "split_summary": {
+    "id_val": {
+      "maximum_year": 2019,
+      "minimum_year": 2010,
+      "n0": 35157,
+      "n_positive": 16084,
+      "n_positive_percent": 31.3889,
+      "patients": 51241
+    },
+    "temporal_test": {
+      "maximum_year": 2023,
+      "minimum_year": 2022,
+      "n0": 78025,
+      "n_positive": 33471,
+      "n_positive_percent": 30.0199,
+      "patients": 111496
+    },
+    "temporal_val": {
+      "maximum_year": 2021,
+      "minimum_year": 2020,
+      "n0": 74137,
+      "n_positive": 33112,
+      "n_positive_percent": 30.8739,
+      "patients": 107249
+    },
+    "train": {
+      "maximum_year": 2019,
+      "minimum_year": 2010,
+      "n0": 316475,
+      "n_positive": 144817,
+      "n_positive_percent": 31.3938,
+      "patients": 461292
+    }
+  },
+  "total_patients": 731278,
+  "validation": {
+    "all_periods_non_overlapping": true,
+    "duplicate_patient_ids": 0,
+    "missing_split_assignments": 0,
+    "temporary_hash_stored": false
+  }
+}
