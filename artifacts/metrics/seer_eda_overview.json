@@ -1,0 +1,67 @@
+{
+  "age": {
+    "maximum": 90,
+    "median": 61.0,
+    "minimum": 5,
+    "unparseable": 0
+  },
+  "grade": {
+    "from_2018_new_grade_blank": 0,
+    "from_2018_old_grade_blank": 343676,
+    "from_2018_records": 343676,
+    "pre_2018_new_grade_blank": 412680,
+    "pre_2018_old_grade_blank": 0,
+    "pre_2018_records": 412680,
+    "unified_grade_counts": {
+      "1": 170504,
+      "2": 310401,
+      "3": 192023,
+      "4": 333,
+      "unknown": 83095
+    }
+  },
+  "patients": {
+    "maximum_records_per_patient": 4,
+    "patients_crossing_2019_2020": 4489,
+    "patients_crossing_2021_2022": 2608,
+    "patients_with_conflicting_targets": 7760,
+    "patients_with_multiple_records": 24805,
+    "unique_patients": 731290
+  },
+  "records": {
+    "exact_duplicate_records": 0,
+    "raw_columns": 19,
+    "total_records": 756356
+  },
+  "selected_variable_checks": {
+    "age_label_unique_values": 78,
+    "diagnostic_confirmation_counts": {
+      "Clinical diagnosis only": 12,
+      "Positive exfoliative cytology, no positive histology": 828,
+      "Positive histology": 755253,
+      "Positive laboratory test/marker study": 2,
+      "Positive microscopic confirm, method not specified": 135,
+      "Radiography without microscopic confirm": 91,
+      "Unknown": 35
+    },
+    "tumor_size_unique_values": 156
+  },
+  "source": {
+    "csv_file": "seer_breast_nodes_2010_2023_codes.csv",
+    "csv_sha256": "b8ac1b36a21f448851d243970ccdb8ae57f1c5abb4dd6740c88914fbfbfc5edd",
+    "csv_size_bytes": 209252259,
+    "dictionary_file": "seer_breast_nodes_2010_2023_codes.dic",
+    "dictionary_sha256": "84b6636380c043a06db089efa170768adced361dc51d1176fa56abcaf3d6030f"
+  },
+  "target": {
+    "invalid_or_excluded": 0,
+    "n0": 523139,
+    "n_positive": 233217,
+    "n_positive_percent": 30.8343
+  },
+  "year": {
+    "maximum": 2023,
+    "minimum": 2010,
+    "unparseable": 0
+  }
+}

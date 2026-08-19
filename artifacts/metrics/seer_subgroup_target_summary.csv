@@ -1,0 +1,176 @@
+variable,category,records,n0,n_positive,n_positive_percent
+Breast Subtype (2010+),HR+/HER2-,538839,380747,158092,29.3394
+Breast Subtype (2010+),HR-/HER2-,79974,54106,25868,32.3455
+Breast Subtype (2010+),HR+/HER2+,74688,46666,28022,37.5187
+Breast Subtype (2010+),HR-/HER2+,31543,18838,12705,40.2784
+Breast Subtype (2010+),Unknown,30538,22069,8469,27.7327
+Breast Subtype (2010+),Recode not available,774,713,61,7.8811
+Derived HER2 Recode (2010+),Negative,619563,435334,184229,29.7353
+Derived HER2 Recode (2010+),Positive,106499,65653,40846,38.3534
+Derived HER2 Recode (2010+),Borderline/Unknown,29520,21439,8081,27.3747
+Derived HER2 Recode (2010+),Recode not available,774,713,61,7.8811
+ER Status Recode Breast Cancer (1990+),Positive,623798,435714,188084,30.1514
+ER Status Recode Breast Cancer (1990+),Negative,122191,80383,41808,34.2153
+ER Status Recode Breast Cancer (1990+),Borderline/Unknown,9593,6329,3264,34.0248
+ER Status Recode Breast Cancer (1990+),Recode not available,774,713,61,7.8811
+Histologic Type ICD-O-3,8500,582702,403244,179458,30.7976
+Histologic Type ICD-O-3,8520,76008,50473,25535,33.5951
+Histologic Type ICD-O-3,8522,38079,24506,13573,35.6443
+Histologic Type ICD-O-3,8523,14746,11072,3674,24.9152
+Histologic Type ICD-O-3,8480,13521,12224,1297,9.5925
+Histologic Type ICD-O-3,8211,3577,3432,145,4.0537
+Histologic Type ICD-O-3,8575,3466,2678,788,22.7351
+Histologic Type ICD-O-3,8507,3025,1569,1456,48.1322
+Histologic Type ICD-O-3,8010,2788,1196,1592,57.1019
+Histologic Type ICD-O-3,8503,1965,1615,350,17.8117
+Histologic Type ICD-O-3,8140,1877,562,1315,70.0586
+Histologic Type ICD-O-3,8524,1319,878,441,33.4344
+Histologic Type ICD-O-3,8401,1199,808,391,32.6105
+Histologic Type ICD-O-3,8530,1163,230,933,80.2236
+Histologic Type ICD-O-3,8541,1058,616,442,41.7769
+Histologic Type ICD-O-3,8201,1054,896,158,14.9905
+Histologic Type ICD-O-3,8510,943,744,199,21.1029
+Histologic Type ICD-O-3,8050,915,798,117,12.7869
+Histologic Type ICD-O-3,8509,644,566,78,12.1118
+Histologic Type ICD-O-3,8504,639,581,58,9.0767
+Histologic Type ICD-O-3,8200,591,564,27,4.5685
+Histologic Type ICD-O-3,8543,505,483,22,4.3564
+Histologic Type ICD-O-3,9020,394,374,20,5.0761
+Histologic Type ICD-O-3,8521,388,272,116,29.8969
+Histologic Type ICD-O-3,8000,365,186,179,49.0411
+Histologic Type ICD-O-3,8255,358,267,91,25.419
+Histologic Type ICD-O-3,8501,188,150,38,20.2128
+Histologic Type ICD-O-3,8032,179,161,18,10.0559
+Histologic Type ICD-O-3,8540,173,156,17,9.8266
+Histologic Type ICD-O-3,8574,173,100,73,42.1965
+Histologic Type ICD-O-3,8070,167,96,71,42.515
+Histologic Type ICD-O-3,8246,160,93,67,41.875
+Histologic Type ICD-O-3,8022,159,96,63,39.6226
+Histologic Type ICD-O-3,9120,142,130,12,8.4507
+Histologic Type ICD-O-3,8260,139,115,24,17.2662
+Histologic Type ICD-O-3,8560,128,107,21,16.4062
+Histologic Type ICD-O-3,8230,111,90,21,18.9189
+Histologic Type ICD-O-3,8980,99,79,20,20.202
+Histologic Type ICD-O-3,8041,92,45,47,51.087
+Histologic Type ICD-O-3,8502,85,73,12,14.1176
+Histologic Type ICD-O-3,8571,67,56,11,16.4179
+Histologic Type ICD-O-3,8343,66,65,1,1.5152
+Histologic Type ICD-O-3,8490,65,36,29,44.6154
+Histologic Type ICD-O-3,8481,60,39,21,35.0
+Histologic Type ICD-O-3,8513,56,44,12,21.4286
+Histologic Type ICD-O-3,8572,49,43,6,12.2449
+Histologic Type ICD-O-3,8570,45,36,9,20.0
+Histologic Type ICD-O-3,8033,40,26,14,35.0
+Histologic Type ICD-O-3,8046,33,6,27,81.8182
+Histologic Type ICD-O-3,8323,31,26,5,16.129
+Histologic Type ICD-O-3,8071,30,20,10,33.3333
+Histologic Type ICD-O-3,8800,30,27,3,10.0
+Histologic Type ICD-O-3,8035,27,23,4,14.8148
+Histologic Type ICD-O-3,8249,26,15,11,42.3077
+Histologic Type ICD-O-3,8573,21,18,3,14.2857
+Histologic Type ICD-O-3,8240,20,16,4,20.0
+Histologic Type ICD-O-3,8315,20,9,11,55.0
+Histologic Type ICD-O-3,8550,20,16,4,20.0
+Histologic Type ICD-O-3,8525,19,15,4,21.0526
+Histologic Type ICD-O-3,8983,19,19,0,0.0
+Histologic Type ICD-O-3,8013,18,11,7,38.8889
+Histologic Type ICD-O-3,8982,18,18,0,0.0
+Histologic Type ICD-O-3,8123,17,13,4,23.5294
+Histologic Type ICD-O-3,8310,17,12,5,29.4118
+Histologic Type ICD-O-3,8801,17,16,1,5.8824
+Histologic Type ICD-O-3,8802,16,15,1,6.25
+Histologic Type ICD-O-3,8430,15,13,2,13.3333
+Histologic Type ICD-O-3,8890,13,13,0,0.0
+Histologic Type ICD-O-3,8021,12,7,5,41.6667
+Histologic Type ICD-O-3,9180,12,12,0,0.0
+Histologic Type ICD-O-3,8020,11,3,8,72.7273
+Histologic Type ICD-O-3,8805,11,11,0,0.0
+Histologic Type ICD-O-3,8004,10,9,1,10.0
+Histologic Type ICD-O-3,8453,8,6,2,25.0
+Histologic Type ICD-O-3,8012,6,2,4,66.6667
+Histologic Type ICD-O-3,8141,6,4,2,33.3333
+Histologic Type ICD-O-3,8512,6,4,2,33.3333
+Histologic Type ICD-O-3,8562,6,6,0,0.0
+Histologic Type ICD-O-3,8005,5,3,2,40.0
+Histologic Type ICD-O-3,8082,5,4,1,20.0
+Histologic Type ICD-O-3,8147,5,2,3,60.0
+Histologic Type ICD-O-3,8410,5,4,1,20.0
+Histologic Type ICD-O-3,8935,5,5,0,0.0
+Histologic Type ICD-O-3,8072,4,3,1,25.0
+Histologic Type ICD-O-3,8265,4,2,2,50.0
+Histologic Type ICD-O-3,8341,4,2,2,50.0
+Histologic Type ICD-O-3,8470,4,4,0,0.0
+Histologic Type ICD-O-3,8900,4,4,0,0.0
+Histologic Type ICD-O-3,8074,3,3,0,0.0
+Histologic Type ICD-O-3,8314,3,2,1,33.3333
+Histologic Type ICD-O-3,8344,3,3,0,0.0
+Histologic Type ICD-O-3,8804,3,2,1,33.3333
+Histologic Type ICD-O-3,8811,3,3,0,0.0
+Histologic Type ICD-O-3,8001,2,1,1,50.0
+Histologic Type ICD-O-3,8030,2,0,2,100.0
+Histologic Type ICD-O-3,8076,2,2,0,0.0
+Histologic Type ICD-O-3,8083,2,1,1,50.0
+Histologic Type ICD-O-3,8251,2,1,1,50.0
+Histologic Type ICD-O-3,8460,2,2,0,0.0
+Histologic Type ICD-O-3,8542,2,2,0,0.0
+Histologic Type ICD-O-3,8810,2,2,0,0.0
+Histologic Type ICD-O-3,8830,2,2,0,0.0
+Histologic Type ICD-O-3,8850,2,2,0,0.0
+Histologic Type ICD-O-3,9041,2,2,0,0.0
+Histologic Type ICD-O-3,8042,1,1,0,0.0
+Histologic Type ICD-O-3,8090,1,1,0,0.0
+Histologic Type ICD-O-3,8130,1,1,0,0.0
+Histologic Type ICD-O-3,8210,1,1,0,0.0
+Histologic Type ICD-O-3,8243,1,1,0,0.0
+Histologic Type ICD-O-3,8290,1,0,1,100.0
+Histologic Type ICD-O-3,8320,1,0,1,100.0
+Histologic Type ICD-O-3,8471,1,1,0,0.0
+Histologic Type ICD-O-3,8482,1,1,0,0.0
+Histologic Type ICD-O-3,8720,1,0,1,100.0
+Histologic Type ICD-O-3,8803,1,1,0,0.0
+Histologic Type ICD-O-3,8825,1,1,0,0.0
+Histologic Type ICD-O-3,8832,1,1,0,0.0
+Histologic Type ICD-O-3,8854,1,1,0,0.0
+Histologic Type ICD-O-3,8858,1,1,0,0.0
+Histologic Type ICD-O-3,8912,1,1,0,0.0
+Histologic Type ICD-O-3,8920,1,0,1,100.0
+Histologic Type ICD-O-3,8990,1,1,0,0.0
+Histologic Type ICD-O-3,9040,1,1,0,0.0
+Histologic Type ICD-O-3,9064,1,0,1,100.0
+Histologic Type ICD-O-3,9133,1,0,1,100.0
+Histologic Type ICD-O-3,9170,1,1,0,0.0
+Histologic Type ICD-O-3,9181,1,1,0,0.0
+Histologic Type ICD-O-3,9220,1,1,0,0.0
+Histologic Type ICD-O-3,9231,1,1,0,0.0
+Histologic Type ICD-O-3,9364,1,1,0,0.0
+Histologic Type ICD-O-3,9561,1,1,0,0.0
+Laterality,Left - origin of primary,383024,264803,118221,30.8652
+Laterality,Right - origin of primary,372739,258220,114519,30.7236
+Laterality,"Paired site, but no information concerning laterality",420,64,356,84.7619
+Laterality,"Bilateral, single primary",103,18,85,82.5243
+Laterality,Only one side - side unspecified,70,34,36,51.4286
+"Origin recode NHIA (Hispanic, Non-Hisp)",Non-Spanish-Hispanic-Latino,654671,458466,196205,29.97
+"Origin recode NHIA (Hispanic, Non-Hisp)",Spanish-Hispanic-Latino,101685,64673,37012,36.3987
+PR Status Recode Breast Cancer (1990+),Positive,543369,381265,162104,29.8331
+PR Status Recode Breast Cancer (1990+),Negative,200772,133464,67308,33.5246
+PR Status Recode Breast Cancer (1990+),Borderline/Unknown,11441,7697,3744,32.7244
+PR Status Recode Breast Cancer (1990+),Recode not available,774,713,61,7.8811
+Primary Site - labeled,C50.4-Upper-outer quadrant of breast,261638,180895,80743,30.8606
+Primary Site - labeled,C50.8-Overlapping lesion of breast,176174,124263,51911,29.4658
+Primary Site - labeled,C50.2-Upper-inner quadrant of breast,96430,77295,19135,19.8434
+Primary Site - labeled,"C50.9-Breast, NOS",80180,42724,37456,46.7149
+Primary Site - labeled,C50.5-Lower-outer quadrant of breast,59017,41355,17662,29.927
+Primary Site - labeled,C50.3-Lower-inner quadrant of breast,41945,32149,9796,23.3544
+Primary Site - labeled,C50.1-Central portion of breast,34272,20526,13746,40.1085
+Primary Site - labeled,C50.6-Axillary tail of breast,3660,2032,1628,44.4809
+Primary Site - labeled,C50.0-Nipple,3040,1900,1140,37.5
+"Race recode (W, B, AI, API)",White,587483,411613,175870,29.9362
+"Race recode (W, B, AI, API)",Black,80284,50395,29889,37.2291
+"Race recode (W, B, AI, API)",Asian or Pacific Islander,78118,54102,24016,30.7432
+"Race recode (W, B, AI, API)",American Indian/Alaska Native,5430,3573,1857,34.1989
+"Race recode (W, B, AI, API)",Unknown,5041,3456,1585,31.4422
+grade_unified,2,310401,210562,99839,32.1645
+grade_unified,3,192023,113867,78156,40.7014
+grade_unified,1,170504,140652,29852,17.5081
+grade_unified,unknown,83095,57822,25273,30.4146
+grade_unified,4,333,236,97,29.1291

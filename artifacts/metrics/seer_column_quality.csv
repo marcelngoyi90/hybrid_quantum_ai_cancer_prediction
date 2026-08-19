@@ -1,0 +1,20 @@
+column,unique_values,blank_values,unknown_values,missing_like_values,missing_like_percent,most_common_value,most_common_count,most_common_percent
+Patient ID,731290,0,0,0,0.0,<suppressed>,4,0.0005
+Sequence number,19,0,0,0,0.0,One primary only,550876,72.8329
+Year of diagnosis,14,0,0,0,0.0,2021,59524,7.8698
+Age recode with single ages and 90+,78,0,0,0,0.0,65 years,24257,3.2071
+"Race recode (W, B, AI, API)",5,0,5041,5041,0.6665,White,587483,77.6728
+"Origin recode NHIA (Hispanic, Non-Hisp)",2,0,0,0,0.0,Non-Spanish-Hispanic-Latino,654671,86.5559
+Primary Site - labeled,9,0,0,0,0.0,C50.4-Upper-outer quadrant of breast,261638,34.5919
+Histologic Type ICD-O-3,131,0,0,0,0.0,8500,582702,77.0407
+Laterality,5,0,420,420,0.0555,Left - origin of primary,383024,50.6407
+Tumor Size Over Time Recode (1988+),156,0,19215,19215,2.5405,015,43599,5.7643
+Grade Recode (thru 2017),6,343676,29685,373361,49.3631,Blank(s),343676,45.4384
+Grade Clinical (2018+),12,412680,0,412680,54.5616,Blank(s),412680,54.5616
+ER Status Recode Breast Cancer (1990+),4,0,10367,10367,1.3707,Positive,623798,82.4741
+PR Status Recode Breast Cancer (1990+),4,0,12215,12215,1.615,Positive,543369,71.8404
+Derived HER2 Recode (2010+),4,0,30294,30294,4.0053,Negative,619563,81.9142
+Breast Subtype (2010+),6,0,31312,31312,4.1398,HR+/HER2-,538839,71.2415
+Regional nodes positive (1988+),71,0,0,0,0.0,00,523139,69.1657
+Regional nodes examined (1988+),83,0,0,0,0.0,01,164501,21.7491
+Diagnostic Confirmation,7,0,35,35,0.0046,Positive histology,755253,99.8542
