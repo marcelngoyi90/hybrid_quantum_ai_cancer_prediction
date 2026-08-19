@@ -1,0 +1,394 @@
+{
+  "configuration": {
+    "training_mode": "frozen",
+    "seed": 42,
+    "epochs": 5,
+    "train_limit": 20000,
+    "batch_size": 32,
+    "eval_batch_size": 128,
+    "selection_metric": "ood_validation_accuracy",
+    "threshold": 0.5,
+    "initial_learning_rates": {
+      "classifier": 0.001
+    },
+    "weight_decay": 0.0001
+  },
+  "parameters": {
+    "total": 6955906,
+    "trainable": 2050
+  },
+  "best_epoch": 5,
+  "best_id_validation": {
+    "overall": {
+      "samples": 33560,
+      "threshold": 0.5,
+      "accuracy": 0.9376340882002384,
+      "balanced_accuracy": 0.9376290621325907,
+      "roc_auc": 0.9815588554581405,
+      "average_precision": 0.9846525362786058,
+      "f1": 0.9369976821889768,
+      "precision": 0.9368566785047854,
+      "sensitivity": 0.9371387283236994,
+      "specificity": 0.9381193959414819,
+      "true_negative": 15903,
+      "false_positive": 1049,
+      "false_negative": 1044,
+      "true_positive": 15564,
+      "mean_loss": 0.16588127307584943,
+      "elapsed_seconds": 73.37451150000561,
+      "images_per_second": 457.3795356715586
+    },
+    "by_center": {
+      "0": {
+        "samples": 6011,
+        "threshold": 0.5,
+        "accuracy": 0.9243054400266179,
+        "balanced_accuracy": 0.9243714355811702,
+        "roc_auc": 0.9780139738060885,
+        "average_precision": 0.9818139266260753,
+        "f1": 0.9242550357915765,
+        "precision": 0.916776750330251,
+        "sensitivity": 0.9318563276267203,
+        "specificity": 0.91688654353562,
+        "true_negative": 2780,
+        "false_positive": 252,
+        "false_negative": 203,
+        "true_positive": 2776
+      },
+      "3": {
+        "samples": 12879,
+        "threshold": 0.5,
+        "accuracy": 0.9273235499650594,
+        "balanced_accuracy": 0.927211130047441,
+        "roc_auc": 0.9752114709592616,
+        "average_precision": 0.9798401040859502,
+        "f1": 0.9256198347107438,
+        "precision": 0.9411764705882353,
+        "sensitivity": 0.9105691056910569,
+        "specificity": 0.9438531544038253,
+        "true_negative": 6119,
+        "false_positive": 364,
+        "false_negative": 572,
+        "true_positive": 5824
+      },
+      "4": {
+        "samples": 14670,
+        "threshold": 0.5,
+        "accuracy": 0.9521472392638037,
+        "balanced_accuracy": 0.952293472273415,
+        "roc_auc": 0.9889237808104692,
+        "average_precision": 0.9902276811596671,
+        "f1": 0.9520164046479836,
+        "precision": 0.9414627551710153,
+        "sensitivity": 0.9628093460528135,
+        "specificity": 0.9417775984940164,
+        "true_negative": 7004,
+        "false_positive": 433,
+        "false_negative": 269,
+        "true_positive": 6964
+      }
+    }
+  },
+  "best_ood_validation": {
+    "overall": {
+      "samples": 34904,
+      "threshold": 0.5,
+      "accuracy": 0.8789250515700207,
+      "balanced_accuracy": 0.8789250515700207,
+      "roc_auc": 0.9420743226869376,
+      "average_precision": 0.9514975908371357,
+      "f1": 0.876907841081207,
+      "precision": 0.891765402843602,
+      "sensitivity": 0.862537245014898,
+      "specificity": 0.8953128581251433,
+      "true_negative": 15625,
+      "false_positive": 1827,
+      "false_negative": 2399,
+      "true_positive": 15053,
+      "mean_loss": 0.3317294977630958,
+      "elapsed_seconds": 85.51863533302094,
+      "images_per_second": 408.14496003215186
+    },
+    "by_center": {
+      "1": {
+        "samples": 34904,
+        "threshold": 0.5,
+        "accuracy": 0.8789250515700207,
+        "balanced_accuracy": 0.8789250515700207,
+        "roc_auc": 0.9420743226869376,
+        "average_precision": 0.9514975908371357,
+        "f1": 0.876907841081207,
+        "precision": 0.891765402843602,
+        "sensitivity": 0.862537245014898,
+        "specificity": 0.8953128581251433,
+        "true_negative": 15625,
+        "false_positive": 1827,
+        "false_negative": 2399,
+        "true_positive": 15053
+      }
+    }
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "learning_rates": {
+        "classifier": 0.001
+      },
+      "training": {
+        "samples": 20000,
+        "mean_loss": 0.23048730568289758,
+        "accuracy": 0.91145,
+        "elapsed_seconds": 38.662843041005544,
+        "images_per_second": 517.2925327500654
+      },
+      "ood_validation": {
+        "overall": {
+          "samples": 34904,
+          "threshold": 0.5,
+          "accuracy": 0.8647719459087784,
+          "balanced_accuracy": 0.8647719459087784,
+          "roc_auc": 0.9349083510232761,
+          "average_precision": 0.9405920602675081,
+          "f1": 0.8625669694852085,
+          "precision": 0.8768647880653564,
+          "sensitivity": 0.8487279394911758,
+          "specificity": 0.8808159523263809,
+          "true_negative": 15372,
+          "false_positive": 2080,
+          "false_negative": 2640,
+          "true_positive": 14812,
+          "mean_loss": 0.3417783949917783,
+          "elapsed_seconds": 56.84270366700366,
+          "images_per_second": 614.0453875043465
+        },
+        "by_center": {
+          "1": {
+            "samples": 34904,
+            "threshold": 0.5,
+            "accuracy": 0.8647719459087784,
+            "balanced_accuracy": 0.8647719459087784,
+            "roc_auc": 0.9349083510232761,
+            "average_precision": 0.9405920602675081,
+            "f1": 0.8625669694852085,
+            "precision": 0.8768647880653564,
+            "sensitivity": 0.8487279394911758,
+            "specificity": 0.8808159523263809,
+            "true_negative": 15372,
+            "false_positive": 2080,
+            "false_negative": 2640,
+            "true_positive": 14812
+          }
+        }
+      }
+    },
+    {
+      "epoch": 2,
+      "learning_rates": {
+        "classifier": 0.0009045084971874737
+      },
+      "training": {
+        "samples": 20000,
+        "mean_loss": 0.20786022856235503,
+        "accuracy": 0.92055,
+        "elapsed_seconds": 39.88782237502164,
+        "images_per_second": 501.40616381515736
+      },
+      "ood_validation": {
+        "overall": {
+          "samples": 34904,
+          "threshold": 0.5,
+          "accuracy": 0.8414221865688746,
+          "balanced_accuracy": 0.8414221865688747,
+          "roc_auc": 0.9262886260334426,
+          "average_precision": 0.9404894090876188,
+          "f1": 0.8193478899441888,
+          "precision": 0.9518465155076969,
+          "sensitivity": 0.7192298876919551,
+          "specificity": 0.9636144854457942,
+          "true_negative": 16817,
+          "false_positive": 635,
+          "false_negative": 4900,
+          "true_positive": 12552,
+          "mean_loss": 0.4888128982944388,
+          "elapsed_seconds": 76.22698866701103,
+          "images_per_second": 457.8955644237
+        },
+        "by_center": {
+          "1": {
+            "samples": 34904,
+            "threshold": 0.5,
+            "accuracy": 0.8414221865688746,
+            "balanced_accuracy": 0.8414221865688747,
+            "roc_auc": 0.9262886260334426,
+            "average_precision": 0.9404894090876188,
+            "f1": 0.8193478899441888,
+            "precision": 0.9518465155076969,
+            "sensitivity": 0.7192298876919551,
+            "specificity": 0.9636144854457942,
+            "true_negative": 16817,
+            "false_positive": 635,
+            "false_negative": 4900,
+            "true_positive": 12552
+          }
+        }
+      }
+    },
+    {
+      "epoch": 3,
+      "learning_rates": {
+        "classifier": 0.0006545084971874737
+      },
+      "training": {
+        "samples": 20000,
+        "mean_loss": 0.20665027420818805,
+        "accuracy": 0.9238,
+        "elapsed_seconds": 51.81469804199878,
+        "images_per_second": 385.9908627430166
+      },
+      "ood_validation": {
+        "overall": {
+          "samples": 34904,
+          "threshold": 0.5,
+          "accuracy": 0.8342596837038735,
+          "balanced_accuracy": 0.8342596837038735,
+          "roc_auc": 0.9262022967787642,
+          "average_precision": 0.9366588985048784,
+          "f1": 0.8115205421431597,
+          "precision": 0.9405634015557738,
+          "sensitivity": 0.7136144854457942,
+          "specificity": 0.9549048819619528,
+          "true_negative": 16665,
+          "false_positive": 787,
+          "false_negative": 4998,
+          "true_positive": 12454,
+          "mean_loss": 0.49952607264956994,
+          "elapsed_seconds": 75.23796429100912,
+          "images_per_second": 463.9147314645115
+        },
+        "by_center": {
+          "1": {
+            "samples": 34904,
+            "threshold": 0.5,
+            "accuracy": 0.8342596837038735,
+            "balanced_accuracy": 0.8342596837038735,
+            "roc_auc": 0.9262022967787642,
+            "average_precision": 0.9366588985048784,
+            "f1": 0.8115205421431597,
+            "precision": 0.9405634015557738,
+            "sensitivity": 0.7136144854457942,
+            "specificity": 0.9549048819619528,
+            "true_negative": 16665,
+            "false_positive": 787,
+            "false_negative": 4998,
+            "true_positive": 12454
+          }
+        }
+      }
+    },
+    {
+      "epoch": 4,
+      "learning_rates": {
+        "classifier": 0.00034549150281252633
+      },
+      "training": {
+        "samples": 20000,
+        "mean_loss": 0.18462802599668504,
+        "accuracy": 0.9303,
+        "elapsed_seconds": 49.10369008302223,
+        "images_per_second": 407.3013650539284
+      },
+      "ood_validation": {
+        "overall": {
+          "samples": 34904,
+          "threshold": 0.5,
+          "accuracy": 0.8548590419436167,
+          "balanced_accuracy": 0.8548590419436168,
+          "roc_auc": 0.9349386804389147,
+          "average_precision": 0.9470442741143349,
+          "f1": 0.8375136314067612,
+          "precision": 0.9511875273204138,
+          "sensitivity": 0.7481090992436397,
+          "specificity": 0.9616089846435939,
+          "true_negative": 16782,
+          "false_positive": 670,
+          "false_negative": 4396,
+          "true_positive": 13056,
+          "mean_loss": 0.4492383459661905,
+          "elapsed_seconds": 75.90762549999636,
+          "images_per_second": 459.82205042103016
+        },
+        "by_center": {
+          "1": {
+            "samples": 34904,
+            "threshold": 0.5,
+            "accuracy": 0.8548590419436167,
+            "balanced_accuracy": 0.8548590419436168,
+            "roc_auc": 0.9349386804389147,
+            "average_precision": 0.9470442741143349,
+            "f1": 0.8375136314067612,
+            "precision": 0.9511875273204138,
+            "sensitivity": 0.7481090992436397,
+            "specificity": 0.9616089846435939,
+            "true_negative": 16782,
+            "false_positive": 670,
+            "false_negative": 4396,
+            "true_positive": 13056
+          }
+        }
+      }
+    },
+    {
+      "epoch": 5,
+      "learning_rates": {
+        "classifier": 9.549150281252633e-05
+      },
+      "training": {
+        "samples": 20000,
+        "mean_loss": 0.1868917944818735,
+        "accuracy": 0.9299,
+        "elapsed_seconds": 49.59479229201679,
+        "images_per_second": 403.26814723285725
+      },
+      "ood_validation": {
+        "overall": {
+          "samples": 34904,
+          "threshold": 0.5,
+          "accuracy": 0.8789250515700207,
+          "balanced_accuracy": 0.8789250515700207,
+          "roc_auc": 0.9420743226869376,
+          "average_precision": 0.9514975908371357,
+          "f1": 0.876907841081207,
+          "precision": 0.891765402843602,
+          "sensitivity": 0.862537245014898,
+          "specificity": 0.8953128581251433,
+          "true_negative": 15625,
+          "false_positive": 1827,
+          "false_negative": 2399,
+          "true_positive": 15053,
+          "mean_loss": 0.3317294977630958,
+          "elapsed_seconds": 74.22886291699251,
+          "images_per_second": 470.22140213884046
+        },
+        "by_center": {
+          "1": {
+            "samples": 34904,
+            "threshold": 0.5,
+            "accuracy": 0.8789250515700207,
+            "balanced_accuracy": 0.8789250515700207,
+            "roc_auc": 0.9420743226869376,
+            "average_precision": 0.9514975908371357,
+            "f1": 0.876907841081207,
+            "precision": 0.891765402843602,
+            "sensitivity": 0.862537245014898,
+            "specificity": 0.8953128581251433,
+            "true_negative": 15625,
+            "false_positive": 1827,
+            "false_negative": 2399,
+            "true_positive": 15053
+          }
+        }
+      }
+    }
+  ],
+  "checkpoint": "/Users/cepsa/Downloads/project/artifacts/checkpoints/candidate_frozen_seed42.pt"
+}

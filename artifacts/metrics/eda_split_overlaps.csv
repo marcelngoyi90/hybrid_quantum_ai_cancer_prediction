@@ -1,0 +1,7 @@
+left_split,right_split,shared_patients,shared_slides,shared_image_ids
+train,id_val,26,30,0
+train,ood_val,0,0,0
+train,ood_test,0,0,0
+id_val,ood_val,0,0,0
+id_val,ood_test,0,0,0
+ood_val,ood_test,0,0,0

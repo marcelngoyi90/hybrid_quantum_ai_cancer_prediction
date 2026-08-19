@@ -1,0 +1,17 @@
+split,center,label,patches
+id_val,0,0,3032
+id_val,0,1,2979
+id_val,3,0,6483
+id_val,3,1,6396
+id_val,4,0,7437
+id_val,4,1,7233
+ood_test,2,0,42527
+ood_test,2,1,42527
+ood_val,1,0,17452
+ood_val,1,1,17452
+train,0,0,26686
+train,0,1,26739
+train,3,0,58436
+train,3,1,58523
+train,4,0,65924
+train,4,1,66128

@@ -1,0 +1,5 @@
+split,patches,non_tumor,tumor,tumor_percent,centers,patients,slides,unique_image_ids
+train,302436,151046,151390,50.06,"0,3,4",26,30,302436
+id_val,33560,16952,16608,49.49,"0,3,4",26,30,33560
+ood_val,34904,17452,17452,50.0,1,8,10,34904
+ood_test,85054,42527,42527,50.0,2,9,10,85054

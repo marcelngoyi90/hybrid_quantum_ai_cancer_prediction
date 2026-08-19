@@ -1,0 +1,28 @@
+# Python environment
+.venv/
+
+# Dataset
+data/
+
+# Python caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Notebook temporary files
+.ipynb_checkpoints/
+
+# Large trained artifacts
+artifacts/checkpoints/
+artifacts/features/
+artifacts/logs/
+*.pt
+*.pth
+*.ckpt
+*.npz
+*.npy
+
+# macOS and editor files
+.DS_Store
+.vscode/
