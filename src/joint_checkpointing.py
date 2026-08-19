@@ -353,8 +353,11 @@ def move_optimizer_state_to_device(
         for key, value in (
             state.items()
         ):
-            if torch.is_tensor(
-                value
+            if (
+                torch.is_tensor(
+                    value
+                )
+                and key != "step"
             ):
                 state[key] = value.to(
                     parameter_device
