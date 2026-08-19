@@ -1,0 +1,229 @@
+{
+    "version": "1.0",
+    "model_name": "camelyon17_seer_joint_network",
+    "random_seeds": [
+      42,
+      123,
+      2026
+    ],
+    "tasks": {
+      "image": {
+        "dataset": "Camelyon17-WILDS",
+        "target": "patch_metastatic_tumor",
+        "negative_class": 0,
+        "positive_class": 1,
+        "training_split": "train",
+        "internal_validation_split": "id_val",
+        "selection_validation_split": "ood_val",
+        "locked_test_split": "ood_test"
+      },
+      "tabular": {
+        "dataset": "SEER breast cancer",
+        "target": "node_positive_target",
+        "negative_class": 0,
+        "positive_class": 1,
+        "training_split": "train",
+        "internal_validation_split": "id_val",
+        "selection_validation_split": "temporal_val",
+        "locked_test_split": "temporal_test"
+      }
+    },
+    "image_path": {
+      "architecture": "densenet121",
+      "initialization": "imagenet",
+      "fine_tuning": "all_layers",
+      "input_height": 96,
+      "input_width": 96,
+      "input_channels": 3,
+      "encoder_output_dimension": 1024,
+      "projector_hidden_dimension": 256,
+      "projector_output_dimension": 128,
+      "dropout_probability": 0.2,
+      "training_transform": "src.camelyon17_data.build_transform",
+      "normalization": "imagenet"
+    },
+    "tabular_path": {
+      "numeric_features": [
+        "age_numeric",
+        "tumor_size_mm"
+      ],
+      "categorical_features": [
+        "Race recode (W, B, AI, API)",
+        "Origin recode NHIA (Hispanic, Non-Hisp)",
+        "Primary Site - labeled",
+        "Histologic Type ICD-O-3",
+        "Laterality",
+        "grade_unified",
+        "ER Status Recode Breast Cancer (1990+)",
+        "PR Status Recode Breast Cancer (1990+)",
+        "Derived HER2 Recode (2010+)",
+        "Breast Subtype (2010+)",
+        "tumor_size_status"
+      ],
+      "numeric_preprocessing": {
+        "fit_split": "train",
+        "missing_value_strategy": "median",
+        "scaling": "standard",
+        "add_missing_indicator": false
+      },
+      "categorical_preprocessing": {
+        "fit_split": "train",
+        "known_category_start_index": 1,
+        "unknown_category_index": 0,
+        "missing_category_index": 0,
+        "unseen_category_action": "map_to_unknown"
+      },
+      "training_category_cardinalities": {
+        "Race recode (W, B, AI, API)": 5,
+        "Origin recode NHIA (Hispanic, Non-Hisp)": 2,
+        "Primary Site - labeled": 9,
+        "Histologic Type ICD-O-3": 118,
+        "Laterality": 5,
+        "grade_unified": 5,
+        "ER Status Recode Breast Cancer (1990+)": 4,
+        "PR Status Recode Breast Cancer (1990+)": 4,
+        "Derived HER2 Recode (2010+)": 4,
+        "Breast Subtype (2010+)": 6,
+        "tumor_size_status": 6
+      },
+      "embedding_dimension_rule": {
+        "formula": "min(32, max(4, round(sqrt(training_cardinality))))",
+        "maximum_dimension": 32,
+        "minimum_dimension": 4
+      },
+      "encoder_hidden_dimensions": [
+        256,
+        256
+      ],
+      "encoder_output_dimension": 256,
+      "projector_output_dimension": 128,
+      "activation": "gelu",
+      "normalization": "layer_norm",
+      "dropout_probability": 0.2
+    },
+    "shared_path": {
+      "input_dimension": 128,
+      "hidden_dimension": 64,
+      "output_dimension": 32,
+      "activation": "gelu",
+      "normalization": "layer_norm",
+      "dropout_probability": 0.2
+    },
+    "task_heads": {
+      "image": {
+        "input_dimension": 32,
+        "output_dimension": 1
+      },
+      "tabular": {
+        "input_dimension": 32,
+        "output_dimension": 1
+      }
+    },
+    "loss": {
+      "image": "binary_cross_entropy_with_logits",
+      "tabular": "binary_cross_entropy_with_logits",
+      "image_weight": 0.5,
+      "tabular_weight": 0.5,
+      "class_weighting": "none",
+      "reduction": "mean"
+    },
+    "batching": {
+      "image_training_batch_size": 32,
+      "tabular_training_batch_size": 49,
+      "image_evaluation_batch_size": 128,
+      "tabular_evaluation_batch_size": 4096,
+      "drop_last_training_batch": true,
+      "steps_per_epoch": "minimum_loader_length",
+      "expected_steps_per_epoch": 9414,
+      "expected_image_samples_per_epoch": 301248,
+      "expected_tabular_samples_per_epoch": 461286,
+      "shuffle_each_epoch": true,
+      "num_workers": 0
+    },
+    "optimizer": {
+      "name": "adamw",
+      "weight_decay": 0.0001,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "learning_rates": {
+        "image_encoder": 0.00005,
+        "image_projector": 0.0003,
+        "tabular_encoder": 0.0003,
+        "tabular_projector": 0.0003,
+        "shared_layers": 0.0003,
+        "task_heads": 0.0003
+      },
+      "gradient_clipping_max_norm": 5.0
+    },
+    "scheduler": {
+      "name": "linear_warmup_cosine_decay",
+      "warmup_epochs": 1,
+      "minimum_learning_rate_ratio": 0.05,
+      "update_frequency": "training_step"
+    },
+    "training": {
+      "maximum_epochs": 15,
+      "minimum_epochs_before_early_stopping": 5,
+      "early_stopping_patience": 3,
+      "early_stopping_minimum_improvement": 0.001,
+      "validate_every_epochs": 1,
+      "device_priority": [
+        "mps",
+        "cpu"
+      ],
+      "mps_fallback_enabled": true,
+      "save_best_checkpoint": true,
+      "save_latest_recovery_checkpoint": true
+    },
+    "gradient_monitoring": {
+      "enabled": true,
+      "measurement_frequency_steps": 200,
+      "shared_parameters_only": true,
+      "metrics": [
+        "image_gradient_norm",
+        "tabular_gradient_norm",
+        "gradient_cosine_similarity"
+      ]
+    },
+    "checkpoint_selection": {
+      "image_metric": "ood_val_roc_auc",
+      "tabular_metric": "temporal_val_roc_auc",
+      "image_metric_weight": 0.5,
+      "tabular_metric_weight": 0.5,
+      "selection_rule": "weighted_mean",
+      "tie_tolerance": 0.001,
+      "tie_breaker": "earlier_epoch"
+    },
+    "evaluation": {
+      "primary_metric": "roc_auc",
+      "secondary_metrics": [
+        "average_precision",
+        "balanced_accuracy",
+        "accuracy",
+        "f1",
+        "precision",
+        "sensitivity",
+        "specificity",
+        "brier_score",
+        "expected_calibration_error",
+        "calibration_intercept",
+        "calibration_slope",
+        "confusion_matrix"
+      ],
+      "probability_threshold": 0.5,
+      "calibration_bins": 15,
+      "calibration_binning": "equal_frequency",
+      "report_each_task_separately": true
+    },
+    "test_protection": {
+      "camelyon17_ood_test_locked": true,
+      "seer_temporal_test_locked": true,
+      "allow_test_for_preprocessing": false,
+      "allow_test_for_tuning": false,
+      "allow_test_for_checkpoint_selection": false,
+      "allow_test_for_calibration": false,
+      "allow_test_for_threshold_selection": false
+    }
+  }
