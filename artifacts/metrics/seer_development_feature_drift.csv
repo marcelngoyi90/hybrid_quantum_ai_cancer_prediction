@@ -1,0 +1,79 @@
+comparison,scope,class_value,feature,feature_type,reference_count,comparison_count,reference_missing_percent,comparison_missing_percent,reference_unique_values,comparison_unique_values,psi,psi_interpretation,secondary_metric_name,secondary_metric_value,effective_psi_bins,unseen_category_percent
+id_val,overall,all,age_numeric,numeric,461292,51241,0.0,0.0,73,72,0.00017309273799854025,small,kolmogorov_smirnov_statistic,0.0021598833237668202,10,
+id_val,overall,all,tumor_size_mm,numeric,461292,51241,3.402833779905136,3.4484104525672796,153,140,0.00013286236574950325,small,kolmogorov_smirnov_statistic,0.0027243216644236012,10,
+id_val,overall,all,"Race recode (W, B, AI, API)",categorical,461292,51241,0.0,0.0,5,5,6.284142621945821e-05,small,jensen_shannon_distance,0.0033663415253527003,7,0.0
+id_val,overall,all,"Origin recode NHIA (Hispanic, Non-Hisp)",categorical,461292,51241,0.0,0.0,2,2,4.8218044454277915e-06,small,jensen_shannon_distance,0.0009324956477368664,4,0.0
+id_val,overall,all,Primary Site - labeled,categorical,461292,51241,0.0,0.0,9,9,0.00010011122561308842,small,jensen_shannon_distance,0.004248868228854434,11,0.0
+id_val,overall,all,Histologic Type ICD-O-3,categorical,461292,51241,0.0,0.0,118,75,0.0033682061823610615,small,jensen_shannon_distance,0.023216510818216466,120,0.001951562225561562
+id_val,overall,all,Laterality,categorical,461292,51241,0.0,0.0,5,5,0.0001708933807898578,small,jensen_shannon_distance,0.005546107057217917,7,0.0
+id_val,overall,all,grade_unified,categorical,461292,51241,0.0,0.0,5,5,6.353640754193151e-05,small,jensen_shannon_distance,0.0033849515244373813,7,0.0
+id_val,overall,all,ER Status Recode Breast Cancer (1990+),categorical,461292,51241,0.0,0.0,4,4,7.860145784058184e-05,small,jensen_shannon_distance,0.003764862914610319,6,0.0
+id_val,overall,all,PR Status Recode Breast Cancer (1990+),categorical,461292,51241,0.0,0.0,4,4,6.0242945671592246e-05,small,jensen_shannon_distance,0.0032959789183616356,6,0.0
+id_val,overall,all,Derived HER2 Recode (2010+),categorical,461292,51241,0.0,0.0,4,4,1.2432075917949316e-05,small,jensen_shannon_distance,0.0014973105864316517,6,0.0
+id_val,overall,all,Breast Subtype (2010+),categorical,461292,51241,0.0,0.0,6,6,4.516731601493935e-05,small,jensen_shannon_distance,0.0028539902052292696,8,0.0
+id_val,overall,all,tumor_size_status,categorical,461292,51241,0.0,0.0,6,5,1.0077798774464389e-05,small,jensen_shannon_distance,0.0013466357898065696,8,0.0
+id_val,class_conditional,0,age_numeric,numeric,316475,35157,0.0,0.0,73,72,0.00044940210968804045,small,kolmogorov_smirnov_statistic,0.002096085737199993,10,
+id_val,class_conditional,0,tumor_size_mm,numeric,316475,35157,2.5736630065566,2.6594988195807376,145,116,0.00021104619832956986,small,kolmogorov_smirnov_statistic,0.0030902079279160333,10,
+id_val,class_conditional,0,"Race recode (W, B, AI, API)",categorical,316475,35157,0.0,0.0,5,5,4.0690449263292684e-05,small,jensen_shannon_distance,0.0027088525610096917,7,0.0
+id_val,class_conditional,0,"Origin recode NHIA (Hispanic, Non-Hisp)",categorical,316475,35157,0.0,0.0,2,2,1.024976614756096e-06,small,jensen_shannon_distance,0.00042993142777339086,4,0.0
+id_val,class_conditional,0,Primary Site - labeled,categorical,316475,35157,0.0,0.0,9,9,0.00014173004719391966,small,jensen_shannon_distance,0.005055570873781235,11,0.0
+id_val,class_conditional,0,Histologic Type ICD-O-3,categorical,316475,35157,0.0,0.0,113,72,0.004629397396320019,small,jensen_shannon_distance,0.02678985455769401,115,0.005688767528514947
+id_val,class_conditional,0,Laterality,categorical,316475,35157,0.0,0.0,5,5,0.00012398419003983936,small,jensen_shannon_distance,0.004727397946599014,7,0.0
+id_val,class_conditional,0,grade_unified,categorical,316475,35157,0.0,0.0,5,5,0.00012885737317218365,small,jensen_shannon_distance,0.004820528299389964,7,0.0
+id_val,class_conditional,0,ER Status Recode Breast Cancer (1990+),categorical,316475,35157,0.0,0.0,4,4,2.894588862499169e-05,small,jensen_shannon_distance,0.0022847237544737654,6,0.0
+id_val,class_conditional,0,PR Status Recode Breast Cancer (1990+),categorical,316475,35157,0.0,0.0,4,4,1.872433728372937e-05,small,jensen_shannon_distance,0.001837574887850313,6,0.0
+id_val,class_conditional,0,Derived HER2 Recode (2010+),categorical,316475,35157,0.0,0.0,4,4,1.5330831231589213e-05,small,jensen_shannon_distance,0.001662740350829904,6,0.0
+id_val,class_conditional,0,Breast Subtype (2010+),categorical,316475,35157,0.0,0.0,6,6,3.424356421389657e-05,small,jensen_shannon_distance,0.0024850199013669526,8,0.0
+id_val,class_conditional,0,tumor_size_status,categorical,316475,35157,0.0,0.0,5,5,3.362961243738423e-05,small,jensen_shannon_distance,0.0024625273761280306,7,0.0
+id_val,class_conditional,1,age_numeric,numeric,144817,16084,0.0,0.0,73,71,0.0006763875933330417,small,kolmogorov_smirnov_statistic,0.005203914816678701,10,
+id_val,class_conditional,1,tumor_size_mm,numeric,144817,16084,5.214857371717409,5.1728425764735135,152,136,0.0008672217337413317,small,kolmogorov_smirnov_statistic,0.0052142216424649335,10,
+id_val,class_conditional,1,"Race recode (W, B, AI, API)",categorical,144817,16084,0.0,0.0,5,5,0.00033268266154638787,small,jensen_shannon_distance,0.007744617066443764,7,0.0
+id_val,class_conditional,1,"Origin recode NHIA (Hispanic, Non-Hisp)",categorical,144817,16084,0.0,0.0,2,2,2.072869357277909e-05,small,jensen_shannon_distance,0.001933425062722292,4,0.0
+id_val,class_conditional,1,Primary Site - labeled,categorical,144817,16084,0.0,0.0,9,9,0.0005493946745338365,small,jensen_shannon_distance,0.009951751564484005,11,0.0
+id_val,class_conditional,1,Histologic Type ICD-O-3,categorical,144817,16084,0.0,0.0,80,46,0.009366162830307865,small,jensen_shannon_distance,0.035194660866118437,82,0.012434717731907486
+id_val,class_conditional,1,Laterality,categorical,144817,16084,0.0,0.0,5,5,0.0003330356573931847,small,jensen_shannon_distance,0.0077316460155485755,7,0.0
+id_val,class_conditional,1,grade_unified,categorical,144817,16084,0.0,0.0,5,5,3.763450462536441e-05,small,jensen_shannon_distance,0.0026051587632725673,7,0.0
+id_val,class_conditional,1,ER Status Recode Breast Cancer (1990+),categorical,144817,16084,0.0,0.0,4,4,0.00027689606845382404,small,jensen_shannon_distance,0.007065538736137794,6,0.0
+id_val,class_conditional,1,PR Status Recode Breast Cancer (1990+),categorical,144817,16084,0.0,0.0,4,4,0.0003698512209270105,small,jensen_shannon_distance,0.00816423215369797,6,0.0
+id_val,class_conditional,1,Derived HER2 Recode (2010+),categorical,144817,16084,0.0,0.0,4,4,0.0001348312750790395,small,jensen_shannon_distance,0.004930394453109824,6,0.0
+id_val,class_conditional,1,Breast Subtype (2010+),categorical,144817,16084,0.0,0.0,6,6,0.00033503209787356285,small,jensen_shannon_distance,0.00777242262178904,8,0.0
+id_val,class_conditional,1,tumor_size_status,categorical,144817,16084,0.0,0.0,6,5,0.00018970065927351195,small,jensen_shannon_distance,0.005812008274226429,8,0.0
+temporal_val,overall,all,age_numeric,numeric,461292,107249,0.0,0.0,73,72,0.004252521927411213,small,kolmogorov_smirnov_statistic,0.015885077270839765,10,
+temporal_val,overall,all,tumor_size_mm,numeric,461292,107249,3.402833779905136,2.94921164766105,153,148,0.002303915747192941,small,kolmogorov_smirnov_statistic,0.02358160841069068,10,
+temporal_val,overall,all,"Race recode (W, B, AI, API)",categorical,461292,107249,0.0,0.0,5,5,0.006125967366387979,small,jensen_shannon_distance,0.03312951689508472,7,0.0
+temporal_val,overall,all,"Origin recode NHIA (Hispanic, Non-Hisp)",categorical,461292,107249,0.0,0.0,2,2,0.002913684204323516,small,jensen_shannon_distance,0.022914998681711242,4,0.0
+temporal_val,overall,all,Primary Site - labeled,categorical,461292,107249,0.0,0.0,9,9,0.005635016918585013,small,jensen_shannon_distance,0.03185298945284423,11,0.0
+temporal_val,overall,all,Histologic Type ICD-O-3,categorical,461292,107249,0.0,0.0,118,72,0.0855393781472909,small,jensen_shannon_distance,0.11452152139708274,120,0.0037296385047879232
+temporal_val,overall,all,Laterality,categorical,461292,107249,0.0,0.0,5,5,3.957462609404421e-05,small,jensen_shannon_distance,0.0026635542234671903,7,0.0
+temporal_val,overall,all,grade_unified,categorical,461292,107249,0.0,0.0,5,4,0.03700841141385951,small,jensen_shannon_distance,0.07878696101378833,7,0.0
+temporal_val,overall,all,ER Status Recode Breast Cancer (1990+),categorical,461292,107249,0.0,0.0,4,4,0.006287427027905083,small,jensen_shannon_distance,0.03325722136081153,6,0.0
+temporal_val,overall,all,PR Status Recode Breast Cancer (1990+),categorical,461292,107249,0.0,0.0,4,4,0.00695508421614538,small,jensen_shannon_distance,0.03501806135051408,6,0.0
+temporal_val,overall,all,Derived HER2 Recode (2010+),categorical,461292,107249,0.0,0.0,4,4,0.02186268331251827,small,jensen_shannon_distance,0.061996770137818256,6,0.0
+temporal_val,overall,all,Breast Subtype (2010+),categorical,461292,107249,0.0,0.0,6,6,0.022270153854434767,small,jensen_shannon_distance,0.06259054775149295,8,0.0
+temporal_val,overall,all,tumor_size_status,categorical,461292,107249,0.0,0.0,6,5,0.0065662228570969655,small,jensen_shannon_distance,0.03369880292088828,8,0.0
+temporal_val,class_conditional,0,age_numeric,numeric,316475,74137,0.0,0.0,73,72,0.004976449160291571,small,kolmogorov_smirnov_statistic,0.015141518417634892,10,
+temporal_val,class_conditional,0,tumor_size_mm,numeric,316475,74137,2.5736630065566,1.9194194531745281,145,130,0.004731540815601447,small,kolmogorov_smirnov_statistic,0.020061267139155126,10,
+temporal_val,class_conditional,0,"Race recode (W, B, AI, API)",categorical,316475,74137,0.0,0.0,5,5,0.006281454192590557,small,jensen_shannon_distance,0.03356623415354886,7,0.0
+temporal_val,class_conditional,0,"Origin recode NHIA (Hispanic, Non-Hisp)",categorical,316475,74137,0.0,0.0,2,2,0.0024392654958078418,small,jensen_shannon_distance,0.020967049277447795,4,0.0
+temporal_val,class_conditional,0,Primary Site - labeled,categorical,316475,74137,0.0,0.0,9,9,0.007163499286421291,small,jensen_shannon_distance,0.0358915283938055,11,0.0
+temporal_val,class_conditional,0,Histologic Type ICD-O-3,categorical,316475,74137,0.0,0.0,113,68,0.09014827831264846,small,jensen_shannon_distance,0.11740046461025322,115,0.0040465624452028
+temporal_val,class_conditional,0,Laterality,categorical,316475,74137,0.0,0.0,5,5,7.803285338598281e-05,small,jensen_shannon_distance,0.003714526348018894,7,0.0
+temporal_val,class_conditional,0,grade_unified,categorical,316475,74137,0.0,0.0,5,4,0.050127810808405046,small,jensen_shannon_distance,0.09228326370663564,7,0.0
+temporal_val,class_conditional,0,ER Status Recode Breast Cancer (1990+),categorical,316475,74137,0.0,0.0,4,4,0.0060183476110298815,small,jensen_shannon_distance,0.032550490610803555,6,0.0
+temporal_val,class_conditional,0,PR Status Recode Breast Cancer (1990+),categorical,316475,74137,0.0,0.0,4,4,0.006446615219447284,small,jensen_shannon_distance,0.03374711059034862,6,0.0
+temporal_val,class_conditional,0,Derived HER2 Recode (2010+),categorical,316475,74137,0.0,0.0,4,4,0.018600068157633032,small,jensen_shannon_distance,0.05734038920054221,6,0.0
+temporal_val,class_conditional,0,Breast Subtype (2010+),categorical,316475,74137,0.0,0.0,6,6,0.019132847401870864,small,jensen_shannon_distance,0.05816084514200424,8,0.0
+temporal_val,class_conditional,0,tumor_size_status,categorical,316475,74137,0.0,0.0,5,5,0.008107031715592693,small,jensen_shannon_distance,0.03739420231948178,7,0.0
+temporal_val,class_conditional,1,age_numeric,numeric,144817,33112,0.0,0.0,73,71,0.0049660637064037425,small,kolmogorov_smirnov_statistic,0.01877171191468463,10,
+temporal_val,class_conditional,1,tumor_size_mm,numeric,144817,33112,5.214857371717409,5.254892486107756,152,148,0.004240856058398386,small,kolmogorov_smirnov_statistic,0.038653487358332406,10,
+temporal_val,class_conditional,1,"Race recode (W, B, AI, API)",categorical,144817,33112,0.0,0.0,5,5,0.006467438157637795,small,jensen_shannon_distance,0.03400276121622756,7,0.0
+temporal_val,class_conditional,1,"Origin recode NHIA (Hispanic, Non-Hisp)",categorical,144817,33112,0.0,0.0,2,2,0.004246171732869562,small,jensen_shannon_distance,0.02766137490276732,4,0.0
+temporal_val,class_conditional,1,Primary Site - labeled,categorical,144817,33112,0.0,0.0,9,9,0.003989699430856918,small,jensen_shannon_distance,0.02681173402657955,11,0.0
+temporal_val,class_conditional,1,Histologic Type ICD-O-3,categorical,144817,33112,0.0,0.0,80,46,0.0844904254250182,small,jensen_shannon_distance,0.11233225206562328,82,0.009060159458806475
+temporal_val,class_conditional,1,Laterality,categorical,144817,33112,0.0,0.0,5,5,4.778327275464547e-05,small,jensen_shannon_distance,0.0029301439888448533,7,0.0
+temporal_val,class_conditional,1,grade_unified,categorical,144817,33112,0.0,0.0,5,4,0.01970673660118788,small,jensen_shannon_distance,0.05616158569867923,7,0.0
+temporal_val,class_conditional,1,ER Status Recode Breast Cancer (1990+),categorical,144817,33112,0.0,0.0,4,4,0.006977812022972955,small,jensen_shannon_distance,0.03501477353727674,6,0.0
+temporal_val,class_conditional,1,PR Status Recode Breast Cancer (1990+),categorical,144817,33112,0.0,0.0,4,4,0.008294255961048682,small,jensen_shannon_distance,0.03816088796314318,6,0.0
+temporal_val,class_conditional,1,Derived HER2 Recode (2010+),categorical,144817,33112,0.0,0.0,4,4,0.03244862343981795,small,jensen_shannon_distance,0.074733157349957,6,0.0
+temporal_val,class_conditional,1,Breast Subtype (2010+),categorical,144817,33112,0.0,0.0,6,6,0.03214513448981258,small,jensen_shannon_distance,0.07450500715220869,8,0.0
+temporal_val,class_conditional,1,tumor_size_status,categorical,144817,33112,0.0,0.0,6,5,0.003508443587621709,small,jensen_shannon_distance,0.024714219818065195,8,0.0

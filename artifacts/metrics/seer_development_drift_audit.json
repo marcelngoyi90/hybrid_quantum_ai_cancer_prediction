@@ -1,0 +1,76 @@
+{
+  "automatic_feature_dropping_performed": false,
+  "automatic_feature_reweighting_performed": false,
+  "class_conditional_analysis_enabled": true,
+  "development_comparisons": [
+    "id_val",
+    "temporal_val"
+  ],
+  "development_only_validation": {
+    "loaded_patients": 619782,
+    "loaded_splits": [
+      "id_val",
+      "temporal_val",
+      "train"
+    ],
+    "locked_comparison_loaded": false,
+    "patient_identifier_loaded": false,
+    "patient_level_rows_exported": false,
+    "permitted_splits": [
+      "train",
+      "id_val",
+      "temporal_val"
+    ]
+  },
+  "drift_config_version": "1.0",
+  "feature_config_version": "1.0",
+  "feature_drift_rows": 78,
+  "files": {
+    "comparison_summary": {
+      "file_name": "seer_development_drift_summary.csv",
+      "sha256": "d9cc274cdecb840e30a72b6321be62b3bb2ac1f7d36ea418d11a4731031608c0",
+      "size_bytes": 394
+    },
+    "drift_configuration": {
+      "file_name": "seer_drift.json",
+      "sha256": "4075111ea78779e401742fd180281ce75d5deb9540865287bc67587785bcce0a",
+      "size_bytes": 1916
+    },
+    "feature_configuration": {
+      "file_name": "seer_features.json",
+      "sha256": "67166e39bc726e9fbf59495c3fc2169420997a0c797ee19129ba0c03959d218e",
+      "size_bytes": 2915
+    },
+    "feature_drift_report": {
+      "file_name": "seer_development_feature_drift.csv",
+      "sha256": "83fc884a7d49d55998dca2d2d5f162103ba27195244eee5030072787474fe247",
+      "size_bytes": 13676
+    },
+    "prevalence_report": {
+      "file_name": "seer_development_prevalence_drift.csv",
+      "sha256": "73cc75d515633f2b1117bf3a986ce985643f1025c849403ae8d16e75726bbc15",
+      "size_bytes": 435
+    },
+    "private_model_table": {
+      "file_name": "seer_model_table.parquet",
+      "sha256": "221a71f32799ada48c9c33bac03703f2c961c7b1092f35ab0ae5bf57f1237ad4",
+      "size_bytes": 5432954
+    }
+  },
+  "interpretation_guardrails": {
+    "calibration_analyzed": false,
+    "feature_dropping_performed": false,
+    "feature_reweighting_performed": false,
+    "label_shift_assessment_is_univariate_only": true,
+    "psi_thresholds_are_descriptive_only": true
+  },
+  "locked_comparison": "temporal_test",
+  "locked_comparison_included": false,
+  "model_feature_count": 13,
+  "reference_split": "train",
+  "split_patient_counts": {
+    "id_val": 51241,
+    "temporal_val": 107249,
+    "train": 461292
+  }
+}
