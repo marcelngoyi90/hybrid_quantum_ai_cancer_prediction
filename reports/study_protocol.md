@@ -1,7 +1,7 @@
 # Hybrid Quantum AI for Cancer Risk Prediction
 ## Study Protocol
 
-Version: 0.1  
+Version: 0.1.1
 Status: Frozen before SEER model training
 
 ## 1. Purpose
@@ -96,6 +96,23 @@ Their shared clinical concept is lymph-node metastasis. Their different modaliti
 ## 4. SEER cohort and leakage control
 
 The primary SEER cohort will use one deterministic index breast cancer record per patient.
+
+### Protocol amendment 0.1.1 — Adult primary cohort
+
+Date: 2026-08-19
+
+The initial EDA identified 12 records with age below 18 among 756,356 records. These consisted of 10 N0 and 2 N+ records.
+
+The primary SEER cohort will include patients aged 18 or older. The age restriction will be applied before selecting one index record per patient.
+
+Rationale:
+
+- The intended prediction population is adults with diagnosed breast cancer.
+- The under-18 subgroup is too small for meaningful training or subgroup evaluation.
+- The decision was made before cohort construction or model training.
+- No model result was used to make this decision.
+
+The number of excluded under-18 records will be reported in the cohort audit.
 
 Index record selection:
 
