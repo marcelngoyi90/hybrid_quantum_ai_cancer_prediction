@@ -1,0 +1,22 @@
+{
+    "version": "1.0",
+    "split_column": "split",
+    "development_year_start": 2010,
+    "development_year_end": 2019,
+    "internal_validation_fraction": 0.1,
+    "internal_validation_name": "id_val",
+    "training_name": "train",
+    "temporal_validation_year_start": 2020,
+    "temporal_validation_year_end": 2021,
+    "temporal_validation_name": "temporal_val",
+    "temporal_test_year_start": 2022,
+    "temporal_test_year_end": 2023,
+    "temporal_test_name": "temporal_test",
+    "internal_validation_strata": [
+      "year_numeric",
+      "node_positive_target"
+    ],
+    "assignment_method": "sha256_rank_within_stratum",
+    "hash_salt": "seer_index_cohort_split_v1",
+    "temporal_test_locked": true
+  }
