@@ -1,39 +1,44 @@
 # Hybrid Quantum AI for Cancer Risk Prediction
+
 ## Study Protocol
 
-Version: 0.1.1
-Status: Frozen before SEER model training
+Version: 1.0.0
+Status: Frozen before joint-model training
+
+This project trains one joint neural network using two large, unpaired cancer datasets with different modalities. The network contains modality-specific encoders, shared representation layers and two task-specific outputs.
 
 ## 1. Purpose
 
-This project investigates whether two large, unpaired cancer datasets from different modalities can learn a useful shared representation.
+This project investigates whether one neural network can learn a useful shared representation from two large, unpaired cancer datasets with different modalities.
 
-The project combines:
+The project uses:
 
 1. Histopathology images from Camelyon17-WILDS.
 2. Clinical and registry variables from SEER breast cancer data.
-3. A paired image-and-clinical dataset, provisionally BCNB, for transfer and fusion.
-4. A later classical-versus-quantum comparison using the same 8-dimensional representation.
+3. A paired image-and-clinical dataset, provisionally BCNB, for later transfer and fusion.
+4. A later classical-versus-quantum comparison using the same fixed 8-dimensional representation.
 
-The datasets will not be joined row by row because they do not contain the same patients.
+The Camelyon17 and SEER datasets will not be joined row by row because they do not contain the same patients.
+
+Instead, one joint model will learn from alternating image and tabular mini-batches.
 
 ## 2. Main research questions
 
-### RQ1 — Image model
+### RQ1 — Image capability
 
-Can a fine-tuned DenseNet121 identify metastatic tumor tissue in lymph-node image patches and generalize to an unseen hospital?
+Can the image branch of one joint model identify metastatic tumor tissue in lymph-node image patches and generalize to an unseen hospital?
 
-### RQ2 — Tabular model
+### RQ2 — Tabular capability
 
-Can clinical and tumor characteristics predict whether a diagnosed breast cancer case has positive regional lymph nodes?
+Can the tabular branch of the same joint model predict whether a diagnosed breast cancer case has positive regional lymph nodes?
 
-### RQ3 — Multi-task learning
+### RQ3 — Joint learning
 
-Can unpaired image and tabular datasets train a shared neural representation without causing unacceptable negative transfer?
+Can one neural network learn from large, unpaired image and tabular cancer datasets through modality-specific encoders and a shared representation while maintaining useful performance on both tasks?
 
 ### RQ4 — Paired transfer
 
-Do the image and tabular encoders learned from Camelyon17 and SEER improve performance when transferred to a paired image-and-clinical dataset?
+Can the image encoder, tabular encoder and shared representation learned from Camelyon17 and SEER be transferred to a paired image-and-clinical dataset?
 
 ### RQ5 — Quantum comparison
 
@@ -49,7 +54,7 @@ Input:
 
 Target:
 
-- 0: No metastatic tumor tissue in the patch.
+- 0: No metastatic tumor tissue is present in the patch.
 - 1: Metastatic tumor tissue is present in the patch.
 
 This output applies only to the examined patch. It does not mean that the patient is cancer-free.
@@ -89,13 +94,17 @@ This is not a general cancer diagnosis prediction. Every record already represen
 The two targets are related but not identical.
 
 - Camelyon17 detects metastatic tissue at image-patch level.
-- SEER predicts regional lymph-node positivity at patient/tumor-record level.
+- SEER predicts regional lymph-node positivity at patient or tumor-record level.
 
-Their shared clinical concept is lymph-node metastasis. Their different modalities and prediction units are part of the research question.
+Their shared clinical concept is lymph-node metastasis.
+
+Their different modalities and prediction units are part of the research question.
+
+The joint model will therefore produce two different outputs rather than one combined cancer probability.
 
 ## 4. SEER cohort and leakage control
 
-The primary SEER cohort will use one deterministic index breast cancer record per patient.
+The primary SEER cohort uses one deterministic index breast cancer record per patient.
 
 ### Protocol amendment 0.1.1 — Adult primary cohort
 
@@ -103,7 +112,7 @@ Date: 2026-08-19
 
 The initial EDA identified 12 records with age below 18 among 756,356 records. These consisted of 10 N0 and 2 N+ records.
 
-The primary SEER cohort will include patients aged 18 or older. The age restriction will be applied before selecting one index record per patient.
+The primary SEER cohort includes patients aged 18 or older. The age restriction was applied before selecting one index record per patient.
 
 Rationale:
 
@@ -112,163 +121,207 @@ Rationale:
 - The decision was made before cohort construction or model training.
 - No model result was used to make this decision.
 
-The number of excluded under-18 records will be reported in the cohort audit.
-
-Index record selection:
+Index-record selection:
 
 1. Select the earliest eligible diagnosis year.
 2. If multiple records remain, use the earliest valid sequence number.
-3. Record and report how many duplicate and conflicting patient records were removed.
+3. Remove subsequent eligible cancer records from the primary patient-level cohort.
+4. Record all exclusions and decisions in the cohort audit.
 
-Primary predictors may include:
+The final adult index cohort contains 731,278 unique patients.
+
+Primary model inputs are:
+
+Numeric features:
 
 - Age.
+- Tumor size in millimetres.
+
+Categorical features:
+
 - Race.
 - Hispanic origin.
 - Primary breast site.
-- Histology.
+- Histologic type.
 - Laterality.
-- Tumor size.
 - Unified tumor grade.
 - Estrogen receptor status.
 - Progesterone receptor status.
 - HER2 status.
 - Breast cancer subtype.
+- Tumor-size status.
 
 The following variables will not be model inputs:
 
 - Patient ID.
+- Sequence number.
 - Regional nodes positive.
 - Regional nodes examined.
 - Year of diagnosis.
 - Diagnostic confirmation.
+- Raw grade columns replaced by unified grade.
+- Raw age replaced by numeric age.
+- Raw tumor-size code replaced by derived tumor-size features.
+- Internal cohort-construction variables.
+- Split assignment.
 - Any variable created directly from the target.
 
-Patient ID is used only for deduplication and leakage-safe splitting.
+Patient ID is used only for deduplication, cohort validation and leakage-safe splitting.
 
-Year of diagnosis is used only for temporal splitting and subgroup analysis.
+Year of diagnosis is used only for temporal splitting and aggregate auditing.
 
-The older and newer SEER grade columns will be combined into one unified grade variable. Structural missing values caused by changes in SEER coding years will not be treated as ordinary missing clinical data.
+The older and newer SEER grade columns are combined into one unified grade variable. Structural missing values caused by SEER coding changes are not treated as ordinary missing clinical data.
 
 ## 5. SEER data splits
 
-The primary SEER evaluation will measure temporal generalization:
+The primary SEER evaluation measures temporal generalization.
 
-- Development period: 2010–2019.
-- Temporal validation: 2020–2021.
-- Locked temporal test: 2022–2023.
+| Split | Years | Patients | N+ percentage |
+|---|---|---:|---:|
+| Train | 2010–2019 | 461,292 | 31.3938% |
+| ID validation | 2010–2019 | 51,241 | 31.3889% |
+| Temporal validation | 2020–2021 | 107,249 | 30.8739% |
+| Locked temporal test | 2022–2023 | 111,496 | 30.0199% |
 
-The development period will contain:
+The internal validation subset was deterministically sampled within year-and-target strata from the 2010–2019 development period.
 
-- Training patients.
-- An internal validation subset drawn only from 2010–2019.
+No patient occurs in more than one split.
 
-No patient may occur in more than one split.
+The locked temporal test split cannot be used for feature selection, preprocessing decisions, hyperparameter tuning, checkpoint selection, calibration fitting or threshold selection.
 
-The exact counts and class distributions must be recorded before model training.
+Development drift analysis compares:
 
-If the index-record construction makes any temporal split too small or unrepresentative, the protocol will be amended before training, with the reason documented.
+- Train against ID validation.
+- Train against temporal validation.
 
-## 6. Models
+The development drift analysis does not load the locked temporal test split.
 
-### 6.1 Image baseline
+## 6. Single joint model
 
-The primary image model will be:
+The project will train one neural network with two modality-specific input paths, one shared representation and two task-specific outputs.
 
-- ImageNet-pretrained DenseNet121.
-- All DenseNet layers fine-tuned.
-- A binary classification head.
+### 6.1 Image path
 
-The pilot comparison of frozen, last-block, full fine-tuning and training from scratch identified full fine-tuning as the strongest candidate.
+The image path will contain:
 
-The pilot is exploratory because it used:
+- An ImageNet-pretrained DenseNet121 encoder.
+- Full DenseNet fine-tuning during joint training.
+- A projector from the DenseNet representation to 128 dimensions.
+
+The earlier comparison of frozen DenseNet, final-block fine-tuning, full fine-tuning and training from scratch was exploratory.
+
+The pilot used:
 
 - 20,000 training patches.
 - Five epochs.
 - One random seed.
-- OOD validation accuracy for checkpoint selection.
+- OOD-validation accuracy for checkpoint selection.
 
-The pilot results are not final results.
+The pilot identified full fine-tuning as the strongest candidate. The pilot results are not final project results.
 
-The final image model will use the complete Camelyon17 training split and will select checkpoints using OOD-validation AUROC.
+### 6.2 Tabular path
 
-### 6.2 Tabular baselines
+The tabular path will contain:
 
-Three standalone tabular model families will be compared:
+- Train-fitted preprocessing for two numeric features.
+- Learned embeddings for eleven categorical features.
+- A neural tabular encoder.
+- A projector to 128 dimensions.
 
-1. CatBoost.
-2. A gradient-boosted tree model such as XGBoost or LightGBM.
-3. A neural tabular multilayer perceptron.
+Numeric preprocessing will be fitted on the SEER training split only.
 
-The tree models provide strong tabular baselines.
+Numeric missing-value replacement and scaling statistics must not be learned from validation or test data.
 
-The neural model is required because its encoder can participate in hard-parameter-sharing and later transfer.
+Categorical vocabularies will be constructed from the SEER training split only.
 
-### 6.3 Hard-parameter-sharing model
+Categories not observed during training will be mapped to a reserved unknown-category index.
 
-The multi-task model will contain:
+### 6.3 Shared path
 
-Image path:
-
-- DenseNet121 image encoder.
-- Image projector to a 128-dimensional vector.
-
-Tabular path:
-
-- Tabular neural encoder.
-- Tabular projector to a 128-dimensional vector.
-
-Shared path:
+The projected image and tabular representations will enter the same shared layers:
 
 - Shared layer: 128 to 64 dimensions.
 - Shared layer: 64 to 32 dimensions.
 
-Task-specific outputs:
+The resulting 32-dimensional representation will be used by the appropriate task-specific output head.
 
-- Image head: patch tumor absent or present.
-- SEER head: N0 or N+.
+### 6.4 Task-specific outputs
 
-The two datasets are not concatenated and are not treated as paired samples.
+The joint model will have two output heads:
 
-One training cycle will:
+- Image head: metastatic tumor absent or present in the image patch.
+- SEER head: N0 or N+ regional lymph-node status.
 
-1. Process one Camelyon17 mini-batch.
-2. Process one SEER mini-batch.
-3. Calculate one normalized loss for each task.
-4. Combine the two task losses.
-5. Update the shared and task-specific parameters.
+The outputs will always be reported separately.
 
-The initial loss will be:
+The model will not produce one universal cancer diagnosis probability.
+
+### 6.5 Alternating-batch training
+
+The Camelyon17 and SEER datasets will not be concatenated or treated as paired patients.
+
+One joint training cycle will:
+
+1. Clear the accumulated gradients.
+2. Process one Camelyon17 mini-batch.
+3. Calculate the mean image-task binary loss.
+4. Process one SEER mini-batch.
+5. Calculate the mean tabular-task binary loss.
+6. Combine the two losses.
+7. Update the modality-specific encoders, shared layers and task-specific heads.
+
+The initial combined loss will be:
 
 L_total = 0.5 × L_image + 0.5 × L_tabular
 
-Batch losses will be averaged within each modality so that the larger tabular batch does not automatically dominate the shared layers.
+Each task loss will be averaged within its own mini-batch before the losses are combined.
 
-## 7. Gradient-conflict analysis
+This prevents the larger tabular mini-batch from automatically dominating the shared parameters.
 
-For the shared layers, training will record:
+## 7. Joint-training monitoring
 
-- Image-task gradient norm.
-- Tabular-task gradient norm.
-- Cosine similarity between the two task gradients.
-- Individual task losses.
-- Combined loss.
+Training will record:
 
-Negative cosine similarity indicates that the two tasks are requesting conflicting changes to the shared parameters.
+- Image-task training loss.
+- Tabular-task training loss.
+- Combined training loss.
+- Image-task validation AUROC.
+- Tabular-task validation AUROC.
+- Image-task shared-gradient norm.
+- Tabular-task shared-gradient norm.
+- Cosine similarity between the task gradients in the shared layers.
+- Learning rate.
+- Training epoch.
+- Selected checkpoint.
 
-The first multi-task model will use ordinary equal-weight training.
+Negative gradient cosine similarity means that the tasks are requesting conflicting changes to the shared parameters.
 
-Methods such as dynamic loss weighting or PCGrad will be tested only as documented secondary experiments if the baseline shows gradient conflict or negative transfer.
+The initial joint model will use equal task weights.
 
-This analysis is part of the project’s distinctive contribution.
+If persistent gradient conflict or strong task imbalance appears on permitted validation data, a documented optimization adjustment may be evaluated.
+
+Permitted adjustments include:
+
+- Gradient clipping.
+- Revised fixed task weights.
+- A learning-rate adjustment.
+- PCGrad or another explicitly documented gradient-conflict method.
+
+These adjustments remain variants of the same joint model.
+
+No adjustment may be selected using either locked test split.
 
 ## 8. Evaluation protocol
 
-### Primary metric
+### 8.1 Primary metric
+
+The primary metric for both tasks is:
 
 - ROC-AUC.
 
-### Secondary metrics
+### 8.2 Secondary metrics
+
+Secondary metrics are:
 
 - Average precision or PR-AUC.
 - Balanced accuracy.
@@ -278,22 +331,32 @@ This analysis is part of the project’s distinctive contribution.
 - Sensitivity.
 - Specificity.
 - Brier score.
-- Calibration error.
+- Expected calibration error.
+- Calibration intercept.
+- Calibration slope.
 - Confusion matrix.
 
 Accuracy will not be used as the only success measure.
 
+No predetermined accuracy or AUROC will be claimed before evaluation.
+
+### 8.3 Decision thresholds
+
 A probability threshold of 0.5 will always be reported.
 
-If a second operating threshold is selected, it must be selected using validation data only and then frozen before test evaluation.
+If a second operating threshold is used, it must be selected using permitted validation data only and frozen before locked-test evaluation.
 
-### Repeated experiments
+No threshold may be selected separately after observing test performance.
 
-Final experiments will use at least three seeds:
+### 8.4 Repeated training
+
+The same joint architecture will be trained using at least three random seeds:
 
 - 42.
 - 123.
 - 2026.
+
+These repeated runs measure the statistical stability of the joint model.
 
 Results will be reported as mean and standard deviation across seeds.
 
@@ -303,35 +366,43 @@ Where practical, 95% bootstrap confidence intervals will be calculated:
 - By patient or slide for Camelyon17.
 - By patient for the paired dataset.
 
-## 9. Negative-transfer rule
+## 9. Joint checkpoint-selection rule
 
-For each task:
+One joint checkpoint will be selected using both permitted validation domains.
 
-Delta AUROC = multi-task AUROC − standalone AUROC
+The checkpoint score will be:
 
-Hard parameter sharing will be considered harmful to a task if its mean validation AUROC decreases by more than 0.02 compared with its standalone model.
+Joint validation score =
+0.5 × Camelyon17 OOD-validation AUROC
++
+0.5 × SEER temporal-validation AUROC
 
-The result will not be hidden if multi-task learning performs worse.
+Both task-specific AUROCs will always be reported separately so that strong performance on one task cannot hide poor performance on the other.
 
-A neutral or negative multi-task result is still scientifically meaningful because it tests whether unrelated modalities actually benefit from shared parameters.
+The SEER ID-validation results will be reported as an internal-distribution diagnostic but will not replace temporal-validation performance in the joint checkpoint score.
+
+If checkpoints have joint validation scores within 0.001, the earlier checkpoint will be selected to reduce overfitting.
 
 ## 10. Test-set protection
 
 ### Camelyon17
 
-- OOD validation hospital 1 may be used for model selection.
-- OOD test hospital 2 remains locked until the final image and multi-task configurations are selected.
+- OOD-validation hospital 1 may be used for joint-model selection.
+- OOD-test hospital 2 remains locked until the final joint-model configuration is selected.
 
 ### SEER
 
-- The 2022–2023 temporal test split remains locked until the final preprocessing and model configurations are selected.
+- Temporal validation from 2020–2021 may be used for joint-model selection.
+- The 2022–2023 temporal test split remains locked until the final joint-model configuration is selected.
 
 ### Paired dataset
 
 - Splits must be patient-level.
 - No slide, patch or clinical record belonging to a test patient may appear during training.
 
-No hyperparameter, feature, checkpoint or threshold will be selected using a test set.
+No hyperparameter, feature, checkpoint, calibration method or threshold will be selected using a test set.
+
+Each locked test set will be evaluated once after the model configuration is frozen.
 
 ## 11. Paired transfer and fusion
 
@@ -339,23 +410,24 @@ The paired-data phase is provisional until BCNB is downloaded and audited.
 
 For each paired patient:
 
-Image branch:
+### Image branch
 
 1. Divide the whole-slide image into tissue patches.
-2. Encode each patch using the transferred DenseNet121.
+2. Encode each patch using the transferred DenseNet121 encoder.
 3. Combine patch features using attention-based multiple-instance learning.
 4. Produce one patient-level image vector.
 
-Clinical branch:
+### Clinical branch
 
 1. Select clinical features available in both SEER and the paired dataset.
-2. Apply the transferred tabular encoder.
-3. Produce one patient-level clinical vector.
+2. Apply preprocessing compatible with the transferred tabular encoder.
+3. Apply the transferred tabular encoder.
+4. Produce one patient-level clinical vector.
 
-Fusion:
+### Fusion
 
-1. Pass both vectors through their learned shared representation.
-2. Concatenate the image and clinical vectors.
+1. Pass the image and clinical vectors through compatible learned projections.
+2. Concatenate the patient-level image and clinical vectors.
 3. Apply a fusion multilayer perceptron.
 4. Produce an 8-dimensional bottleneck.
 5. Predict N0 versus N+.
@@ -370,22 +442,27 @@ Later fine-tuning may unfreeze:
 
 Small learning rates will be used during unfreezing.
 
-## 12. Paired-transfer ablations
+All paired-data decisions remain provisional until the BCNB files, labels, clinical variables, patient identifiers and split possibilities have been audited.
 
-The following comparisons will be performed:
+## 12. Paired stage
 
-1. Image-only paired model.
-2. Clinical-only paired model.
-3. Paired fusion trained without Camelyon17 or SEER transfer.
-4. ImageNet image transfer plus paired clinical training.
-5. Camelyon17 image transfer plus SEER tabular transfer.
-6. Unpaired multi-task shared-transfer model.
+The paired stage will use the image encoder, tabular encoder and shared representation learned by the joint model.
 
-These comparisons are necessary to determine whether the proposed pretraining actually contributes value.
+The paired stage will report:
+
+- Patient-level image performance.
+- Patient-level clinical performance where available.
+- Patient-level fused performance.
+- Calibration.
+- The final 8-dimensional representation.
+
+The paired model must use patient-level splits and must prevent slide or patch leakage across patients.
+
+Any change required by the actual BCNB schema must be documented before paired-model training.
 
 ## 13. Classical and quantum handoff
 
-The final fusion model will export:
+The final paired fusion stage will export:
 
 - One 8-dimensional feature vector per patient.
 - Patient-level target.
@@ -403,49 +480,58 @@ The classical and quantum classifiers must use:
 
 The quantum model will not receive privileged data unavailable to the classical comparator.
 
+The quantum comparison is a downstream project stage and does not alter the training rules of the joint Camelyon17-SEER model.
+
 ## 14. Distinctive contribution
 
 The project does not claim that multi-task learning or quantum classification is new by itself.
 
-The distinctive experiment is the combined evaluation of:
+The distinctive system combines:
 
-- Two large unpaired cancer datasets.
-- Two different modalities.
+- Two large, unpaired cancer datasets.
+- Two different data modalities.
+- One joint neural network with two capabilities.
 - A shared representation centered on lymph-node metastasis.
 - Hospital distribution shift in histopathology.
 - Temporal distribution shift in registry data.
-- Explicit measurement of task-gradient conflict.
+- Explicit monitoring of task-gradient interaction.
 - Transfer into a paired image-and-clinical dataset.
 - A controlled classical-versus-quantum comparison.
 
-Novelty will be demonstrated through experiments and ablations, not claimed from architecture names alone.
+The contribution will be demonstrated through transparent implementation, domain-shift evaluation, reproducible auditing and controlled downstream comparison.
 
 ## 15. Reporting rules
 
 The project will:
 
 - Separate exploratory pilot results from final results.
-- Report all planned standalone and multi-task comparisons.
-- Report unsuccessful experiments.
+- Report both task-specific results and the joint checkpoint-selection score.
+- Report unsuccessful training runs or optimization changes.
+- Report the exact dataset split used for every result.
+- Report metrics for each task separately.
 - Clearly distinguish patch-level, tumor-record-level and patient-level predictions.
 - Avoid statements such as “cancer-free” when the model evaluates only a patch or lymph-node status.
 - Avoid presenting the system as a clinical diagnostic tool.
+- Avoid claiming a predetermined performance level.
 - Document all protocol amendments before the affected experiment is trained.
+- Never expose SEER Patient IDs or patient-level source records in Git-tracked artifacts.
 
 ## 16. Execution order
 
-1. Freeze this study protocol.
-2. Implement reproducible SEER EDA and cohort construction.
-3. Generate and freeze SEER patient splits.
-4. Train standalone SEER baselines.
-5. Retrain the final Camelyon17 baseline on the complete training data.
-6. Train the basic hard-parameter-sharing model.
-7. Measure gradient conflict and negative transfer.
-8. Run justified multi-task ablations.
-9. Download and audit the paired dataset.
-10. Train paired image, clinical and fusion baselines.
-11. Transfer the learned encoders and shared representation.
-12. Export the fixed 8-dimensional features.
-13. Perform the classical-versus-quantum comparison.
-14. Evaluate each locked test set once.
-15. Prepare the final report and presentation.
+1. Freeze the study protocol.
+2. Complete reproducible SEER EDA and cohort construction.
+3. Generate and freeze SEER patient-level splits.
+4. Build and audit the leakage-safe SEER model table.
+5. Complete development-only SEER drift analysis.
+6. Implement train-only SEER preprocessing and the tabular neural encoder.
+7. Implement the DenseNet121 image path and shared joint architecture.
+8. Train the equal-weight joint model using alternating image and tabular mini-batches.
+9. Monitor both task metrics, gradient norms and gradient cosine similarity.
+10. Tune the joint model using only Camelyon17 OOD validation and SEER temporal validation.
+11. Freeze the final joint-model configuration.
+12. Download and audit the paired image-and-clinical dataset.
+13. Transfer the learned encoders and shared representation to the paired dataset.
+14. Train the paired fusion stage and export the fixed 8-dimensional representation.
+15. Perform the controlled classical-versus-quantum comparison.
+16. Evaluate each locked test set once.
+17. Prepare the final report and presentation.
