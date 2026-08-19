@@ -1,0 +1,142 @@
+{
+  "categorical_features": [
+    "Race recode (W, B, AI, API)",
+    "Origin recode NHIA (Hispanic, Non-Hisp)",
+    "Primary Site - labeled",
+    "Histologic Type ICD-O-3",
+    "Laterality",
+    "grade_unified",
+    "ER Status Recode Breast Cancer (1990+)",
+    "PR Status Recode Breast Cancer (1990+)",
+    "Derived HER2 Recode (2010+)",
+    "Breast Subtype (2010+)",
+    "tumor_size_status"
+  ],
+  "categorical_summary": {
+    "Breast Subtype (2010+)": {
+      "missing": 0,
+      "unique_values": 6
+    },
+    "Derived HER2 Recode (2010+)": {
+      "missing": 0,
+      "unique_values": 4
+    },
+    "ER Status Recode Breast Cancer (1990+)": {
+      "missing": 0,
+      "unique_values": 4
+    },
+    "Histologic Type ICD-O-3": {
+      "missing": 0,
+      "unique_values": 127
+    },
+    "Laterality": {
+      "missing": 0,
+      "unique_values": 5
+    },
+    "Origin recode NHIA (Hispanic, Non-Hisp)": {
+      "missing": 0,
+      "unique_values": 2
+    },
+    "PR Status Recode Breast Cancer (1990+)": {
+      "missing": 0,
+      "unique_values": 4
+    },
+    "Primary Site - labeled": {
+      "missing": 0,
+      "unique_values": 9
+    },
+    "Race recode (W, B, AI, API)": {
+      "missing": 0,
+      "unique_values": 5
+    },
+    "grade_unified": {
+      "missing": 0,
+      "unique_values": 5
+    },
+    "tumor_size_status": {
+      "missing": 0,
+      "unique_values": 6
+    }
+  },
+  "feature_contract_version": "1.0",
+  "files": {
+    "configuration": {
+      "file_name": "seer_features.json",
+      "sha256": "67166e39bc726e9fbf59495c3fc2169420997a0c797ee19129ba0c03959d218e",
+      "size_bytes": 2915
+    },
+    "input_split_cohort": {
+      "file_name": "seer_index_cohort_with_splits.parquet",
+      "sha256": "bb03ce84c542c9c1235d8ec8a5c755c8e61afe2e6d7ac9e389250d102ce462be",
+      "size_bytes": 8540376
+    },
+    "private_model_table": {
+      "columns": 16,
+      "file_name": "seer_model_table.parquet",
+      "rows": 731278,
+      "sha256": "221a71f32799ada48c9c33bac03703f2c961c7b1092f35ab0ae5bf57f1237ad4",
+      "size_bytes": 5432954
+    }
+  },
+  "model_feature_count": 13,
+  "numeric_features": [
+    "age_numeric",
+    "tumor_size_mm"
+  ],
+  "numeric_summary": {
+    "age_numeric": {
+      "maximum": 90.0,
+      "median": 61.0,
+      "minimum": 18.0,
+      "missing": 0,
+      "missing_percent": 0.0
+    },
+    "tumor_size_mm": {
+      "maximum": 185.0,
+      "median": 17.0,
+      "minimum": 0.0,
+      "missing": 23799,
+      "missing_percent": 3.2544
+    }
+  },
+  "patients": 731278,
+  "split_summary": {
+    "id_val": {
+      "n0": 35157,
+      "n_positive": 16084,
+      "n_positive_percent": 31.3889,
+      "patients": 51241
+    },
+    "temporal_test": {
+      "n0": 78025,
+      "n_positive": 33471,
+      "n_positive_percent": 30.0199,
+      "patients": 111496
+    },
+    "temporal_val": {
+      "n0": 74137,
+      "n_positive": 33112,
+      "n_positive_percent": 30.8739,
+      "patients": 107249
+    },
+    "train": {
+      "n0": 316475,
+      "n_positive": 144817,
+      "n_positive_percent": 31.3938,
+      "patients": 461292
+    }
+  },
+  "tumor_size_status_counts": {
+    "inconsistent_or_not_applicable": 1,
+    "measured": 706118,
+    "microscopic_focus": 4849,
+    "no_evidence_of_primary_tumor": 1361,
+    "site_specific": 690,
+    "unknown_or_unreasonable": 18259
+  },
+  "validation": {
+    "duplicate_patient_ids": 0,
+    "forbidden_model_inputs_present": [],
+    "missing_targets": 0
+  }
+}
