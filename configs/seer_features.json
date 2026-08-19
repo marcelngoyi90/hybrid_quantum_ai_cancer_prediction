@@ -1,0 +1,62 @@
+{
+    "version": "1.0",
+    "target_column": "node_positive_target",
+    "split_column": "split",
+    "model_numeric_features": [
+      "age_numeric",
+      "tumor_size_mm"
+    ],
+    "model_categorical_features": [
+      "Race recode (W, B, AI, API)",
+      "Origin recode NHIA (Hispanic, Non-Hisp)",
+      "Primary Site - labeled",
+      "Histologic Type ICD-O-3",
+      "Laterality",
+      "grade_unified",
+      "ER Status Recode Breast Cancer (1990+)",
+      "PR Status Recode Breast Cancer (1990+)",
+      "Derived HER2 Recode (2010+)",
+      "Breast Subtype (2010+)",
+      "tumor_size_status"
+    ],
+    "metadata_columns": [
+      "Patient ID",
+      "split"
+    ],
+    "derived_features": {
+      "age_numeric": "Integer age parsed from the SEER age label; 90 represents 90+.",
+      "grade_unified": "Grade Recode through 2017 combined with Grade Clinical from 2018 onward.",
+      "tumor_size_mm": "Numeric millimeters for codes 000 through 400; special codes are missing.",
+      "tumor_size_status": "Measured, no evidence of primary tumor, microscopic focus, site-specific, unknown or unreasonable, or inconsistent/not applicable."
+    },
+    "forbidden_model_inputs": {
+      "Patient ID": "Identifier used only for privacy-safe cohort and split validation.",
+      "Sequence number": "Administrative tumor order used only for deterministic index-record selection.",
+      "Year of diagnosis": "Used for temporal splitting and excluded to reduce temporal shortcut learning.",
+      "Regional nodes positive (1988+)": "Direct source of the prediction target.",
+      "Regional nodes examined (1988+)": "Closely tied to how the target was measured and could leak procedural information.",
+      "Diagnostic Confirmation": "Administrative confirmation field and nearly constant in this cohort.",
+      "Grade Recode (thru 2017)": "Replaced by grade_unified.",
+      "Grade Clinical (2018+)": "Replaced by grade_unified.",
+      "Age recode with single ages and 90+": "Replaced by age_numeric.",
+      "Tumor Size Over Time Recode (1988+)": "Replaced by tumor_size_mm and tumor_size_status.",
+      "source_row_number": "Internal reproducibility field with no clinical meaning.",
+      "sequence_rank": "Internal index-selection field with no model role.",
+      "year_numeric": "Used only for temporal splitting and auditing.",
+      "node_positive_target": "Prediction target and never an input.",
+      "split": "Dataset partition metadata and never an input."
+    },
+    "paired_bridge_feature_status": "provisional_pending_bcnb_audit",
+    "paired_bridge_candidate_features": [
+      "age_numeric",
+      "tumor_size_mm",
+      "tumor_size_status",
+      "Histologic Type ICD-O-3",
+      "Laterality",
+      "grade_unified",
+      "ER Status Recode Breast Cancer (1990+)",
+      "PR Status Recode Breast Cancer (1990+)",
+      "Derived HER2 Recode (2010+)",
+      "Breast Subtype (2010+)"
+    ]
+  }
