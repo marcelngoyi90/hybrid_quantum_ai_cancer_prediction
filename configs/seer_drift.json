@@ -1,0 +1,61 @@
+{
+    "version": "1.0",
+    "reference_split": "train",
+    "development_comparisons": [
+      "id_val",
+      "temporal_val"
+    ],
+    "locked_comparison": "temporal_test",
+    "locked_comparison_stage": "final_evaluation_only",
+    "numeric_features": {
+      "primary_metric": "population_stability_index",
+      "secondary_metric": "kolmogorov_smirnov_statistic",
+      "psi_bins": 10,
+      "psi_binning": "reference_quantiles",
+      "epsilon": 1e-06,
+      "use_p_values_as_primary_evidence": false
+    },
+    "categorical_features": {
+      "primary_metric": "population_stability_index",
+      "secondary_metric": "jensen_shannon_distance",
+      "unseen_category": "__UNSEEN__",
+      "epsilon": 1e-06,
+      "use_p_values_as_primary_evidence": false
+    },
+    "psi_interpretation": {
+      "small_upper_exclusive": 0.1,
+      "moderate_upper_exclusive": 0.25,
+      "large_lower_inclusive": 0.25,
+      "thresholds_are_descriptive_only": true
+    },
+    "class_conditional_analysis": {
+      "enabled": true,
+      "classes": [
+        0,
+        1
+      ],
+      "purpose": "Assess whether observed prevalence drift is compatible with label shift."
+    },
+    "label_prevalence_analysis": {
+      "enabled": true,
+      "report_absolute_percentage_point_change": true,
+      "report_relative_change": true,
+      "call_label_shift_only_if_class_conditional_distributions_are_stable": true
+    },
+    "calibration_analysis": {
+      "metrics": [
+        "brier_score",
+        "expected_calibration_error",
+        "calibration_intercept",
+        "calibration_slope"
+      ],
+      "fit_calibration_on_validation_only": true,
+      "allow_temporal_test_recalibration": false
+    },
+    "actions": {
+      "automatic_feature_dropping": false,
+      "automatic_feature_reweighting": false,
+      "drift_results_are_audit_evidence": true,
+      "mitigation_requires_a_predeclared_ablation": true
+    }
+  }
