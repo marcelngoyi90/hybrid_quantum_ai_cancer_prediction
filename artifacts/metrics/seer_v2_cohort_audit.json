@@ -1,0 +1,95 @@
+{
+  "baseline_equivalence": {
+    "diagnosis_years_equal": true,
+    "patient_membership_equal": true,
+    "patient_order_equal": true,
+    "records_equal": true,
+    "targets_equal": true
+  },
+  "cohort": {
+    "eligible_patient_structure": {
+      "ambiguous_tie_records": 0,
+      "eligible_unique_patients": 731278,
+      "maximum_records_per_patient": 4,
+      "patients_with_conflicting_targets": 7760,
+      "patients_with_multiple_records": 24805
+    },
+    "flow": {
+      "eligible_records": 756344,
+      "final_index_records": 731278,
+      "invalid_target_records_after_age_filter": 0,
+      "raw_records": 756356,
+      "records_removed_as_non_index": 25066,
+      "under_age_records": 12,
+      "unparseable_age_records": 0
+    },
+    "index_cohort": {
+      "maximum_age": 90,
+      "maximum_year": 2023,
+      "median_age": 61.0,
+      "minimum_age": 18,
+      "minimum_year": 2010,
+      "n0": 503794,
+      "n_positive": 227484,
+      "n_positive_percent": 31.1077,
+      "records": 731278,
+      "unique_patients": 731278
+    },
+    "selection_rule": {
+      "ambiguous_ties_allowed": false,
+      "minimum_age": 18,
+      "primary_sort": "earliest diagnosis year",
+      "secondary_sort": "smallest sequence rank"
+    }
+  },
+  "development_staging_summary": {
+    "locked_test_years_excluded": [
+      2022,
+      2023
+    ],
+    "maximum_year_included": 2021,
+    "rows": 22
+  },
+  "files": {
+    "baseline_private_cohort": {
+      "file_name": "seer_index_cohort.parquet",
+      "sha256": "5758f119042f67d2153796b3d68a7e740fc13f86ac0cc3d5eb84c588c98939d0",
+      "size_bytes": 8448900
+    },
+    "private_v2_cohort": {
+      "columns": 33,
+      "file_name": "seer_v2_index_cohort.parquet",
+      "rows": 731278,
+      "sha256": "1dff3a1d0aa42f055af390810d5dd807ce30d053cff63c97b6ce603a6cc23075",
+      "size_bytes": 9290281
+    },
+    "raw_v2_csv": {
+      "file_name": "seer_breast_nodes_2010_2023_v2.csv",
+      "sha256": "14c6c7e0b1fcd29d8cef630897d71afb3560bc651f3ff26b800cf72fb3a66538",
+      "size_bytes": 250599292
+    }
+  },
+  "harmonized_features": {
+    "m_stage_harmonized": [
+      "M0",
+      "M1",
+      "unknown"
+    ],
+    "t_stage_harmonized": [
+      "T0",
+      "T1",
+      "T2",
+      "T3",
+      "T4",
+      "TX",
+      "Tis",
+      "unknown"
+    ]
+  },
+  "test_protection": {
+    "locked_test_distribution_reported": false,
+    "locked_test_performance_evaluated": false,
+    "locked_test_used_for_model_selection": false
+  },
+  "version": "2.0"
+}
