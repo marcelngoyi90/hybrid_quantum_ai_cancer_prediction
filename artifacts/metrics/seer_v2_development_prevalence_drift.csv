@@ -1,0 +1,3 @@
+comparison,reference_patients,comparison_patients,reference_n_positive,comparison_n_positive,reference_positive_percent,comparison_positive_percent,absolute_percentage_point_change,relative_percent_change
+id_val,461292,51241,144817,16084,31.393780945691667,31.388926835932164,-0.00485410975950562,-0.015462010669897719
+temporal_val,461292,107249,144817,33112,31.393780945691667,30.87394754263443,-0.5198334030572405,-1.655848347660016
