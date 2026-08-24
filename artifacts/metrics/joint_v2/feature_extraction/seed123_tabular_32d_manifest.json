@@ -1,0 +1,68 @@
+{
+  "checkpoint": {
+    "checkpoint_filename": "joint_seed123_best.pt",
+    "checkpoint_sha256": "ac8ba9baccaace84ef860caf9a6023bafac5c7eec07ca600a99dc25c3d0b921a",
+    "history_filename": "joint_seed123_history.json",
+    "history_sha256": "fa8c69a78896c0f3768b8ea1d5dabf81c8c71355512ac510e4291f50dab66df4",
+    "joint_config_filename": "joint_model_v2.json",
+    "joint_config_sha256": "9f19cb05a37725e60acf049a8e0e42beca05613ab008ea8e42af53ba668d4d36",
+    "locked_tests_evaluated": false,
+    "locked_tests_loaded": false,
+    "model_in_evaluation_mode": true,
+    "model_parameters_trainable": false,
+    "patient_identifiers_loaded": false,
+    "preprocessor_state_filename": "seer_v2_preprocessor.json",
+    "preprocessor_state_sha256": "ea081585de07866fbe8e26217160c462c4b11650e852f6cfa2041dcf180c2a94",
+    "seed": 123,
+    "selected_epoch": 5,
+    "shared_dimension": 32
+  },
+  "development_splits": [
+    "train",
+    "id_val",
+    "temporal_val"
+  ],
+  "feature_dimension": 32,
+  "privacy": {
+    "patient_identifiers_in_output": false,
+    "patient_identifiers_loaded": false,
+    "patient_level_rows_in_public_outputs": false,
+    "private_features_committed": false
+  },
+  "representation": "joint_shared_trunk_output",
+  "seed": 123,
+  "selected_epoch": 5,
+  "split_audits": [
+    {
+      "feature_dimension": 32,
+      "private_feature_path": "artifacts/features/joint_v2/seed123/tabular_train_32d.npz",
+      "private_feature_sha256": "eb60d9e437287bbe83640b7101646f3b9961a2c427e35d6ae034b8de9cb789da",
+      "public_audit_filename": "seed123_tabular_train_32d_audit.json",
+      "rows": 461292,
+      "split": "train"
+    },
+    {
+      "feature_dimension": 32,
+      "private_feature_path": "artifacts/features/joint_v2/seed123/tabular_id_val_32d.npz",
+      "private_feature_sha256": "3e056972b9750f971f73912f27ecc00780db003cb46338d9ed0aa6189b198f5d",
+      "public_audit_filename": "seed123_tabular_id_val_32d_audit.json",
+      "rows": 51241,
+      "split": "id_val"
+    },
+    {
+      "feature_dimension": 32,
+      "private_feature_path": "artifacts/features/joint_v2/seed123/tabular_temporal_val_32d.npz",
+      "private_feature_sha256": "84c6769e7dc9410980d85308ec404db05b6229394d43c88d93ea472a41c3dd09",
+      "public_audit_filename": "seed123_tabular_temporal_val_32d_audit.json",
+      "rows": 107249,
+      "split": "temporal_val"
+    }
+  ],
+  "task": "tabular",
+  "test_protection": {
+    "locked_test_evaluated": false,
+    "locked_test_extracted": false,
+    "locked_test_loaded": false
+  },
+  "version": "1.0"
+}
