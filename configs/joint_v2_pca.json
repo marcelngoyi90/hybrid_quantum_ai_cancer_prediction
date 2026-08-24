@@ -1,0 +1,120 @@
+{
+    "version": "1.0",
+    "purpose": "Pre-register the protected reduction of joint model v2 shared representations from 32 dimensions to 8 dimensions.",
+    "model_name": "camelyon17_seer_joint_network_v2",
+    "source_representation": "joint_shared_trunk_output",
+    "source_dimension": 32,
+    "output_representation": "training_only_standard_scaler_then_pca",
+    "output_dimension": 8,
+    "random_seeds": [
+        42,
+        123,
+        2026
+    ],
+    "tasks": {
+        "image": {
+            "training_split": "train",
+            "development_transform_splits": [
+                "train",
+                "id_val",
+                "ood_val"
+            ],
+            "locked_test_split": "ood_test"
+        },
+        "tabular": {
+            "training_split": "train",
+            "development_transform_splits": [
+                "train",
+                "id_val",
+                "temporal_val"
+            ],
+            "locked_test_split": "temporal_test"
+        }
+    },
+    "pipeline_scope": {
+        "fit_separately_for_each_task": true,
+        "fit_separately_for_each_seed": true,
+        "number_of_fitted_pipelines": 6,
+        "use_full_training_split": true,
+        "training_subsampling": false,
+        "labels_used_during_fit": false
+    },
+    "standard_scaler": {
+        "implementation": "sklearn.preprocessing.StandardScaler",
+        "with_mean": true,
+        "with_std": true,
+        "copy": true,
+        "zero_variance_action": "error"
+    },
+    "pca": {
+        "implementation": "sklearn.decomposition.PCA",
+        "n_components": 8,
+        "svd_solver": "covariance_eigh",
+        "whiten": false,
+        "copy": true,
+        "random_state": null,
+        "labels_used_during_fit": false
+    },
+    "fitting_rules": {
+        "fit_split": "train",
+        "scaler_fit_on_training_features_only": true,
+        "pca_fit_on_scaled_training_features_only": true,
+        "validation_features_used_for_fit": false,
+        "locked_test_features_used_for_fit": false,
+        "hyperparameter_tuning_using_explained_variance": false,
+        "output_dimension_fixed_before_fit": true
+    },
+    "transformation_rules": {
+        "reuse_fitted_training_scaler": true,
+        "reuse_fitted_training_pca": true,
+        "refit_on_validation": false,
+        "output_dtype": "float32",
+        "preserve_binary_labels": true,
+        "label_dtype": "uint8",
+        "preserve_row_order": true
+    },
+    "validation": {
+        "require_exact_input_dimension": true,
+        "require_exact_output_dimension": true,
+        "require_finite_inputs": true,
+        "require_finite_outputs": true,
+        "require_nonzero_training_variance": true,
+        "require_row_count_preservation": true,
+        "require_label_hash_preservation": true,
+        "report_component_explained_variance_ratio": true,
+        "report_total_explained_variance_ratio": true,
+        "report_input_and_output_hashes": true
+    },
+    "private_outputs": {
+        "feature_archive_format": "npz",
+        "fitted_state_format": "joblib",
+        "feature_archive_arrays": [
+            "features",
+            "labels"
+        ],
+        "commit_feature_archives": false,
+        "commit_fitted_states": false
+    },
+    "public_outputs": {
+        "commit_aggregate_audits_only": true,
+        "include_feature_values": false,
+        "include_labels": false,
+        "include_patient_rows": false,
+        "include_patient_identifiers": false,
+        "include_category_vocabularies": false
+    },
+    "test_protection": {
+        "allow_camelyon_ood_test_loading": false,
+        "allow_seer_temporal_test_loading": false,
+        "allow_locked_test_transformation_at_this_stage": false,
+        "allow_locked_test_pca_fitting": false,
+        "allow_locked_test_scaler_fitting": false
+    },
+    "handoff": {
+        "classical_and_quantum_receive_same_8d_features": true,
+        "classical_and_quantum_receive_same_labels": true,
+        "additional_downstream_scaling_must_fit_training_only": true,
+        "additional_downstream_scaling_must_be_identical_for_both_classifiers": true,
+        "quantum_implementation_is_outside_current_contributor_scope": true
+    }
+}
