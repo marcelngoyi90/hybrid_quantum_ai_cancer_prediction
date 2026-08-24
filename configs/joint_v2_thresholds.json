@@ -1,0 +1,84 @@
+{
+    "version": "1.0",
+    "purpose": "Pre-register development-only SEER classification-threshold selection for joint model v2.",
+    "model_name": "camelyon17_seer_joint_network_v2",
+    "model_version": "2.0",
+    "task": "tabular",
+    "target": "node_positive_target",
+    "negative_class": 0,
+    "positive_class": 1,
+    "random_seeds": [
+        42,
+        123,
+        2026
+    ],
+    "probability_source": "selected_joint_v2_checkpoint_tabular_head",
+    "threshold_selection": {
+        "fit_split": "id_val",
+        "development_evaluation_split": "temporal_val",
+        "locked_test_split": "temporal_test",
+        "default_threshold": 0.5,
+        "selection_metric": "balanced_accuracy",
+        "positive_prediction_rule": "probability_greater_than_or_equal_to_threshold",
+        "select_separately_for_each_seed": true,
+        "candidate_grid": {
+            "method": "fixed_inclusive_grid",
+            "minimum": 0.01,
+            "maximum": 0.99,
+            "step": 0.001
+        },
+        "metric_comparison_tolerance": 1e-12,
+        "tie_breakers_in_order": [
+            "minimum_absolute_distance_from_default_threshold",
+            "lower_threshold"
+        ]
+    },
+    "probability_processing": {
+        "apply_calibration_before_threshold_selection": false,
+        "probability_clipping": false,
+        "probability_rounding": false
+    },
+    "reported_metrics": [
+        "accuracy",
+        "balanced_accuracy",
+        "roc_auc",
+        "average_precision",
+        "f1",
+        "precision",
+        "sensitivity",
+        "specificity",
+        "brier_score",
+        "expected_calibration_error",
+        "confusion_matrix"
+    ],
+    "comparisons": {
+        "report_default_threshold": true,
+        "report_selected_threshold": true,
+        "report_absolute_metric_change": true,
+        "report_each_seed": true,
+        "report_mean_across_seeds": true,
+        "report_sample_standard_deviation": true
+    },
+    "development_rules": {
+        "model_retraining_allowed": false,
+        "checkpoint_changes_allowed": false,
+        "feature_changes_allowed": false,
+        "preprocessing_changes_allowed": false,
+        "threshold_selected_using_id_val_only": true,
+        "temporal_val_used_for_threshold_selection": false,
+        "temporal_val_used_for_development_evaluation": true
+    },
+    "test_protection": {
+        "allow_temporal_test_loading": false,
+        "allow_temporal_test_threshold_selection": false,
+        "allow_temporal_test_calibration": false,
+        "allow_temporal_test_tuning": false,
+        "allow_temporal_test_evaluation_at_this_stage": false
+    },
+    "interpretation": {
+        "primary_goal": "Improve the balance between N-positive sensitivity and N0 specificity.",
+        "roc_auc_expected_to_change": false,
+        "overall_accuracy_required_to_increase": false,
+        "selected_threshold_is_not_a_new_model": true
+    }
+}
