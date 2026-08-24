@@ -1,0 +1,68 @@
+{
+  "checkpoint": {
+    "checkpoint_filename": "joint_seed123_best.pt",
+    "checkpoint_sha256": "ac8ba9baccaace84ef860caf9a6023bafac5c7eec07ca600a99dc25c3d0b921a",
+    "history_filename": "joint_seed123_history.json",
+    "history_sha256": "fa8c69a78896c0f3768b8ea1d5dabf81c8c71355512ac510e4291f50dab66df4",
+    "joint_config_filename": "joint_model_v2.json",
+    "joint_config_sha256": "9f19cb05a37725e60acf049a8e0e42beca05613ab008ea8e42af53ba668d4d36",
+    "locked_tests_evaluated": false,
+    "locked_tests_loaded": false,
+    "model_in_evaluation_mode": true,
+    "model_parameters_trainable": false,
+    "patient_identifiers_loaded": false,
+    "preprocessor_state_filename": "seer_v2_preprocessor.json",
+    "preprocessor_state_sha256": "ea081585de07866fbe8e26217160c462c4b11650e852f6cfa2041dcf180c2a94",
+    "seed": 123,
+    "selected_epoch": 5,
+    "shared_dimension": 32
+  },
+  "development_splits": [
+    "train",
+    "id_val",
+    "ood_val"
+  ],
+  "feature_dimension": 32,
+  "privacy": {
+    "patient_identifiers_in_output": false,
+    "patient_identifiers_loaded": false,
+    "patient_level_rows_in_public_outputs": false,
+    "private_features_committed": false
+  },
+  "representation": "joint_shared_trunk_output",
+  "seed": 123,
+  "selected_epoch": 5,
+  "split_audits": [
+    {
+      "feature_dimension": 32,
+      "private_feature_path": "artifacts/features/joint_v2/seed123/image_train_32d.npz",
+      "private_feature_sha256": "2d6f2dad82f1da38b4304124a99815bf47d51675d6b88717917e83bc27a1614f",
+      "public_audit_filename": "seed123_image_train_32d_audit.json",
+      "rows": 302436,
+      "split": "train"
+    },
+    {
+      "feature_dimension": 32,
+      "private_feature_path": "artifacts/features/joint_v2/seed123/image_id_val_32d.npz",
+      "private_feature_sha256": "5c6040611f7ecb2f96c9767f7ca859b5060f590c2c2482c4af45b7d59901eb41",
+      "public_audit_filename": "seed123_image_id_val_32d_audit.json",
+      "rows": 33560,
+      "split": "id_val"
+    },
+    {
+      "feature_dimension": 32,
+      "private_feature_path": "artifacts/features/joint_v2/seed123/image_ood_val_32d.npz",
+      "private_feature_sha256": "fe4d8e22e6bd6073e4b75ba646179fa12c03fd56a404c5a3c9748282c2cef19e",
+      "public_audit_filename": "seed123_image_ood_val_32d_audit.json",
+      "rows": 34904,
+      "split": "ood_val"
+    }
+  ],
+  "task": "image",
+  "test_protection": {
+    "locked_test_evaluated": false,
+    "locked_test_extracted": false,
+    "locked_test_loaded": false
+  },
+  "version": "1.0"
+}
