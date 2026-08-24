@@ -1,0 +1,194 @@
+{
+  "fit": {
+    "full_training_split_used": true,
+    "labels_used": false,
+    "locked_test_features_used": false,
+    "rows": 461292,
+    "split": "train",
+    "training_subsampling_used": false,
+    "validation_features_used": false
+  },
+  "fitted_state": {
+    "committed": false,
+    "filename": "tabular_32d_to_8d_pca.joblib",
+    "path": "artifacts/features/joint_v2/seed42/tabular_32d_to_8d_pca.joblib",
+    "sha256": "6460b99cab53cfa54452af28d7d66fe3d673431bcdacf9cb8f84d6c56663734a",
+    "size_bytes": 3103
+  },
+  "handoff": {
+    "classical_and_quantum_receive_same_features": true,
+    "classical_and_quantum_receive_same_labels": true,
+    "quantum_implementation_in_current_scope": false
+  },
+  "joint_configuration": {
+    "filename": "joint_model_v2.json",
+    "sha256": "9f19cb05a37725e60acf049a8e0e42beca05613ab008ea8e42af53ba668d4d36"
+  },
+  "output_dimension": 8,
+  "output_representation": "training_only_standard_scaler_then_pca",
+  "pca_configuration": {
+    "filename": "joint_v2_pca.json",
+    "sha256": "b8637b7972f5039c8ca1f16d6d769afba00fd78131255f52f0892d694799f108"
+  },
+  "pca_fit": {
+    "explained_variance_ratio": [
+      0.6428126096725464,
+      0.2820754051208496,
+      0.055846378207206726,
+      0.013694476336240768,
+      0.003027983708307147,
+      0.0012381091946735978,
+      0.0004584298003464937,
+      0.00027164359926246107
+    ],
+    "labels_used": false,
+    "n_components": 8,
+    "svd_solver": "covariance_eigh",
+    "total_explained_variance_ratio": 0.9994250356394332,
+    "whiten": false
+  },
+  "privacy": {
+    "feature_values_in_public_audit": false,
+    "fitted_state_committed": false,
+    "labels_in_public_audit": false,
+    "patient_identifiers_in_output": false,
+    "patient_identifiers_loaded": false,
+    "patient_level_rows_in_public_audit": false,
+    "private_archives_committed": false
+  },
+  "seed": 42,
+  "software": {
+    "joblib": "1.5.3",
+    "numpy": "2.5.2",
+    "python": "3.12.13",
+    "scikit_learn": "1.9.0"
+  },
+  "source_dimension": 32,
+  "source_representation": "joint_shared_trunk_output",
+  "split_outputs": {
+    "id_val": {
+      "archive_filename": "tabular_id_val_8d.npz",
+      "archive_path": "artifacts/features/joint_v2/seed42/tabular_id_val_8d.npz",
+      "archive_sha256": "16d5d6a247bc81d1d1c7885e4088b2720dd3c4c0efeefdc1f72373df790f4520",
+      "size_bytes": 1553608,
+      "source": {
+        "archive_path": "artifacts/features/joint_v2/seed42/tabular_id_val_32d.npz",
+        "archive_sha256": "bafce919bb89d2562a5fba290ff7093c7642fe7b1a6beab8292ce901799db762",
+        "dimension": 32,
+        "extraction_audit_filename": "seed42_tabular_id_val_32d_audit.json",
+        "features_sha256": "091c82ab39da3d204c91fb42942d602e450e3ce6ecc2cc1ada6ca8052f5c18bb",
+        "labels_sha256": "9376c84ddd8d39f7e3b09b4fd933fba21d2d0083d67d1951b41999ac481ad133",
+        "locked_test_loaded": false,
+        "patient_identifiers_loaded": false,
+        "rows": 51241,
+        "split": "id_val"
+      },
+      "summary": {
+        "dimension": 8,
+        "feature_dtype": "float32",
+        "feature_maximum": 13.5083646774292,
+        "feature_mean": -0.0006325001050318461,
+        "feature_minimum": -11.9469633102417,
+        "feature_standard_deviation": 2.002130035748459,
+        "features_sha256": "0c8f3ad15a99e51fb35d03498f53e9c47e35ed4617cbb7456acd99e1f70ad38c",
+        "label_dtype": "uint8",
+        "label_hash_preserved": true,
+        "labels_sha256": "9376c84ddd8d39f7e3b09b4fd933fba21d2d0083d67d1951b41999ac481ad133",
+        "locked_test_in_output": false,
+        "negative_count": 35157,
+        "patient_identifiers_in_output": false,
+        "positive_count": 16084,
+        "row_order_preserved": true,
+        "rows": 51241
+      }
+    },
+    "temporal_val": {
+      "archive_filename": "tabular_temporal_val_8d.npz",
+      "archive_path": "artifacts/features/joint_v2/seed42/tabular_temporal_val_8d.npz",
+      "archive_sha256": "7199d2fbb0e0bc08ec989f88ff7d0a572ba7eadec46b5b160ade754a09caaf48",
+      "size_bytes": 3249682,
+      "source": {
+        "archive_path": "artifacts/features/joint_v2/seed42/tabular_temporal_val_32d.npz",
+        "archive_sha256": "ed09ce107cd19aa4969ab77c2a2ea2e07dd722c29b748b0de33aa6e562e194e7",
+        "dimension": 32,
+        "extraction_audit_filename": "seed42_tabular_temporal_val_32d_audit.json",
+        "features_sha256": "43f03e1a06c50fa4aced81f196ab205f741b8c4d285a7ba56069e83de55c56f2",
+        "labels_sha256": "e92d5d7eb988a6cd82a85eca8bcc98e7f843518359493bf74e651b91313005c9",
+        "locked_test_loaded": false,
+        "patient_identifiers_loaded": false,
+        "rows": 107249,
+        "split": "temporal_val"
+      },
+      "summary": {
+        "dimension": 8,
+        "feature_dtype": "float32",
+        "feature_maximum": 13.517003059387207,
+        "feature_mean": 0.013676288390987936,
+        "feature_minimum": -12.069273948669434,
+        "feature_standard_deviation": 2.027147759325615,
+        "features_sha256": "9b2a7efd8924abe6467e00d5c93f6f7ebb7dbfb7abd1ec385e18ccc85e998ee9",
+        "label_dtype": "uint8",
+        "label_hash_preserved": true,
+        "labels_sha256": "e92d5d7eb988a6cd82a85eca8bcc98e7f843518359493bf74e651b91313005c9",
+        "locked_test_in_output": false,
+        "negative_count": 74137,
+        "patient_identifiers_in_output": false,
+        "positive_count": 33112,
+        "row_order_preserved": true,
+        "rows": 107249
+      }
+    },
+    "train": {
+      "archive_filename": "tabular_train_8d.npz",
+      "archive_path": "artifacts/features/joint_v2/seed42/tabular_train_8d.npz",
+      "archive_sha256": "fac565a41d8b54aee309d7cb328fa9cd3ef7edd319a0297f716aa9e1bc63ca87",
+      "size_bytes": 13977984,
+      "source": {
+        "archive_path": "artifacts/features/joint_v2/seed42/tabular_train_32d.npz",
+        "archive_sha256": "c3b75cdc9a9d6dba35b45c15f41df515fe6386f173a70cd64ae748a215323ca6",
+        "dimension": 32,
+        "extraction_audit_filename": "seed42_tabular_train_32d_audit.json",
+        "features_sha256": "5842b05b3f70e5a0a9c87b4c6d5599ebd177f512c6d9daa34484ead3f9f9b71e",
+        "labels_sha256": "969ce945cd3f5b3dfef3564ce2f5df8afd890358e7c62bee7297552551524cb7",
+        "locked_test_loaded": false,
+        "patient_identifiers_loaded": false,
+        "rows": 461292,
+        "split": "train"
+      },
+      "summary": {
+        "dimension": 8,
+        "feature_dtype": "float32",
+        "feature_maximum": 13.51528549194336,
+        "feature_mean": -1.4958346538407517e-07,
+        "feature_minimum": -12.146538734436035,
+        "feature_standard_deviation": 1.9995063111214015,
+        "features_sha256": "7554e5eb8148924ec17773a2e683dde1c7bc9dad99dea6c890c7113759367d65",
+        "label_dtype": "uint8",
+        "label_hash_preserved": true,
+        "labels_sha256": "969ce945cd3f5b3dfef3564ce2f5df8afd890358e7c62bee7297552551524cb7",
+        "locked_test_in_output": false,
+        "negative_count": 316475,
+        "patient_identifiers_in_output": false,
+        "positive_count": 144817,
+        "row_order_preserved": true,
+        "rows": 461292
+      }
+    }
+  },
+  "standard_scaler_fit": {
+    "input_dimension": 32,
+    "maximum_dimension_standard_deviation": 1.001966843929673,
+    "minimum_dimension_standard_deviation": 0.02480683758240838,
+    "with_mean": true,
+    "with_std": true,
+    "zero_variance_dimensions": 0
+  },
+  "task": "tabular",
+  "test_protection": {
+    "locked_tests_loaded": false,
+    "locked_tests_transformed": false,
+    "locked_tests_used_for_pca_fit": false,
+    "locked_tests_used_for_scaler_fit": false
+  },
+  "version": "1.0"
+}
