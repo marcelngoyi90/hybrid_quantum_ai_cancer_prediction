@@ -1,0 +1,88 @@
+{
+  "extraction": {
+    "checkpoint": {
+      "checkpoint_filename": "joint_seed2026_best.pt",
+      "checkpoint_sha256": "431763546aaa9c690f0a2baf3c760932554515ec30d4b108f9b98b9f6b110620",
+      "history_filename": "joint_seed2026_history.json",
+      "history_sha256": "00b9b1a2ca58d05139a848f4e6e2ef5679883dff5a049cb45ed2ff4ef106d031",
+      "joint_config_filename": "joint_model_v2.json",
+      "joint_config_sha256": "9f19cb05a37725e60acf049a8e0e42beca05613ab008ea8e42af53ba668d4d36",
+      "locked_tests_evaluated": false,
+      "locked_tests_loaded": false,
+      "model_in_evaluation_mode": true,
+      "model_parameters_trainable": false,
+      "patient_identifiers_loaded": false,
+      "preprocessor_state_filename": "seer_v2_preprocessor.json",
+      "preprocessor_state_sha256": "ea081585de07866fbe8e26217160c462c4b11650e852f6cfa2041dcf180c2a94",
+      "seed": 2026,
+      "selected_epoch": 2,
+      "shared_dimension": 32
+    },
+    "loader": {
+      "batch_size": 128,
+      "drop_last": false,
+      "expected_rows": 34904,
+      "image_metadata_used_as_model_input": false,
+      "locked_test_loaded": false,
+      "patient_identifiers_retained": false,
+      "shuffle": false,
+      "split": "ood_val",
+      "task": "image",
+      "training_augmentation": false
+    },
+    "locked_tests_evaluated": false,
+    "locked_tests_loaded": false,
+    "output": {
+      "feature_dimension": 32,
+      "feature_dtype": "float32",
+      "feature_maximum": 3.1694276332855225,
+      "feature_mean": 0.5050359866409844,
+      "feature_minimum": -0.16997122764587402,
+      "feature_standard_deviation": 0.9573552647355239,
+      "features_sha256": "60344277a3b9e88fb1ff97d2432868a9261eaca5eb4f99dc45c28cc4af74d03d",
+      "image_metadata_in_output": false,
+      "label_dtype": "uint8",
+      "labels_sha256": "9e2d4d9d8be584e9988e1a9688152fbeabe5e9216a6336d25c6878ab22f3f9d6",
+      "locked_test_loaded": false,
+      "negative_count": 17452,
+      "patient_identifiers_in_output": false,
+      "positive_count": 17452,
+      "positive_percent": 50.0,
+      "raw_clinical_fields_in_output": false,
+      "rows": 34904,
+      "seed": 2026,
+      "split": "ood_val",
+      "task": "image"
+    },
+    "patient_identifiers_in_output": false
+  },
+  "feature_dimension": 32,
+  "privacy": {
+    "image_metadata_in_output": false,
+    "original_images_in_output": false,
+    "patient_identifiers_in_output": false,
+    "patient_identifiers_loaded": false,
+    "private_feature_file_committed": false,
+    "raw_clinical_fields_in_output": false
+  },
+  "private_output": {
+    "archive_arrays": [
+      "features",
+      "labels"
+    ],
+    "file_sha256": "7f37d46843c224b56c860dd8166509756e0b8e0e45fbc6a522a278b34e0b0d5f",
+    "filename": "image_ood_val_32d.npz",
+    "path": "artifacts/features/joint_v2/seed2026/image_ood_val_32d.npz",
+    "size_bytes": 4002276
+  },
+  "representation": "joint_shared_trunk_output",
+  "seed": 2026,
+  "split": "ood_val",
+  "task": "image",
+  "test_protection": {
+    "locked_test_evaluated": false,
+    "locked_test_loaded": false,
+    "locked_test_used_for_extraction": false
+  },
+  "version": "1.0"
+}
