@@ -1,0 +1,130 @@
+{
+  "extraction": {
+    "checkpoint": {
+      "checkpoint_filename": "joint_seed42_best.pt",
+      "checkpoint_sha256": "e3cc27bf8dbcaec66e1250b90d613bad9c98d38b213901a71d6d1403802ab528",
+      "history_filename": "joint_seed42_history.json",
+      "history_sha256": "899ef77b380e0396ad049fae14f301d3ef3433bcbe82cc9201a1b6cf72103861",
+      "joint_config_filename": "joint_model_v2.json",
+      "joint_config_sha256": "9f19cb05a37725e60acf049a8e0e42beca05613ab008ea8e42af53ba668d4d36",
+      "locked_tests_evaluated": false,
+      "locked_tests_loaded": false,
+      "model_in_evaluation_mode": true,
+      "model_parameters_trainable": false,
+      "patient_identifiers_loaded": false,
+      "preprocessor_state_filename": "seer_v2_preprocessor.json",
+      "preprocessor_state_sha256": "ea081585de07866fbe8e26217160c462c4b11650e852f6cfa2041dcf180c2a94",
+      "seed": 42,
+      "selected_epoch": 2,
+      "shared_dimension": 32
+    },
+    "loader": {
+      "batch_size": 4096,
+      "drop_last": false,
+      "expected_rows": 461292,
+      "locked_test_loaded": false,
+      "patient_identifiers_in_tensors": false,
+      "patient_identifiers_loaded": false,
+      "preprocessing": {
+        "categorical_missing_counts": {
+          "Breast Subtype (2010+)": 0,
+          "Derived HER2 Recode (2010+)": 0,
+          "ER Status Recode Breast Cancer (1990+)": 0,
+          "Histologic Type ICD-O-3": 0,
+          "Laterality": 0,
+          "Origin recode NHIA (Hispanic, Non-Hisp)": 0,
+          "PR Status Recode Breast Cancer (1990+)": 0,
+          "Primary Site - labeled": 0,
+          "Race recode (W, B, AI, API)": 0,
+          "grade_unified": 0,
+          "m_stage_harmonized": 0,
+          "t_stage_harmonized": 0,
+          "tumor_size_status": 0
+        },
+        "categorical_unknown_counts": {
+          "Breast Subtype (2010+)": 0,
+          "Derived HER2 Recode (2010+)": 0,
+          "ER Status Recode Breast Cancer (1990+)": 0,
+          "Histologic Type ICD-O-3": 0,
+          "Laterality": 0,
+          "Origin recode NHIA (Hispanic, Non-Hisp)": 0,
+          "PR Status Recode Breast Cancer (1990+)": 0,
+          "Primary Site - labeled": 0,
+          "Race recode (W, B, AI, API)": 0,
+          "grade_unified": 0,
+          "m_stage_harmonized": 0,
+          "t_stage_harmonized": 0,
+          "tumor_size_status": 0
+        },
+        "negative_count": 316475,
+        "numeric_missing_counts": {
+          "age_numeric": 0,
+          "tumor_size_mm": 15697
+        },
+        "patient_identifiers_in_tensors": false,
+        "positive_count": 144817,
+        "positive_percent": 31.393780945691667,
+        "rows": 461292,
+        "split": "train"
+      },
+      "raw_clinical_fields_in_output": false,
+      "shuffle": false,
+      "split": "train",
+      "task": "tabular"
+    },
+    "locked_tests_evaluated": false,
+    "locked_tests_loaded": false,
+    "output": {
+      "feature_dimension": 32,
+      "feature_dtype": "float32",
+      "feature_maximum": 2.9000210762023926,
+      "feature_mean": 0.3773458896551797,
+      "feature_minimum": -0.16997122764587402,
+      "feature_standard_deviation": 0.7152964718486142,
+      "features_sha256": "5842b05b3f70e5a0a9c87b4c6d5599ebd177f512c6d9daa34484ead3f9f9b71e",
+      "image_metadata_in_output": false,
+      "label_dtype": "uint8",
+      "labels_sha256": "969ce945cd3f5b3dfef3564ce2f5df8afd890358e7c62bee7297552551524cb7",
+      "locked_test_loaded": false,
+      "negative_count": 316475,
+      "patient_identifiers_in_output": false,
+      "positive_count": 144817,
+      "positive_percent": 31.393780945691667,
+      "raw_clinical_fields_in_output": false,
+      "rows": 461292,
+      "seed": 42,
+      "split": "train",
+      "task": "tabular"
+    },
+    "patient_identifiers_in_output": false
+  },
+  "feature_dimension": 32,
+  "privacy": {
+    "image_metadata_in_output": false,
+    "original_images_in_output": false,
+    "patient_identifiers_in_output": false,
+    "patient_identifiers_loaded": false,
+    "private_feature_file_committed": false,
+    "raw_clinical_fields_in_output": false
+  },
+  "private_output": {
+    "archive_arrays": [
+      "features",
+      "labels"
+    ],
+    "file_sha256": "c3b75cdc9a9d6dba35b45c15f41df515fe6386f173a70cd64ae748a215323ca6",
+    "filename": "tabular_train_32d.npz",
+    "path": "artifacts/features/joint_v2/seed42/tabular_train_32d.npz",
+    "size_bytes": 54503986
+  },
+  "representation": "joint_shared_trunk_output",
+  "seed": 42,
+  "split": "train",
+  "task": "tabular",
+  "test_protection": {
+    "locked_test_evaluated": false,
+    "locked_test_loaded": false,
+    "locked_test_used_for_extraction": false
+  },
+  "version": "1.0"
+}
