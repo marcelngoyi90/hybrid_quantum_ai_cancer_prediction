@@ -1,0 +1,68 @@
+{
+  "checkpoint": {
+    "checkpoint_filename": "joint_seed2026_best.pt",
+    "checkpoint_sha256": "431763546aaa9c690f0a2baf3c760932554515ec30d4b108f9b98b9f6b110620",
+    "history_filename": "joint_seed2026_history.json",
+    "history_sha256": "00b9b1a2ca58d05139a848f4e6e2ef5679883dff5a049cb45ed2ff4ef106d031",
+    "joint_config_filename": "joint_model_v2.json",
+    "joint_config_sha256": "9f19cb05a37725e60acf049a8e0e42beca05613ab008ea8e42af53ba668d4d36",
+    "locked_tests_evaluated": false,
+    "locked_tests_loaded": false,
+    "model_in_evaluation_mode": true,
+    "model_parameters_trainable": false,
+    "patient_identifiers_loaded": false,
+    "preprocessor_state_filename": "seer_v2_preprocessor.json",
+    "preprocessor_state_sha256": "ea081585de07866fbe8e26217160c462c4b11650e852f6cfa2041dcf180c2a94",
+    "seed": 2026,
+    "selected_epoch": 2,
+    "shared_dimension": 32
+  },
+  "development_splits": [
+    "train",
+    "id_val",
+    "temporal_val"
+  ],
+  "feature_dimension": 32,
+  "privacy": {
+    "patient_identifiers_in_output": false,
+    "patient_identifiers_loaded": false,
+    "patient_level_rows_in_public_outputs": false,
+    "private_features_committed": false
+  },
+  "representation": "joint_shared_trunk_output",
+  "seed": 2026,
+  "selected_epoch": 2,
+  "split_audits": [
+    {
+      "feature_dimension": 32,
+      "private_feature_path": "artifacts/features/joint_v2/seed2026/tabular_train_32d.npz",
+      "private_feature_sha256": "17f666dca0be5398bca8a067a97032bd3c01a3391c16e8b7534d4b584097cf8e",
+      "public_audit_filename": "seed2026_tabular_train_32d_audit.json",
+      "rows": 461292,
+      "split": "train"
+    },
+    {
+      "feature_dimension": 32,
+      "private_feature_path": "artifacts/features/joint_v2/seed2026/tabular_id_val_32d.npz",
+      "private_feature_sha256": "7455af46a94d8fc56a17a5e017a23af0e413080cee9b5dc31b8c176a8e78c4fa",
+      "public_audit_filename": "seed2026_tabular_id_val_32d_audit.json",
+      "rows": 51241,
+      "split": "id_val"
+    },
+    {
+      "feature_dimension": 32,
+      "private_feature_path": "artifacts/features/joint_v2/seed2026/tabular_temporal_val_32d.npz",
+      "private_feature_sha256": "1ad917d4b77d1e0d20cffea5529bc46af49f9b00f962a46fc99ff0c8222f2c77",
+      "public_audit_filename": "seed2026_tabular_temporal_val_32d_audit.json",
+      "rows": 107249,
+      "split": "temporal_val"
+    }
+  ],
+  "task": "tabular",
+  "test_protection": {
+    "locked_test_evaluated": false,
+    "locked_test_extracted": false,
+    "locked_test_loaded": false
+  },
+  "version": "1.0"
+}
