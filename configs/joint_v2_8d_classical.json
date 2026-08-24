@@ -1,0 +1,154 @@
+{
+    "version": "1.0",
+    "purpose": "Evaluate predictive information retained after reducing joint model v2 shared representations from 32 dimensions to 8 dimensions.",
+    "model_name": "camelyon17_seer_joint_network_v2",
+    "experiment_name": "joint_v2_paired_linear_probe",
+    "random_seeds": [
+        42,
+        123,
+        2026
+    ],
+    "tasks": {
+        "image": {
+            "target": "camelyon17_patch_tumor_label",
+            "negative_class": 0,
+            "positive_class": 1,
+            "training_split": "train",
+            "evaluation_splits": [
+                "id_val",
+                "ood_val"
+            ],
+            "locked_test_split": "ood_test"
+        },
+        "tabular": {
+            "target": "node_positive_target",
+            "negative_class": 0,
+            "positive_class": 1,
+            "training_split": "train",
+            "evaluation_splits": [
+                "id_val",
+                "temporal_val"
+            ],
+            "locked_test_split": "temporal_test"
+        }
+    },
+    "representations": {
+        "source_32d": {
+            "dimension": 32,
+            "description": "Shared-trunk representation extracted from the selected joint model v2 checkpoint."
+        },
+        "pca_8d": {
+            "dimension": 8,
+            "description": "Training-only StandardScaler and PCA transformation of the corresponding 32-dimensional representation."
+        }
+    },
+    "paired_probe_design": {
+        "train_one_probe_per_seed_task_and_representation": true,
+        "number_of_fitted_probes": 12,
+        "use_identical_rows_and_labels_for_32d_and_8d": true,
+        "use_identical_estimator_configuration": true,
+        "primary_comparison": "pca_8d_minus_source_32d",
+        "comparison_is_descriptive": true,
+        "comparison_is_not_model_selection": true
+    },
+    "estimator": {
+        "implementation": "sklearn.linear_model.LogisticRegression",
+        "solver": "lbfgs",
+        "penalty": null,
+        "fit_intercept": true,
+        "class_weight": null,
+        "max_iter": 2000,
+        "tolerance": 1e-06,
+        "warm_start": false,
+        "additional_feature_scaling": false,
+        "reason_for_no_additional_scaling": "Use the protected representations exactly as produced and avoid introducing a separate downstream transformation.",
+        "hyperparameter_tuning": false,
+        "validation_based_model_selection": false
+    },
+    "classification": {
+        "probability_method": "predict_proba",
+        "default_threshold": 0.5,
+        "positive_prediction_rule": "probability_greater_than_or_equal_to_threshold",
+        "threshold_tuning": false,
+        "probability_calibration": false,
+        "probability_clipping": false,
+        "probability_rounding": false
+    },
+    "reported_metrics": [
+        "roc_auc",
+        "average_precision",
+        "accuracy",
+        "balanced_accuracy",
+        "f1",
+        "precision",
+        "sensitivity",
+        "specificity",
+        "brier_score",
+        "expected_calibration_error",
+        "confusion_matrix"
+    ],
+    "calibration_metrics": {
+        "expected_calibration_error_bins": 15,
+        "expected_calibration_error_binning": "uniform"
+    },
+    "comparison_outputs": {
+        "report_each_seed": true,
+        "report_each_task": true,
+        "report_each_representation": true,
+        "report_each_development_split": true,
+        "report_8d_minus_32d_absolute_metric_change": true,
+        "report_roc_auc_retention_ratio": true,
+        "report_mean_across_seeds": true,
+        "report_sample_standard_deviation": true,
+        "automatic_pass_fail_threshold": false
+    },
+    "validation": {
+        "require_exact_32d_input_dimension": true,
+        "require_exact_8d_input_dimension": true,
+        "require_finite_features": true,
+        "require_binary_labels": true,
+        "require_row_count_match_between_32d_and_8d": true,
+        "require_label_array_match_between_32d_and_8d": true,
+        "require_label_hash_match_between_32d_and_8d": true,
+        "require_training_split_for_fit": true,
+        "fail_on_convergence_warning": true
+    },
+    "private_outputs": {
+        "save_fitted_probe_models": true,
+        "fitted_model_format": "joblib",
+        "commit_fitted_probe_models": false,
+        "save_row_level_probabilities": false,
+        "save_row_level_predictions": false,
+        "save_feature_values": false,
+        "save_labels": false
+    },
+    "public_outputs": {
+        "save_per_seed_aggregate_metrics": true,
+        "save_three_seed_summary": true,
+        "save_audit_json": true,
+        "include_feature_values": false,
+        "include_labels": false,
+        "include_patient_rows": false,
+        "include_patient_identifiers": false,
+        "include_probabilities": false,
+        "include_predictions": false
+    },
+    "privacy": {
+        "patient_identifiers_allowed_in_memory": false,
+        "patient_identifiers_allowed_in_outputs": false,
+        "individual_seer_rows_allowed_in_public_outputs": false
+    },
+    "test_protection": {
+        "allow_camelyon_ood_test_loading": false,
+        "allow_seer_temporal_test_loading": false,
+        "allow_locked_test_evaluation_at_this_stage": false,
+        "allow_locked_test_tuning": false
+    },
+    "interpretation": {
+        "primary_question": "How much linearly accessible predictive information is retained in the protected 8-dimensional representation compared with the 32-dimensional source representation?",
+        "explained_variance_alone_is_not_predictive_performance": true,
+        "linear_probe_is_not_a_replacement_for_the_joint_model": true,
+        "linear_probe_is_the_classical_8d_reference": true,
+        "quantum_implementation_is_outside_current_contributor_scope": true
+    }
+}
