@@ -1,0 +1,111 @@
+{
+  "dimensionality_reduction": {
+    "development_audit_path": "artifacts/metrics/joint_v2/pca/seed123_tabular_pca_audit.json",
+    "development_audit_sha256": "ee88bb70a3a3493eee2c766dbea31907823ad7ef0523daaea902a16d076b8607",
+    "fit_split": "train",
+    "pca_refitted": false,
+    "scaler_refitted": false,
+    "state_path": "artifacts/features/joint_v2/seed123/tabular_32d_to_8d_pca.joblib",
+    "state_sha256": "f06001a97ada9acd00533a3d816b5386d4a34c1c685911899af2c1d5528bce2a"
+  },
+  "expected_rows": 111496,
+  "final_configuration": {
+    "path": "configs/joint_v2_locked_features.json",
+    "sha256": "d0f9eb0f5017ec018dcf1754953c5f564c2556f76481d51a7da6c38ffebf3a08"
+  },
+  "frozen_model": {
+    "checkpoint_path": "artifacts/checkpoints/joint_v2/joint_seed123_best.pt",
+    "checkpoint_reselected": false,
+    "checkpoint_sha256": "ac8ba9baccaace84ef860caf9a6023bafac5c7eec07ca600a99dc25c3d0b921a",
+    "feature_config_sha256": "e822882dcfbd285fa30750c7e6967a26dd99c879ce6dbf4a20421923b61b5876",
+    "history_path": "artifacts/metrics/joint_v2/joint_seed123_history.json",
+    "history_sha256": "fa8c69a78896c0f3768b8ea1d5dabf81c8c71355512ac510e4291f50dab66df4",
+    "joint_config_sha256": "9f19cb05a37725e60acf049a8e0e42beca05613ab008ea8e42af53ba668d4d36",
+    "model_in_evaluation_mode": true,
+    "model_parameters_trainable": false,
+    "model_training_performed": false,
+    "preprocessor_state_sha256": "ea081585de07866fbe8e26217160c462c4b11650e852f6cfa2041dcf180c2a94"
+  },
+  "loader": {
+    "batch_size": 4096,
+    "drop_last": false,
+    "expected_rows": 111496,
+    "locked_test_loaded": true,
+    "patient_identifiers_loaded": false,
+    "raw_clinical_fields_loaded": false,
+    "shuffle": false,
+    "split": "temporal_test",
+    "training_augmentation": false
+  },
+  "outputs": {
+    "label_hash_preserved": true,
+    "reduced_8d": {
+      "archive_arrays": [
+        "features",
+        "labels"
+      ],
+      "dimension": 8,
+      "feature_dtype": "float32",
+      "features_sha256": "6f6facc29b79c0ce7039d1c8bba218ffd9bb5a1cbb6a470af4d2a400462612af",
+      "file_sha256": "0fcd5fa865f13b27a147b6991b710c6ddbf90dcf1e173e03572aec1537b5b5b6",
+      "filename": "tabular_temporal_test_8d.npz",
+      "label_dtype": "uint8",
+      "labels_sha256": "c80c083690f2d34c18a88b1c7fdd5d1605e51297c9ebf2995c87764051b1d3c5",
+      "path": "artifacts/features/joint_v2/seed123/tabular_temporal_test_8d.npz",
+      "patient_identifiers_in_output": false,
+      "rows": 111496,
+      "size_bytes": 3373282
+    },
+    "row_order_preserved": true,
+    "source_32d": {
+      "archive_arrays": [
+        "features",
+        "labels"
+      ],
+      "dimension": 32,
+      "feature_dtype": "float32",
+      "features_sha256": "669d5815b0ce11bf4e3aeca2df9cfee195e097810a701f0105e23b00dcf59607",
+      "file_sha256": "23cf204b061634267b2cf9fa4a4d476557c304d2aebd73463c465d65640b3f23",
+      "filename": "tabular_temporal_test_32d.npz",
+      "label_dtype": "uint8",
+      "labels_sha256": "c80c083690f2d34c18a88b1c7fdd5d1605e51297c9ebf2995c87764051b1d3c5",
+      "path": "artifacts/features/joint_v2/seed123/tabular_temporal_test_32d.npz",
+      "patient_identifiers_in_output": false,
+      "rows": 111496,
+      "size_bytes": 13282298
+    }
+  },
+  "phase": "final_locked_test",
+  "privacy": {
+    "image_metadata_in_output": false,
+    "patient_identifiers_in_output": false,
+    "private_archives_committed": false,
+    "raw_clinical_fields_in_output": false
+  },
+  "protocol": {
+    "path": "reports/final_locked_feature_protocol.md",
+    "sha256": "8c0386d7455e8874800b24deb9280bb046bf0967caed67f4966ef638d3ee3cce"
+  },
+  "seed": 123,
+  "selected_epoch": 5,
+  "software": {
+    "device": "mps",
+    "numpy": "2.5.2",
+    "python": "3.12.13",
+    "pytorch": "2.13.0",
+    "scikit_learn": "1.9.0"
+  },
+  "split": "temporal_test",
+  "task": "tabular",
+  "test_protection": {
+    "locked_test_evaluated": false,
+    "locked_test_loaded": true,
+    "locked_test_used_for_calibration": false,
+    "locked_test_used_for_checkpoint_selection": false,
+    "locked_test_used_for_fitting": false,
+    "locked_test_used_for_threshold_selection": false,
+    "locked_test_used_for_training": false,
+    "locked_test_used_for_tuning": false
+  },
+  "version": "1.0"
+}
