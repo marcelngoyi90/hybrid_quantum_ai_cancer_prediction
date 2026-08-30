@@ -1,0 +1,63 @@
+{
+  "experiment_name": "joint_v2_classical_vs_quantum",
+  "development_only": true,
+  "locked_test_loading_allowed": false,
+  "seeds": [
+    42,
+    123,
+    2026
+  ],
+  "tasks": {
+    "camelyon": {
+      "train_file": "image_train_8d.npz",
+      "selection_file": "image_ood_val_8d.npz",
+      "supporting_file": "image_id_val_8d.npz",
+      "locked_test": "ood_test"
+    },
+    "seer": {
+      "train_file": "tabular_train_8d.npz",
+      "selection_file": "tabular_temporal_val_8d.npz",
+      "supporting_file": "tabular_id_val_8d.npz",
+      "locked_test": "temporal_test"
+    }
+  },
+  "input": {
+    "dimensions": 8,
+    "transformation": "two_times_arctan",
+    "transformation_range": "minus_pi_to_plus_pi",
+    "same_transformation_for_both_models": true
+  },
+  "classical_model": {
+    "architecture": "8_to_3_to_1",
+    "activation": "tanh",
+    "trainable_parameters": 31
+  },
+  "quantum_model": {
+    "qubits": 4,
+    "data_reuploading_rounds": 2,
+    "entangling_layers": 2,
+    "measurement": "four_pauli_z_expectations",
+    "output": "four_to_one_linear_layer",
+    "trainable_parameters": 29,
+    "simulator": "default.qubit"
+  },
+  "training": {
+    "optimizer": "adam",
+    "learning_rate": 0.01,
+    "batch_size": 1024,
+    "maximum_epochs": 15,
+    "early_stopping_patience": 4,
+    "loss": "weighted_binary_cross_entropy_with_logits",
+    "model_selection_metric": "validation_roc_auc"
+  },
+  "classification": {
+    "threshold": 0.5,
+    "threshold_tuning": false
+  },
+  "reporting": {
+    "report_every_seed": true,
+    "report_mean_across_three_seeds": true,
+    "report_sample_standard_deviation": true,
+    "primary_metric": "roc_auc"
+  }
+}

@@ -1,0 +1,211 @@
+{
+  "task": "seer",
+  "seed": 2026,
+  "development_only": true,
+  "locked_test_loaded": false,
+  "training_configuration": {
+    "learning_rate": 0.01,
+    "batch_size": 1024,
+    "maximum_epochs": 15,
+    "patience": 4,
+    "threshold": 0.5
+  },
+  "models": {
+    "classical_neural": {
+      "trainable_parameters": 31,
+      "best_epoch": 5,
+      "best_validation_roc_auc": 0.7937318139533653,
+      "elapsed_seconds": 46.8571113999933,
+      "selection_metrics": {
+        "roc_auc": 0.7937318139533653,
+        "average_precision": 0.6529803519465167,
+        "accuracy": 0.7060765135339258,
+        "balanced_accuracy": 0.7144190928717628,
+        "f1": 0.6073319298944929,
+        "precision": 0.516844403926474,
+        "sensitivity": 0.7362285576226142,
+        "specificity": 0.6926096281209113,
+        "brier_score": 0.1885828673839569,
+        "true_negative": 51348,
+        "false_positive": 22789,
+        "false_negative": 8734,
+        "true_positive": 24378
+      },
+      "supporting_metrics": {
+        "roc_auc": 0.7883271392473412,
+        "average_precision": 0.6435203000773155,
+        "accuracy": 0.709685603325462,
+        "balanced_accuracy": 0.7136221478589059,
+        "f1": 0.6102902651157917,
+        "precision": 0.527345164795364,
+        "sensitivity": 0.7241979607062919,
+        "specificity": 0.7030463350115198,
+        "brier_score": 0.18825818598270416,
+        "true_negative": 24717,
+        "false_positive": 10440,
+        "false_negative": 4436,
+        "true_positive": 11648
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "training_loss": 0.7796302909712476,
+          "validation_roc_auc": 0.7934632776315664
+        },
+        {
+          "epoch": 2,
+          "training_loss": 0.7600606387090081,
+          "validation_roc_auc": 0.7935577257335525
+        },
+        {
+          "epoch": 3,
+          "training_loss": 0.7595535174543118,
+          "validation_roc_auc": 0.7936474773691587
+        },
+        {
+          "epoch": 4,
+          "training_loss": 0.7596673964322201,
+          "validation_roc_auc": 0.7936073687967307
+        },
+        {
+          "epoch": 5,
+          "training_loss": 0.7595959485849145,
+          "validation_roc_auc": 0.7937318139533653
+        },
+        {
+          "epoch": 6,
+          "training_loss": 0.7596199491502765,
+          "validation_roc_auc": 0.7935940890278217
+        },
+        {
+          "epoch": 7,
+          "training_loss": 0.759570941985789,
+          "validation_roc_auc": 0.793669272411289
+        },
+        {
+          "epoch": 8,
+          "training_loss": 0.7596779804775199,
+          "validation_roc_auc": 0.7936740593118381
+        },
+        {
+          "epoch": 9,
+          "training_loss": 0.7595319585690888,
+          "validation_roc_auc": 0.7935564692281705
+        }
+      ]
+    },
+    "hybrid_quantum": {
+      "trainable_parameters": 29,
+      "best_epoch": 13,
+      "best_validation_roc_auc": 0.7909489704408765,
+      "elapsed_seconds": 325.09835569933057,
+      "selection_metrics": {
+        "roc_auc": 0.7909489704408765,
+        "average_precision": 0.6377387932452917,
+        "accuracy": 0.7059180038974723,
+        "balanced_accuracy": 0.7143545762392847,
+        "f1": 0.6072620411416049,
+        "precision": 0.516653953724892,
+        "sensitivity": 0.7364097608117903,
+        "specificity": 0.6922993916667791,
+        "brier_score": 0.18946970999240875,
+        "true_negative": 51325,
+        "false_positive": 22812,
+        "false_negative": 8728,
+        "true_positive": 24384
+      },
+      "supporting_metrics": {
+        "roc_auc": 0.7852162359816216,
+        "average_precision": 0.6294196671662012,
+        "accuracy": 0.7091196502800492,
+        "balanced_accuracy": 0.7135301448477497,
+        "f1": 0.6102147022673187,
+        "precision": 0.5266079891672308,
+        "sensitivity": 0.7253792588908232,
+        "specificity": 0.7016810308046761,
+        "brier_score": 0.18924154341220856,
+        "true_negative": 24669,
+        "false_positive": 10488,
+        "false_negative": 4417,
+        "true_positive": 11667
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "training_loss": 0.8067048478043624,
+          "validation_roc_auc": 0.7816032650929259
+        },
+        {
+          "epoch": 2,
+          "training_loss": 0.7737776336663679,
+          "validation_roc_auc": 0.7872700532417403
+        },
+        {
+          "epoch": 3,
+          "training_loss": 0.7701167694078623,
+          "validation_roc_auc": 0.7888892473033093
+        },
+        {
+          "epoch": 4,
+          "training_loss": 0.7683541012158867,
+          "validation_roc_auc": 0.7895098487340079
+        },
+        {
+          "epoch": 5,
+          "training_loss": 0.7671164249841071,
+          "validation_roc_auc": 0.7896643487905708
+        },
+        {
+          "epoch": 6,
+          "training_loss": 0.7666504981785044,
+          "validation_roc_auc": 0.7903534426983018
+        },
+        {
+          "epoch": 7,
+          "training_loss": 0.7662648535937279,
+          "validation_roc_auc": 0.789938099742097
+        },
+        {
+          "epoch": 8,
+          "training_loss": 0.7660837297629859,
+          "validation_roc_auc": 0.790120803242287
+        },
+        {
+          "epoch": 9,
+          "training_loss": 0.7658512694858631,
+          "validation_roc_auc": 0.7901425881003891
+        },
+        {
+          "epoch": 10,
+          "training_loss": 0.7655865316631926,
+          "validation_roc_auc": 0.7905638610124521
+        },
+        {
+          "epoch": 11,
+          "training_loss": 0.7655010346171459,
+          "validation_roc_auc": 0.7903717808739474
+        },
+        {
+          "epoch": 12,
+          "training_loss": 0.7654777577600794,
+          "validation_roc_auc": 0.7907350795768383
+        },
+        {
+          "epoch": 13,
+          "training_loss": 0.7655453119473902,
+          "validation_roc_auc": 0.7909489704408765
+        },
+        {
+          "epoch": 14,
+          "training_loss": 0.7655100404126182,
+          "validation_roc_auc": 0.7907661573605447
+        },
+        {
+          "epoch": 15,
+          "training_loss": 0.7651023922090555,
+          "validation_roc_auc": 0.7902307889122026
+        }
+      ]
+    }
+  }
+}

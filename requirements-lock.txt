@@ -66,3 +66,15 @@ urllib3==2.7.0
 wcwidth==0.8.2
 wheel==0.48.0
 wilds==2.0.0
+appdirs==1.4.4
+autograd==1.8.0
+autoray==0.8.4
+cachetools==7.1.7
+diastatic-malt==2.15.3
+gast==0.7.0
+pennylane==0.45.1
+pennylane-lightning==0.45.0
+rustworkx==0.18.1
+scipy-openblas32==0.3.34.106.0
+termcolor==3.3.0
+tomlkit==0.15.1
