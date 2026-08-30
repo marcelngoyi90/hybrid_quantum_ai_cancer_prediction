@@ -1,0 +1,110 @@
+{
+    "version": "1.0",
+    "purpose": "Frozen one-time locked-test feature extraction for joint model v2.",
+    "protocol": "reports/final_locked_feature_protocol.md",
+    "phase": "final_locked_test",
+    "access_authorized": true,
+    "random_seeds": [
+        42,
+        123,
+        2026
+    ],
+    "selected_epochs": {
+        "42": 2,
+        "123": 5,
+        "2026": 2
+    },
+    "tasks": {
+        "image": {
+            "locked_split": "ood_test",
+            "expected_rows": 85054,
+            "data_source": "data/camelyon17_hf/data",
+            "checkpoint_template": "artifacts/checkpoints/joint_v2/joint_seed{seed}_best.pt",
+            "history_template": "artifacts/metrics/joint_v2/joint_seed{seed}_history.json",
+            "pca_state_template": "artifacts/features/joint_v2/seed{seed}/image_32d_to_8d_pca.joblib",
+            "output_32d_template": "artifacts/features/joint_v2/seed{seed}/image_ood_test_32d.npz",
+            "output_8d_template": "artifacts/features/joint_v2/seed{seed}/image_ood_test_8d.npz"
+        },
+        "tabular": {
+            "locked_split": "temporal_test",
+            "expected_rows": 111496,
+            "data_source": "data/processed/seer_v2_model_table.parquet",
+            "checkpoint_template": "artifacts/checkpoints/joint_v2/joint_seed{seed}_best.pt",
+            "history_template": "artifacts/metrics/joint_v2/joint_seed{seed}_history.json",
+            "pca_state_template": "artifacts/features/joint_v2/seed{seed}/tabular_32d_to_8d_pca.joblib",
+            "output_32d_template": "artifacts/features/joint_v2/seed{seed}/tabular_temporal_test_32d.npz",
+            "output_8d_template": "artifacts/features/joint_v2/seed{seed}/tabular_temporal_test_8d.npz"
+        }
+    },
+    "model_inputs": {
+        "joint_model_config": "configs/joint_model_v2.json",
+        "seer_feature_config": "configs/seer_features_v2.json",
+        "seer_preprocessor_state": "artifacts/features/seer_v2_preprocessor.json"
+    },
+    "representations": {
+        "source_name": "joint_shared_trunk_output",
+        "source_dimension": 32,
+        "output_name": "training_fitted_standard_scaler_then_pca",
+        "output_dimension": 8,
+        "feature_dtype": "float32",
+        "label_dtype": "uint8"
+    },
+    "execution": {
+        "one_seed_and_task_per_command": true,
+        "required_confirmation_argument": "--confirm-final",
+        "model_evaluation_mode": true,
+        "gradient_calculation": false,
+        "shuffle": false,
+        "training_augmentation": false,
+        "preserve_row_order": true
+    },
+    "pca_rules": {
+        "load_existing_fitted_state": true,
+        "allow_scaler_fit": false,
+        "allow_pca_fit": false,
+        "allow_validation_refit": false,
+        "allow_locked_test_refit": false
+    },
+    "privacy": {
+        "archive_arrays": [
+            "features",
+            "labels"
+        ],
+        "allow_patient_identifiers": false,
+        "allow_raw_clinical_fields": false,
+        "commit_private_archives": false,
+        "commit_fitted_states": false,
+        "commit_aggregate_audits": true
+    },
+    "integrity": {
+        "hash_algorithm": "sha256",
+        "hash_checkpoint": true,
+        "hash_history": true,
+        "hash_pca_state": true,
+        "hash_source_and_output_arrays": true,
+        "require_finite_features": true,
+        "require_binary_labels": true,
+        "require_row_count_preservation": true,
+        "require_label_hash_preservation": true
+    },
+    "prohibited_actions": {
+        "model_training": false,
+        "checkpoint_reselection": false,
+        "feature_selection": false,
+        "scaler_refitting": false,
+        "pca_refitting": false,
+        "threshold_selection": false,
+        "calibration_fitting": false,
+        "architecture_changes": false,
+        "hyperparameter_tuning": false,
+        "test_based_seed_selection": false
+    },
+    "public_audit_directory": "artifacts/metrics/joint_v2/locked_feature_extraction",
+    "downstream_handoff": {
+        "input_dimension": 8,
+        "input_transformation": "two_times_arctan",
+        "classification_threshold": 0.5,
+        "downstream_models_frozen": true,
+        "downstream_training_allowed": false
+    }
+}
