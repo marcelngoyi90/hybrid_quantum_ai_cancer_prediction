@@ -142,16 +142,22 @@ The development evidence therefore does not demonstrate a quantum advantage.
 
 This negative comparison is a valid scientific result and must not be hidden or changed by selecting only a favorable seed.
 
-## Locked-test protection
+## Final locked-test status
 
-The following test splits remain locked:
+After the downstream procedure was frozen and approved, the Camelyon `ood_test`
+and SEER `temporal_test` representations were evaluated once. No training,
+fitting, tuning, calibration, threshold selection, architecture change, seed
+selection, or preprocessing change was performed using locked-test data.
 
-- Camelyon `ood_test`.
-- SEER `temporal_test`.
+Final three-seed ROC-AUC results were:
 
-They were not included in the handoff and were not loaded during this work.
+| Task | Classical neural | Hybrid quantum | Quantum minus classical |
+| --- | ---: | ---: | ---: |
+| Camelyon OOD test | 0.979976 +/- 0.001784 | 0.973123 +/- 0.006888 | -0.006853 +/- 0.005617 |
+| SEER temporal test | 0.797122 +/- 0.001216 | 0.794584 +/- 0.000899 | -0.002537 +/- 0.000424 |
 
-The locked tests must not be requested or evaluated until the complete downstream procedure is frozen and approved. After locked-test results are viewed, the architectures, preprocessing, optimizer, training settings and threshold must not be changed.
+The full final report documents the state-recovery disclosure, integrity rules,
+supporting metrics, and interpretation.
 
 ## Main files
 
@@ -164,6 +170,9 @@ The locked tests must not be requested or evaluated until the complete downstrea
 - `summarize_development.py`: aggregates the three-seed results.
 - `experiment_config.json`: records the frozen experiment configuration.
 - `results/development/`: contains privacy-safe aggregate development results.
+- `recover_frozen_states.py`: recreates and verifies missing frozen downstream states without loading locked arrays.
+- `run_locked_test.py`: performs evaluation-only locked inference with verified states and archives.
+- `results/locked_test/`: contains the privacy-safe final result JSON and report.
 
 ## Running a development experiment
 
@@ -199,7 +208,7 @@ python joint_v2/summarize_development.py
 
 ## Research limitations
 
-- The results are development results, not locked-test results.
+- The final results use one-time locked tests but no additional external validation cohort.
 - The quantum circuit is simulated.
 - Only one small quantum architecture and one parameter-matched classical architecture were evaluated.
 - The two datasets are unpaired and represent different prediction targets.

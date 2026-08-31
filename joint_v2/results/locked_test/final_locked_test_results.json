@@ -1,0 +1,801 @@
+{
+  "phase": "final_locked_test",
+  "one_time_evaluation": true,
+  "training_performed": false,
+  "threshold_tuned": false,
+  "architecture_changed": false,
+  "individual_results": [
+    {
+      "phase": "final_locked_test",
+      "task": "camelyon",
+      "seed": 42,
+      "model_name": "classical_neural",
+      "threshold": 0.5,
+      "locked_archive_sha256": "d49d2d31d9b5a4d69c085a0c43597f25cdcbd568e5cd42f0427187e35f3284b6",
+      "frozen_state_sha256": "787c9f7f06b18050f9d43d3c1becdecd91d2b6db629e4c08296f00a2d4585183",
+      "metrics": {
+        "roc_auc": 0.9807536450741301,
+        "average_precision": 0.9834121914733119,
+        "accuracy": 0.912055870388224,
+        "balanced_accuracy": 0.912055870388224,
+        "f1": 0.905772089390542,
+        "precision": 0.9754714421381088,
+        "sensitivity": 0.8453688245114869,
+        "specificity": 0.9787429162649611,
+        "brier_score": 0.0675172209739685,
+        "true_negative": 41623,
+        "false_positive": 904,
+        "false_negative": 6576,
+        "true_positive": 35951
+      }
+    },
+    {
+      "phase": "final_locked_test",
+      "task": "camelyon",
+      "seed": 42,
+      "model_name": "hybrid_quantum",
+      "threshold": 0.5,
+      "locked_archive_sha256": "d49d2d31d9b5a4d69c085a0c43597f25cdcbd568e5cd42f0427187e35f3284b6",
+      "frozen_state_sha256": "80ef2af646ead61babfde8e22d975d6c4b72fa59db85ab207c43658527b1e744",
+      "metrics": {
+        "roc_auc": 0.9800954903031927,
+        "average_precision": 0.9825901404148305,
+        "accuracy": 0.9069179580031509,
+        "balanced_accuracy": 0.906917958003151,
+        "f1": 0.8992478906578093,
+        "precision": 0.9800011095084877,
+        "sensitivity": 0.8307898511533849,
+        "specificity": 0.983046064852917,
+        "brier_score": 0.07129672914743423,
+        "true_negative": 41806,
+        "false_positive": 721,
+        "false_negative": 7196,
+        "true_positive": 35331
+      }
+    },
+    {
+      "phase": "final_locked_test",
+      "task": "camelyon",
+      "seed": 123,
+      "model_name": "classical_neural",
+      "threshold": 0.5,
+      "locked_archive_sha256": "2e568713fdca06ea0fb8294310e99bad34b37b5af9e017abbe9f08252e7951a4",
+      "frozen_state_sha256": "c339774bc860037f3f662f5f28565118cc8790b49a02b4cf7bd330a10f5da339",
+      "metrics": {
+        "roc_auc": 0.9779360417267061,
+        "average_precision": 0.9812853274889138,
+        "accuracy": 0.9223199379217909,
+        "balanced_accuracy": 0.9223199379217908,
+        "f1": 0.9189712898122371,
+        "precision": 0.960371167845791,
+        "sensitivity": 0.8809932513462035,
+        "specificity": 0.9636466244973781,
+        "brier_score": 0.06292792409658432,
+        "true_negative": 40981,
+        "false_positive": 1546,
+        "false_negative": 5061,
+        "true_positive": 37466
+      }
+    },
+    {
+      "phase": "final_locked_test",
+      "task": "camelyon",
+      "seed": 123,
+      "model_name": "hybrid_quantum",
+      "threshold": 0.5,
+      "locked_archive_sha256": "2e568713fdca06ea0fb8294310e99bad34b37b5af9e017abbe9f08252e7951a4",
+      "frozen_state_sha256": "e3c47f274b91be249ffec05fec8c391ac755eb69935d220a562a128732438d4c",
+      "metrics": {
+        "roc_auc": 0.9663220578151055,
+        "average_precision": 0.9724281084142558,
+        "accuracy": 0.9241540668281327,
+        "balanced_accuracy": 0.9241540668281327,
+        "f1": 0.9216360345476853,
+        "precision": 0.9532844147358899,
+        "sensitivity": 0.8920215392574129,
+        "specificity": 0.9562865943988524,
+        "brier_score": 0.06163528561592102,
+        "true_negative": 40668,
+        "false_positive": 1859,
+        "false_negative": 4592,
+        "true_positive": 37935
+      }
+    },
+    {
+      "phase": "final_locked_test",
+      "task": "camelyon",
+      "seed": 2026,
+      "model_name": "classical_neural",
+      "threshold": 0.5,
+      "locked_archive_sha256": "fd0d734c0082f91f01ee82b327fa8570071043cfa1b87d0a456fb58a7d17e4c1",
+      "frozen_state_sha256": "abbd746ebfe2532f198d9eade5f4ae51b1a1a3ec0e197db3ff9c87c3e6d3e7f1",
+      "metrics": {
+        "roc_auc": 0.9812392827806677,
+        "average_precision": 0.9842085634214882,
+        "accuracy": 0.9209443412420345,
+        "balanced_accuracy": 0.9209443412420345,
+        "f1": 0.915086000050514,
+        "precision": 0.988324831555689,
+        "sensitivity": 0.8519528769957909,
+        "specificity": 0.9899358054882781,
+        "brier_score": 0.05775457248091698,
+        "true_negative": 42099,
+        "false_positive": 428,
+        "false_negative": 6296,
+        "true_positive": 36231
+      }
+    },
+    {
+      "phase": "final_locked_test",
+      "task": "camelyon",
+      "seed": 2026,
+      "model_name": "hybrid_quantum",
+      "threshold": 0.5,
+      "locked_archive_sha256": "fd0d734c0082f91f01ee82b327fa8570071043cfa1b87d0a456fb58a7d17e4c1",
+      "frozen_state_sha256": "c0128051dd646dd3787b0c085e1d6aa7de9613cbe75f60a36cd5bed5034e321f",
+      "metrics": {
+        "roc_auc": 0.9729526897132719,
+        "average_precision": 0.9781953342756001,
+        "accuracy": 0.9261527970465822,
+        "balanced_accuracy": 0.9261527970465822,
+        "f1": 0.9219237510410581,
+        "precision": 0.9779272151898735,
+        "sensitivity": 0.8719872081266019,
+        "specificity": 0.9803183859665624,
+        "brier_score": 0.060502659529447556,
+        "true_negative": 41690,
+        "false_positive": 837,
+        "false_negative": 5444,
+        "true_positive": 37083
+      }
+    },
+    {
+      "phase": "final_locked_test",
+      "task": "seer",
+      "seed": 42,
+      "model_name": "classical_neural",
+      "threshold": 0.5,
+      "locked_archive_sha256": "4d5495cf4697d3f459353c15bab85315b2e339ad3aad57332b25b0a3c37ba245",
+      "frozen_state_sha256": "d3d28c30987c76248bcbecbf82a0346bee692ab6677f4f650940d78833446e04",
+      "metrics": {
+        "roc_auc": 0.7964962471733172,
+        "average_precision": 0.6518013583661754,
+        "accuracy": 0.7135412929611825,
+        "balanced_accuracy": 0.7191716670260763,
+        "f1": 0.6058130206726319,
+        "precision": 0.5161080035328258,
+        "sensitivity": 0.7332616294702877,
+        "specificity": 0.7050817045818648,
+        "brier_score": 0.18608133494853973,
+        "true_negative": 55014,
+        "false_positive": 23011,
+        "false_negative": 8928,
+        "true_positive": 24543
+      }
+    },
+    {
+      "phase": "final_locked_test",
+      "task": "seer",
+      "seed": 42,
+      "model_name": "hybrid_quantum",
+      "threshold": 0.5,
+      "locked_archive_sha256": "4d5495cf4697d3f459353c15bab85315b2e339ad3aad57332b25b0a3c37ba245",
+      "frozen_state_sha256": "c5d0ee27392d37018c50c930f7acb0de9e2f2c2bf5bae69fbf4cd93ad5704720",
+      "metrics": {
+        "roc_auc": 0.794386517230777,
+        "average_precision": 0.6448685262980547,
+        "accuracy": 0.7177925665494727,
+        "balanced_accuracy": 0.7170228528110975,
+        "f1": 0.6033906850696414,
+        "precision": 0.5218690040118612,
+        "sensitivity": 0.7150966508320635,
+        "specificity": 0.7189490547901314,
+        "brier_score": 0.1860521137714386,
+        "true_negative": 56096,
+        "false_positive": 21929,
+        "false_negative": 9536,
+        "true_positive": 23935
+      }
+    },
+    {
+      "phase": "final_locked_test",
+      "task": "seer",
+      "seed": 123,
+      "model_name": "classical_neural",
+      "threshold": 0.5,
+      "locked_archive_sha256": "0fcd5fa865f13b27a147b6991b710c6ddbf90dcf1e173e03572aec1537b5b5b6",
+      "frozen_state_sha256": "2d96f8c2af04b3a65aee4448106ac19c601e5538bd7d87f267319648741eb960",
+      "metrics": {
+        "roc_auc": 0.7985233001800609,
+        "average_precision": 0.6554004765034293,
+        "accuracy": 0.7137834541149458,
+        "balanced_accuracy": 0.718952303787664,
+        "f1": 0.6055669542431958,
+        "precision": 0.5164330135975546,
+        "sensitivity": 0.7318873054285799,
+        "specificity": 0.7060173021467478,
+        "brier_score": 0.18594878911972046,
+        "true_negative": 55087,
+        "false_positive": 22938,
+        "false_negative": 8974,
+        "true_positive": 24497
+      }
+    },
+    {
+      "phase": "final_locked_test",
+      "task": "seer",
+      "seed": 123,
+      "model_name": "hybrid_quantum",
+      "threshold": 0.5,
+      "locked_archive_sha256": "0fcd5fa865f13b27a147b6991b710c6ddbf90dcf1e173e03572aec1537b5b5b6",
+      "frozen_state_sha256": "f2cc9112f2389cc829fa57a58819cd384a8d16d8edf446eeacbd4ee5d187649c",
+      "metrics": {
+        "roc_auc": 0.7955656879478016,
+        "average_precision": 0.6434243331486467,
+        "accuracy": 0.6974779364282127,
+        "balanced_accuracy": 0.715329017910276,
+        "f1": 0.6013285109803087,
+        "precision": 0.4974674880219028,
+        "sensitivity": 0.7600011950643841,
+        "specificity": 0.6706568407561679,
+        "brier_score": 0.19044436514377594,
+        "true_negative": 52328,
+        "false_positive": 25697,
+        "false_negative": 8033,
+        "true_positive": 25438
+      }
+    },
+    {
+      "phase": "final_locked_test",
+      "task": "seer",
+      "seed": 2026,
+      "model_name": "classical_neural",
+      "threshold": 0.5,
+      "locked_archive_sha256": "3c3547e9aca0bafa91c96c60bb3bfd23ac84d5b482e63970299da93bdddb617d",
+      "frozen_state_sha256": "66d7096e415f83e98b4fd400e30032c1f7b5c2d053bd6cd0d54c277df5a2d877",
+      "metrics": {
+        "roc_auc": 0.7963457454516117,
+        "average_precision": 0.6523303255129804,
+        "accuracy": 0.7088326038602282,
+        "balanced_accuracy": 0.7178716454710741,
+        "f1": 0.6042616476095277,
+        "precision": 0.5103679756192987,
+        "sensitivity": 0.7404917689940546,
+        "specificity": 0.6952515219480936,
+        "brier_score": 0.1877809464931488,
+        "true_negative": 54247,
+        "false_positive": 23778,
+        "false_negative": 8686,
+        "true_positive": 24785
+      }
+    },
+    {
+      "phase": "final_locked_test",
+      "task": "seer",
+      "seed": 2026,
+      "model_name": "hybrid_quantum",
+      "threshold": 0.5,
+      "locked_archive_sha256": "3c3547e9aca0bafa91c96c60bb3bfd23ac84d5b482e63970299da93bdddb617d",
+      "frozen_state_sha256": "99e8f5fdac1eb9bc0a65f3b2459a7ee795644be6f42d60d4920d4341a81be43b",
+      "metrics": {
+        "roc_auc": 0.7938011564306061,
+        "average_precision": 0.6380094685776267,
+        "accuracy": 0.7083482815527015,
+        "balanced_accuracy": 0.717610903559137,
+        "f1": 0.6039606372095289,
+        "precision": 0.5097970680757448,
+        "sensitivity": 0.740790535090078,
+        "specificity": 0.6944312720281961,
+        "brier_score": 0.18845753371715546,
+        "true_negative": 54183,
+        "false_positive": 23842,
+        "false_negative": 8676,
+        "true_positive": 24795
+      }
+    }
+  ],
+  "three_seed_summary": {
+    "camelyon": {
+      "classical_neural": {
+        "roc_auc": {
+          "mean": 0.9799763231938347,
+          "sample_standard_deviation": 0.0017835420780945742,
+          "values": [
+            0.9807536450741301,
+            0.9779360417267061,
+            0.9812392827806677
+          ]
+        },
+        "average_precision": {
+          "mean": 0.9829686941279047,
+          "sample_standard_deviation": 0.0015112393923237205,
+          "values": [
+            0.9834121914733119,
+            0.9812853274889138,
+            0.9842085634214882
+          ]
+        },
+        "accuracy": {
+          "mean": 0.9184400498506832,
+          "sample_standard_deviation": 0.005571478898192379,
+          "values": [
+            0.912055870388224,
+            0.9223199379217909,
+            0.9209443412420345
+          ]
+        },
+        "balanced_accuracy": {
+          "mean": 0.9184400498506831,
+          "sample_standard_deviation": 0.00557147889819234,
+          "values": [
+            0.912055870388224,
+            0.9223199379217908,
+            0.9209443412420345
+          ]
+        },
+        "f1": {
+          "mean": 0.9132764597510977,
+          "sample_standard_deviation": 0.00678310769591842,
+          "values": [
+            0.905772089390542,
+            0.9189712898122371,
+            0.915086000050514
+          ]
+        },
+        "precision": {
+          "mean": 0.9747224805131962,
+          "sample_standard_deviation": 0.013991873939476795,
+          "values": [
+            0.9754714421381088,
+            0.960371167845791,
+            0.988324831555689
+          ]
+        },
+        "sensitivity": {
+          "mean": 0.8594383176178271,
+          "sample_standard_deviation": 0.018955179049669844,
+          "values": [
+            0.8453688245114869,
+            0.8809932513462035,
+            0.8519528769957909
+          ]
+        },
+        "specificity": {
+          "mean": 0.977441782083539,
+          "sample_standard_deviation": 0.013192800002714443,
+          "values": [
+            0.9787429162649611,
+            0.9636466244973781,
+            0.9899358054882781
+          ]
+        },
+        "brier_score": {
+          "mean": 0.06273323918382327,
+          "sample_standard_deviation": 0.00488423515621053,
+          "values": [
+            0.0675172209739685,
+            0.06292792409658432,
+            0.05775457248091698
+          ]
+        }
+      },
+      "hybrid_quantum": {
+        "roc_auc": {
+          "mean": 0.9731234126105234,
+          "sample_standard_deviation": 0.006888303155110708,
+          "values": [
+            0.9800954903031927,
+            0.9663220578151055,
+            0.9729526897132719
+          ]
+        },
+        "average_precision": {
+          "mean": 0.9777378610348954,
+          "sample_standard_deviation": 0.005096438454415685,
+          "values": [
+            0.9825901404148305,
+            0.9724281084142558,
+            0.9781953342756001
+          ]
+        },
+        "accuracy": {
+          "mean": 0.9190749406259552,
+          "sample_standard_deviation": 0.010575580385487653,
+          "values": [
+            0.9069179580031509,
+            0.9241540668281327,
+            0.9261527970465822
+          ]
+        },
+        "balanced_accuracy": {
+          "mean": 0.9190749406259554,
+          "sample_standard_deviation": 0.01057558038548759,
+          "values": [
+            0.906917958003151,
+            0.9241540668281327,
+            0.9261527970465822
+          ]
+        },
+        "f1": {
+          "mean": 0.9142692254155177,
+          "sample_standard_deviation": 0.0130096529016915,
+          "values": [
+            0.8992478906578093,
+            0.9216360345476853,
+            0.9219237510410581
+          ]
+        },
+        "precision": {
+          "mean": 0.9704042464780837,
+          "sample_standard_deviation": 0.014862427075412864,
+          "values": [
+            0.9800011095084877,
+            0.9532844147358899,
+            0.9779272151898735
+          ]
+        },
+        "sensitivity": {
+          "mean": 0.8649328661791332,
+          "sample_standard_deviation": 0.03121942844209521,
+          "values": [
+            0.8307898511533849,
+            0.8920215392574129,
+            0.8719872081266019
+          ]
+        },
+        "specificity": {
+          "mean": 0.9732170150727772,
+          "sample_standard_deviation": 0.014725468283684989,
+          "values": [
+            0.983046064852917,
+            0.9562865943988524,
+            0.9803183859665624
+          ]
+        },
+        "brier_score": {
+          "mean": 0.06447822476426761,
+          "sample_standard_deviation": 0.005932091703639364,
+          "values": [
+            0.07129672914743423,
+            0.06163528561592102,
+            0.060502659529447556
+          ]
+        }
+      },
+      "quantum_minus_classical": {
+        "roc_auc": {
+          "mean": -0.006852910583311315,
+          "sample_standard_deviation": 0.005616861413523504,
+          "values": [
+            -0.0006581547709374469,
+            -0.011613983911600623,
+            -0.008286593067395875
+          ]
+        },
+        "average_precision": {
+          "mean": -0.005230833093009202,
+          "sample_standard_deviation": 0.0040743206734027955,
+          "values": [
+            -0.0008220510584814322,
+            -0.008857219074658085,
+            -0.006013229145888088
+          ]
+        },
+        "accuracy": {
+          "mean": 0.0006348907752721233,
+          "sample_standard_deviation": 0.005276406234366128,
+          "values": [
+            -0.005137912385073107,
+            0.0018341289063418253,
+            0.0052084558045476514
+          ]
+        },
+        "balanced_accuracy": {
+          "mean": 0.0006348907752721974,
+          "sample_standard_deviation": 0.00527640623436608,
+          "values": [
+            -0.005137912385072996,
+            0.0018341289063419364,
+            0.0052084558045476514
+          ]
+        },
+        "f1": {
+          "mean": 0.000992765664419859,
+          "sample_standard_deviation": 0.006836085181762405,
+          "values": [
+            -0.006524198732732689,
+            0.002664744735448199,
+            0.006837750990544067
+          ]
+        },
+        "precision": {
+          "mean": -0.004318234035112556,
+          "sample_standard_deviation": 0.007839290359198023,
+          "values": [
+            0.004529667370378965,
+            -0.007086753109901145,
+            -0.010397616365815487
+          ]
+        },
+        "sensitivity": {
+          "mean": 0.005494548561306119,
+          "sample_standard_deviation": 0.01795792068434014,
+          "values": [
+            -0.014578973358101988,
+            0.011028287911209356,
+            0.02003433113081099
+          ]
+        },
+        "specificity": {
+          "mean": -0.004224767010761836,
+          "sample_standard_deviation": 0.007471141820105028,
+          "values": [
+            0.004303148587955885,
+            -0.007360030098525705,
+            -0.009617419521715687
+          ]
+        },
+        "brier_score": {
+          "mean": 0.001744985580444336,
+          "sample_standard_deviation": 0.0026807326119375756,
+          "values": [
+            0.0037795081734657288,
+            -0.0012926384806632996,
+            0.0027480870485305786
+          ]
+        }
+      }
+    },
+    "seer": {
+      "classical_neural": {
+        "roc_auc": {
+          "mean": 0.79712176426833,
+          "sample_standard_deviation": 0.0012160961623007818,
+          "values": [
+            0.7964962471733172,
+            0.7985233001800609,
+            0.7963457454516117
+          ]
+        },
+        "average_precision": {
+          "mean": 0.653177386794195,
+          "sample_standard_deviation": 0.0019433341071666368,
+          "values": [
+            0.6518013583661754,
+            0.6554004765034293,
+            0.6523303255129804
+          ]
+        },
+        "accuracy": {
+          "mean": 0.7120524503121187,
+          "sample_standard_deviation": 0.0027910963592131066,
+          "values": [
+            0.7135412929611825,
+            0.7137834541149458,
+            0.7088326038602282
+          ]
+        },
+        "balanced_accuracy": {
+          "mean": 0.7186652054282714,
+          "sample_standard_deviation": 0.0006959404513620321,
+          "values": [
+            0.7191716670260763,
+            0.718952303787664,
+            0.7178716454710741
+          ]
+        },
+        "f1": {
+          "mean": 0.6052138741751184,
+          "sample_standard_deviation": 0.0008337797947218615,
+          "values": [
+            0.6058130206726319,
+            0.6055669542431958,
+            0.6042616476095277
+          ]
+        },
+        "precision": {
+          "mean": 0.5143029975832264,
+          "sample_standard_deviation": 0.0034117013758517283,
+          "values": [
+            0.5161080035328258,
+            0.5164330135975546,
+            0.5103679756192987
+          ]
+        },
+        "sensitivity": {
+          "mean": 0.7352135679643075,
+          "sample_standard_deviation": 0.00462241779004472,
+          "values": [
+            0.7332616294702877,
+            0.7318873054285799,
+            0.7404917689940546
+          ]
+        },
+        "specificity": {
+          "mean": 0.7021168428922354,
+          "sample_standard_deviation": 0.005963917290708188,
+          "values": [
+            0.7050817045818648,
+            0.7060173021467478,
+            0.6952515219480936
+          ]
+        },
+        "brier_score": {
+          "mean": 0.18660369018713632,
+          "sample_standard_deviation": 0.001021685571356934,
+          "values": [
+            0.18608133494853973,
+            0.18594878911972046,
+            0.1877809464931488
+          ]
+        }
+      },
+      "hybrid_quantum": {
+        "roc_auc": {
+          "mean": 0.7945844538697283,
+          "sample_standard_deviation": 0.0008987641812920183,
+          "values": [
+            0.794386517230777,
+            0.7955656879478016,
+            0.7938011564306061
+          ]
+        },
+        "average_precision": {
+          "mean": 0.6421007760081093,
+          "sample_standard_deviation": 0.0036160089644857057,
+          "values": [
+            0.6448685262980547,
+            0.6434243331486467,
+            0.6380094685776267
+          ]
+        },
+        "accuracy": {
+          "mean": 0.7078729281767956,
+          "sample_standard_deviation": 0.010165653931985383,
+          "values": [
+            0.7177925665494727,
+            0.6974779364282127,
+            0.7083482815527015
+          ]
+        },
+        "balanced_accuracy": {
+          "mean": 0.7166542580935035,
+          "sample_standard_deviation": 0.001184756125959293,
+          "values": [
+            0.7170228528110975,
+            0.715329017910276,
+            0.717610903559137
+          ]
+        },
+        "f1": {
+          "mean": 0.6028932777531596,
+          "sample_standard_deviation": 0.0013847680854584916,
+          "values": [
+            0.6033906850696414,
+            0.6013285109803087,
+            0.6039606372095289
+          ]
+        },
+        "precision": {
+          "mean": 0.5097111867031696,
+          "sample_standard_deviation": 0.012200984688116985,
+          "values": [
+            0.5218690040118612,
+            0.4974674880219028,
+            0.5097970680757448
+          ]
+        },
+        "sensitivity": {
+          "mean": 0.7386294603288418,
+          "sample_standard_deviation": 0.022530139952313833,
+          "values": [
+            0.7150966508320635,
+            0.7600011950643841,
+            0.740790535090078
+          ]
+        },
+        "specificity": {
+          "mean": 0.6946790558581651,
+          "sample_standard_deviation": 0.024147060518732496,
+          "values": [
+            0.7189490547901314,
+            0.6706568407561679,
+            0.6944312720281961
+          ]
+        },
+        "brier_score": {
+          "mean": 0.18831800421079,
+          "sample_standard_deviation": 0.002199447519676193,
+          "values": [
+            0.1860521137714386,
+            0.19044436514377594,
+            0.18845753371715546
+          ]
+        }
+      },
+      "quantum_minus_classical": {
+        "roc_auc": {
+          "mean": -0.002537310398601722,
+          "sample_standard_deviation": 0.00042398800462147706,
+          "values": [
+            -0.002109729942540217,
+            -0.0029576122322593212,
+            -0.0025445890210056277
+          ]
+        },
+        "average_precision": {
+          "mean": -0.011076610786085647,
+          "sample_standard_deviation": 0.0037752611818685057,
+          "values": [
+            -0.006932832068120676,
+            -0.011976143354782587,
+            -0.014320856935353676
+          ]
+        },
+        "accuracy": {
+          "mean": -0.004179522135323244,
+          "sample_standard_deviation": 0.010765049614689623,
+          "values": [
+            0.004251273588290139,
+            -0.016305517686733162,
+            -0.0004843223075267078
+          ]
+        },
+        "balanced_accuracy": {
+          "mean": -0.0020109473347679208,
+          "sample_standard_deviation": 0.001685506136859741,
+          "values": [
+            -0.0021488142149788114,
+            -0.003623285877387916,
+            -0.00026074191193703466
+          ]
+        },
+        "f1": {
+          "mean": -0.0023205964219588093,
+          "sample_standard_deviation": 0.0019706870713423496,
+          "values": [
+            -0.002422335602990433,
+            -0.004238443262887137,
+            -0.0003010103999988578
+          ]
+        },
+        "precision": {
+          "mean": -0.004591810880056761,
+          "sample_standard_deviation": 0.012844299140646206,
+          "values": [
+            0.005761000479035383,
+            -0.01896552557565173,
+            -0.0005709075435539335
+          ]
+        },
+        "sensitivity": {
+          "mean": 0.003415892364534471,
+          "sample_standard_deviation": 0.02329636815710979,
+          "values": [
+            -0.018164978638224194,
+            0.02811388963580419,
+            0.0002987660960234173
+          ]
+        },
+        "specificity": {
+          "mean": -0.007437787034070276,
+          "sample_standard_deviation": 0.025272281392782325,
+          "values": [
+            0.013867350208266571,
+            -0.03536046139057991,
+            -0.0008202499198974866
+          ]
+        },
+        "brier_score": {
+          "mean": 0.0017143140236536663,
+          "sample_standard_deviation": 0.002434359281397861,
+          "values": [
+            -2.9221177101135254e-05,
+            0.004495576024055481,
+            0.0006765872240066528
+          ]
+        }
+      }
+    }
+  }
+}
