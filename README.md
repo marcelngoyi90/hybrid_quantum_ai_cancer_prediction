@@ -157,6 +157,32 @@ A controlled linear-probe comparison measured predictive retention:
 
 The private feature archives are not committed to GitHub.
 
+## Final locked-test evaluation
+
+After the upstream checkpoints, training-fitted PCA pipelines and downstream classifier procedure were frozen, Camelyon `ood_test` and SEER `temporal_test` were evaluated once.
+
+Results are mean ± sample standard deviation across seeds 42, 123 and 2026.
+
+| Task | Model | ROC-AUC | Average precision | Accuracy | Balanced accuracy | F1 |
+|---|---|---:|---:|---:|---:|---:|
+| Camelyon OOD test | Classical neural | 0.979976 ± 0.001784 | 0.982969 ± 0.001511 | 0.918440 ± 0.005571 | 0.918440 ± 0.005571 | 0.913276 ± 0.006783 |
+| Camelyon OOD test | Hybrid quantum | 0.973123 ± 0.006888 | 0.977738 ± 0.005096 | 0.919075 ± 0.010576 | 0.919075 ± 0.010576 | 0.914269 ± 0.013010 |
+| SEER temporal test | Classical neural | 0.797122 ± 0.001216 | 0.653177 ± 0.001943 | 0.712052 ± 0.002791 | 0.718665 ± 0.000696 | 0.605214 ± 0.000834 |
+| SEER temporal test | Hybrid quantum | 0.794584 ± 0.000899 | 0.642101 ± 0.003616 | 0.707873 ± 0.010166 | 0.716654 ± 0.001185 | 0.602893 ± 0.001385 |
+
+The hybrid model did not outperform the parameter-matched classical model on the predeclared primary ROC-AUC metric:
+
+- Camelyon quantum-minus-classical ROC-AUC: −0.006853 ± 0.005617.
+- SEER quantum-minus-classical ROC-AUC: −0.002537 ± 0.000424.
+
+### Downstream state-recovery disclosure
+
+The original downstream development runner saved metrics but did not preserve the selected model-state files. Before any locked array was loaded, all 12 downstream states were recreated using only the frozen development data, seeds, architectures, training settings and model-selection rules.
+
+A recovered state was accepted only when its selected epoch and development ROC-AUC reproduced the recorded result within an absolute tolerance of `1e-6`. All 12 states passed and were frozen by SHA-256 hash before locked-test evaluation.
+
+This recovery was a documented procedural exception. It did not use locked-test data for training, fitting, tuning, model selection or threshold selection.
+
 ## Repository structure
 
 ```text
@@ -247,6 +273,8 @@ Repeat for seeds 123 and 2026.
 python scripts/evaluate_joint_v2_linear_probes.py
 ```
 
+The final locked-test extraction and evaluation are intentionally excluded from the reproduction sequence. Their scripts and audits are retained for transparency, but the one-time final evaluation must not be rerun.
+
 ## Data access and privacy
 
 Raw datasets are not distributed through this repository.
@@ -257,16 +285,18 @@ SEER data requires an approved SEER data-access account and remains subject to t
 
 Only privacy-safe aggregate audits, configurations, metrics and figures are tracked by Git.
 
-## Locked-test policy
+## Final locked-test procedure
 
-The following splits remain locked:
+The following splits were kept locked throughout development:
 
 - Camelyon `ood_test`.
 - SEER `temporal_test`.
 
-They must not be used for preprocessing, tuning, threshold selection, calibration, checkpoint selection or development evaluation.
+They were not used for preprocessing, tuning, calibration, threshold selection, checkpoint selection or development evaluation.
 
-After the complete final procedure and model states are frozen, the locked representations may be generated once using the existing checkpoints, scalers and PCA states without refitting. No architecture, threshold or preprocessing decision may be changed after final results are viewed.
+After the upstream and downstream procedures were frozen, the locked 8D representations were generated and evaluated once. File hashes, checkpoint hashes, row counts, dimensions and label-order preservation were audited.
+
+The final results are now fixed. The locked-test evaluation must not be rerun, and no architecture, preprocessing, threshold, seed or model-selection decision may be changed in response to the results.
 
 ## Current status
 
@@ -281,13 +311,16 @@ Completed:
 - Training-only 32D-to-8D PCA reduction.
 - Three-seed linear-probe validation.
 - Privacy-safe encrypted development handoff.
+- Audited extraction of all six locked-test 8D representations.
+- Verification and freezing of all 12 downstream model states.
+- One-time classical-versus-quantum locked-test evaluation.
+- Public locked-test result report and aggregate JSON.
 - Reproducible documentation notebooks.
 
 Pending:
 
-- Confirmation of frozen downstream model states.
-- One final locked-test feature extraction and evaluation.
-- Final report and presentation updates.
+- Final five-page report.
+- Final presentation.
 
 ## Limitations
 
@@ -295,7 +328,9 @@ Pending:
 - This is multi-task representation learning, not patient-level multimodal fusion.
 - SEER performance does not establish clinical usefulness.
 - Camelyon class 0 does not mean the patient is cancer-free.
-- Results reported here are development results.
+- The downstream model states required a documented development-only recovery because the original runner had not persisted them.
+- The quantum circuit was simulated rather than executed on quantum hardware.
+- The locked-test results do not replace validation on an additional independent external cohort.
 - The project is a research prototype and not a medical diagnostic system.
 
 ## Project documents
@@ -304,4 +339,7 @@ Pending:
 - [Joint model v2 development selection](reports/model_v2_development_selection.md)
 - [Feature handoff plan](reports/joint_v2_feature_handoff_plan.md)
 - [8D validation report](reports/joint_v2_8d_validation.md)
+- [Final locked-feature protocol](reports/final_locked_feature_protocol.md)
+- [Final locked-test report](joint_v2/results/locked_test/FINAL_LOCKED_TEST_REPORT.md)
+- [Final locked-test aggregate results](joint_v2/results/locked_test/final_locked_test_results.json)
 - [Downstream contributor documentation](joint_v2/README.md)
