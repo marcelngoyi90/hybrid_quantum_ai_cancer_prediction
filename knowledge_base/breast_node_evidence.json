@@ -1,0 +1,103 @@
+{
+    "version": "1.0",
+    "purpose": "Curated evidence for explaining relationships between lymph-node histopathology and breast-cancer regional-node predictions.",
+    "accessed_date": "2026-09-20",
+    "documents": [
+      {
+        "id": "wilds_camelyon17_definition",
+        "title": "Camelyon17-WILDS dataset definition",
+        "organization": "WILDS",
+        "url": "https://wilds.stanford.edu/datasets/",
+        "retrieval_text": "Camelyon17-WILDS uses 96 by 96 histopathology image patches. Its binary label indicates whether the central 32 by 32 region contains tumour tissue. Hospitals define the domains used to measure distribution shift.",
+        "supported_claims": [
+          "A positive image result represents tumour tissue detected in the central region of one lymph-node histopathology patch.",
+          "The result is patch-level rather than a whole-patient diagnosis.",
+          "Performance may change between hospitals because of staining, acquisition and population differences."
+        ],
+        "limitations": [
+          "The dataset does not provide patient-level breast-cancer screening.",
+          "One patch does not represent every region of a lymph node or every node in a patient."
+        ],
+        "topics": [
+          "Camelyon17",
+          "histopathology",
+          "lymph-node patch",
+          "tumour pattern",
+          "hospital distribution shift"
+        ]
+      },
+      {
+        "id": "nci_breast_tnm_nodes",
+        "title": "TNM staging for breast cancer",
+        "organization": "National Cancer Institute",
+        "url": "https://www.cancer.gov/types/breast/stages/tnm-staging-system",
+        "retrieval_text": "The N component of breast-cancer TNM staging describes the location of lymph nodes where cancer has spread and the size of cancer deposits in those nodes. Pathological staging examines surgically removed lymph nodes under a microscope. N0 indicates no sign of nodal cancer or only very small cell clusters under specified staging definitions, while N1 through N3 describe increasing regional-node involvement.",
+        "supported_claims": [
+          "Regional lymph-node status is clinically related to the presence of tumour cells in lymph-node tissue.",
+          "N0 and N-positive categories are patient-level staging concepts.",
+          "Microscopic examination of lymph-node tissue contributes to pathological nodal staging."
+        ],
+        "limitations": [
+          "The project simplifies several detailed pathological N categories into binary N0 versus N-positive.",
+          "A model prediction is not equivalent to an official pathological stage."
+        ],
+        "topics": [
+          "breast cancer",
+          "TNM staging",
+          "N0",
+          "N-positive",
+          "regional lymph nodes",
+          "pathological staging"
+        ]
+      },
+      {
+        "id": "nci_sentinel_node_biopsy",
+        "title": "Sentinel lymph-node biopsy",
+        "organization": "National Cancer Institute",
+        "url": "https://www.cancer.gov/about-cancer/diagnosis-staging/staging/sentinel-node-biopsy-fact-sheet",
+        "retrieval_text": "A sentinel lymph node is one of the first nodes to which cancer is likely to spread from a primary tumour. Removed sentinel nodes are examined for cancer cells. A positive result indicates cancer in the sentinel node. A negative result suggests that nearby spread has not occurred, but false-negative biopsy results can occur.",
+        "supported_claims": [
+          "Tumour cells found in lymph-node tissue provide evidence of regional spread.",
+          "Negative lymph-node evidence must be interpreted with awareness of sampling and false-negative limitations.",
+          "Lymph-node pathology contributes to staging rather than cancer screening."
+        ],
+        "limitations": [
+          "A Camelyon image patch is not the complete sentinel-node biopsy procedure.",
+          "This source supports cautious interpretation but does not validate the project model."
+        ],
+        "topics": [
+          "sentinel lymph node",
+          "positive node",
+          "negative node",
+          "false negative",
+          "sampling limitation",
+          "regional metastasis"
+        ]
+      },
+      {
+        "id": "bcnb_multimodal_prediction",
+        "title": "Predicting axillary lymph-node metastasis using biopsy slides and clinical information",
+        "organization": "Frontiers in Oncology",
+        "url": "https://www.frontiersin.org/journals/oncology/articles/10.3389/fonc.2021.759007/full",
+        "retrieval_text": "A study of 1058 patients investigated deep learning on breast core-needle biopsy whole-slide images for predicting axillary lymph-node metastasis. The study also combined image features with clinical information. Its combined image and clinical model achieved a test AUC of 0.831, compared with 0.816 for the image model and 0.613 for the clinical-only model.",
+        "supported_claims": [
+          "Published research has combined breast histopathology images and clinical variables for axillary lymph-node prediction.",
+          "Tumour morphology and clinical characteristics can provide complementary information.",
+          "Paired patient data can support a genuine multimodal fusion model."
+        ],
+        "limitations": [
+          "The study used primary breast core-needle biopsy whole-slide images, not Camelyon lymph-node patches.",
+          "Its results cannot be treated as validation of the current unpaired dual-pathway system.",
+          "The reported performance must not be presented as this project's performance."
+        ],
+        "topics": [
+          "multimodal learning",
+          "clinical information",
+          "whole-slide image",
+          "axillary lymph-node metastasis",
+          "BCNB",
+          "paired patient data"
+        ]
+      }
+    ]
+  }
