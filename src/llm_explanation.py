@@ -189,3 +189,49 @@ def generate_explanation(
             for document in documents
         ],
     }
+
+def generate_background(documents: list[dict]) -> dict:
+    if not documents:
+        raise ValueError("No evidence documents were provided.")
+
+    payload = {
+        "documents": [
+            {
+                "id": document["id"],
+                "title": document["title"],
+                "summary": document["evidence_summary"],
+                "supported_claims": document["supported_claims"],
+                "limitations": document["limitations"],
+            }
+            for document in documents
+        ]
+    }
+
+    client = Groq(timeout=60.0, max_retries=1)
+    response = client.chat.completions.create(
+        model=MODEL,
+        messages=[
+            {"role": "system", "content": BACKGROUND_PROMPT},
+            {"role": "user", "content": json.dumps(payload)},
+        ],
+        temperature=0.2,
+        max_completion_tokens=800,
+    )
+
+    text = response.choices[0].message.content
+    if not text or not text.strip():
+        raise RuntimeError("The API returned no background text.")
+    if response.choices[0].finish_reason != "stop":
+        raise RuntimeError("The background response did not finish normally.")
+
+    return {
+        "text": text.strip(),
+        "sources": [
+            {
+                "id": document["id"],
+                "title": document["title"],
+                "url": document["url"],
+            }
+            for document in documents
+        ],
+    }

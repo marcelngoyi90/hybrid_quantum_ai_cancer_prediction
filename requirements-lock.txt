@@ -78,3 +78,7 @@ rustworkx==0.18.1
 scipy-openblas32==0.3.34.106.0
 termcolor==3.3.0
 tomlkit==0.15.1
+fastapi==0.141.1
+uvicorn==0.53.0
+python-multipart==0.0.32
+groq==1.7.0
