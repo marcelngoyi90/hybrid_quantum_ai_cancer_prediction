@@ -11,6 +11,8 @@ import torch
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
 
+from src.llm_explanation import generate_explanation
+
 from scripts.predict_camelyon_patch import load_image
 from scripts.predict_seer_patient import (
     collect_patient_information,
@@ -79,6 +81,14 @@ def parse_arguments():
             "histopathology patch."
         ),
     )
+    parser.add_argument(
+        "--explain-synthetic",
+        action="store_true",
+        help=(
+            "Send prediction scores and public evidence to Groq "
+            "for an unpaired demo with fictional clinical inputs."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -93,8 +103,8 @@ def assess_relationship(
         return {
             "category": "concordant_positive",
             "summary": (
-                "Both pathways support regional "
-                "lymph-node tumour involvement."
+                "Both model outputs are positive for their "
+                "respective prediction tasks."
             ),
             "interpretation": (
                 "The image pathway detected a tumour "
@@ -143,11 +153,10 @@ def assess_relationship(
                 "the clinical pathway estimates N0."
             ),
             "interpretation": (
-                "Direct tumour-pattern evidence in the "
-                "supplied lymph-node patch conflicts with "
-                "the clinical-model estimate. The outputs "
-                "must remain separate and require expert "
-                "pathology review."
+                "The image model predicts a tumour pattern, "
+                "while the clinical model predicts N0. "
+                "These are different prediction tasks; neither "
+                "output is a confirmed pathological finding."
             ),
             "retrieval_topics": [
                 "pathological confirmation of nodal metastasis",
@@ -271,9 +280,10 @@ def main():
             "Cancer Decision-Support Prototype"
         ),
         "input_assumption": (
-            "The image and clinical information are "
-            "assumed to belong to the same patient. "
-            "The software cannot verify this."
+            "Unpaired demonstration with fictional clinical inputs."
+            if arguments.explain_synthetic
+            else "The relationship between the image and clinical "
+                 "inputs has not been verified."
         ),
         "image_pathway": {
             "input_file": arguments.image.name,
@@ -338,6 +348,11 @@ def main():
         ),
     }
 
+    if arguments.explain_synthetic:
+        result["llm_explanation"] = generate_explanation(
+            result,
+            synthetic_demo=True,
+        )
     print(
         json.dumps(
             result,
