@@ -7,9 +7,50 @@ const runButton = document.querySelector("#run-analysis");
 const runStatus = document.querySelector("#run-status");
 
 let imageReady = false;
+let modelReady = false;
+let latestPrediction = null;
 
 function field(id) {
   return document.getElementById(id);
+}
+
+async function loadModelStatus() {
+  const card = field("model-readiness");
+  const title = field("model-readiness-title");
+  const message = field("model-readiness-message");
+  const missingList = field("model-missing-files");
+
+  try {
+    const response = await fetch("/api/model/status");
+    const result = await response.json();
+    if (!response.ok) throw new Error("Could not check the model files.");
+
+    modelReady = result.ready;
+    card.classList.add(modelReady ? "ready" : "unavailable");
+    title.textContent = modelReady
+      ? "Prediction model ready"
+      : "Prediction model files are incomplete";
+    message.textContent = result.message;
+    runButton.disabled = !modelReady;
+
+    missingList.replaceChildren();
+    for (const item of result.missing) {
+      const row = document.createElement("li");
+      row.textContent = `${item.name}: ${item.path}`;
+      missingList.append(row);
+    }
+    missingList.hidden = result.missing.length === 0;
+    if (!modelReady) {
+      runStatus.textContent =
+        "Prediction is disabled until the listed private files are supplied.";
+    }
+  } catch (error) {
+    modelReady = false;
+    card.classList.add("unavailable");
+    title.textContent = "Could not verify the prediction model";
+    message.textContent = error.message;
+    runButton.disabled = true;
+  }
 }
 
 function updateSubtype() {
@@ -109,6 +150,11 @@ function clinicalInput() {
 }
 
 runButton.addEventListener("click", async () => {
+  if (!modelReady) {
+    runStatus.textContent =
+      "Prediction is unavailable because private model files are missing.";
+    return;
+  }
   const inputs = document.querySelectorAll(
     '#clinical input[required], #clinical select[required]'
   );
@@ -151,6 +197,7 @@ runButton.addEventListener("click", async () => {
 
     const image = result.image_pathway;
     const clinical = result.clinical_pathway;
+    latestPrediction = result;
 
     field("image-result-title").textContent =
       image.predicted_class === "tumour_pattern_detected"
@@ -170,11 +217,57 @@ runButton.addEventListener("click", async () => {
       `Threshold: ${(clinical.threshold * 100).toFixed(1)}%.`;
 
     runStatus.textContent = `Analysis complete · model seed ${result.model_seed}`;
+    field("result-explanation").hidden = false;
     field("results").scrollIntoView({ behavior: "smooth" });
   } catch (error) {
     runStatus.textContent = error.message;
   } finally {
-    runButton.disabled = false;
+    runButton.disabled = !modelReady;
+  }
+});
+
+const explainResultsButton = field("explain-results");
+const resultExplanationStatus = field("result-explanation-status");
+
+explainResultsButton.addEventListener("click", async () => {
+  if (!latestPrediction) return;
+  explainResultsButton.disabled = true;
+  resultExplanationStatus.textContent =
+    "Retrieving evidence and explaining both outputs separately…";
+
+  try {
+    const image = latestPrediction.image_pathway;
+    const clinical = latestPrediction.clinical_pathway;
+    const response = await fetch("/api/explain-results", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        image: {
+          predicted_class: image.predicted_class,
+          probability: image.tumour_pattern_probability,
+        },
+        clinical: {
+          predicted_class: clinical.predicted_class,
+          probability: clinical.n_positive_probability,
+        },
+        level: field("assistant-level").value,
+      }),
+    });
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.detail || "Could not explain the results.");
+    }
+
+    showAssistantAnswer(result);
+    assistantQuestion.value =
+      "Explain the latest image and clinical pathway results.";
+    resultExplanationStatus.textContent =
+      "Explanation is ready in the Knowledge assistant section.";
+    field("knowledge").scrollIntoView({ behavior: "smooth" });
+  } catch (error) {
+    resultExplanationStatus.textContent = error.message;
+  } finally {
+    explainResultsButton.disabled = false;
   }
 });
 
@@ -221,3 +314,97 @@ explainButton.addEventListener("click", async () => {
     explainButton.disabled = false;
   }
 });
+
+const askButton = field("ask-assistant");
+const assistantQuestion = field("assistant-question");
+const assistantStatus = field("assistant-status");
+const assistantResponse = field("assistant-response");
+const assistantAnswer = field("assistant-answer");
+const assistantSources = field("assistant-sources");
+
+async function loadKnowledgeStatus() {
+  const row = document.querySelector(".knowledge-status-row");
+  const title = field("knowledge-status-title");
+  const detail = field("knowledge-status-detail");
+
+  try {
+    const response = await fetch("/api/knowledge/status");
+    const result = await response.json();
+    if (!response.ok || !result.ready) {
+      throw new Error("Knowledge database unavailable");
+    }
+    row.classList.add("ready");
+    title.textContent = "Knowledge assistant ready";
+    detail.textContent =
+      `${result.documents} documents · ${result.chunks} searchable sections`;
+  } catch (error) {
+    title.textContent = "Knowledge database unavailable";
+    detail.textContent = "Run: python -m rag_system.build_database";
+  }
+}
+
+function showAssistantAnswer(result) {
+  assistantAnswer.textContent = result.answer;
+  assistantAnswer.dir = "ltr";
+  assistantSources.replaceChildren();
+
+  for (const source of result.sources) {
+    const item = document.createElement("li");
+    const link = document.createElement("a");
+    link.href = source.url;
+    link.textContent = `[${source.citation}] ${source.title} — ${source.heading}`;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    item.append(link);
+    assistantSources.append(item);
+  }
+
+  assistantResponse.hidden = false;
+  assistantStatus.textContent = result.answer_mode === "general"
+    ? "General LLM explanation — verify specialised or current facts."
+    : `Evidence-grounded answer from ${result.sources.length} supporting sources.`;
+}
+
+askButton.addEventListener("click", async () => {
+  const question = assistantQuestion.value.trim();
+  if (question.length < 2) {
+    assistantStatus.textContent = "Write a question first.";
+    assistantQuestion.focus();
+    return;
+  }
+
+  askButton.disabled = true;
+  assistantResponse.hidden = true;
+  assistantStatus.textContent = "Searching the verified knowledge base…";
+
+  try {
+    const response = await fetch("/api/ask", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        question,
+        level: field("assistant-level").value,
+      }),
+    });
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.detail || "The assistant could not answer.");
+    }
+
+    showAssistantAnswer(result);
+  } catch (error) {
+    assistantStatus.textContent = error.message;
+  } finally {
+    askButton.disabled = false;
+  }
+});
+
+assistantQuestion.addEventListener("keydown", event => {
+  if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+    event.preventDefault();
+    askButton.click();
+  }
+});
+
+loadModelStatus();
+loadKnowledgeStatus();

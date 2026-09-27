@@ -4,9 +4,11 @@ import io
 import json
 from functools import lru_cache
 from pathlib import Path
+from typing import Literal
 
 import torch
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from pydantic import BaseModel, Field
 from fastapi.staticfiles import StaticFiles
 from PIL import Image, UnidentifiedImageError
 
@@ -29,14 +31,81 @@ from src.joint_feature_extraction import load_selected_feature_context
 
 from fastapi.concurrency import run_in_threadpool
 
-from src.evidence_retrieval import retrieve_evidence
-from src.llm_explanation import generate_background
+from rag_system.llm import answer_question
+from rag_system.retrieval import database_stats, retrieve
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 FRONTEND_DIR = Path(__file__).resolve().parent
 
 app = FastAPI(title="Dual Pathway Analysis")
+
+
+class KnowledgeQuestion(BaseModel):
+    question: str = Field(min_length=2, max_length=2000)
+    level: str = Field(
+        default="student",
+        pattern="^(beginner|student|technical)$",
+    )
+
+
+class PathwayResult(BaseModel):
+    predicted_class: str = Field(min_length=1, max_length=80)
+    probability: float = Field(ge=0.0, le=1.0)
+
+
+class PredictionExplanationRequest(BaseModel):
+    image: PathwayResult
+    clinical: PathwayResult
+    level: Literal["beginner", "student", "technical"] = "student"
+
+
+PREDICTION_FILES = {
+    "Joint-model configuration": JOINT_CONFIG_PATH,
+    "SEER feature configuration": FEATURE_CONFIG_PATH,
+    "SEER preprocessor state": PREPROCESSOR_STATE_PATH,
+    "Trained joint-model checkpoint": CHECKPOINT_PATH,
+    "Training history": HISTORY_PATH,
+}
+
+
+def project_path(path: Path) -> str:
+    try:
+        return path.resolve().relative_to(PROJECT_ROOT.resolve()).as_posix()
+    except ValueError:
+        return str(path)
+
+
+def prediction_readiness() -> dict:
+    files = [
+        {
+            "name": name,
+            "path": project_path(path),
+            "available": path.is_file(),
+        }
+        for name, path in PREDICTION_FILES.items()
+    ]
+    missing = [item for item in files if not item["available"]]
+    return {
+        "ready": not missing,
+        "model_seed": SEED,
+        "files": files,
+        "missing": missing,
+        "image_input": {
+            "width": 96,
+            "height": 96,
+            "formats": ["PNG", "JPEG"],
+        },
+        "message": (
+            "The trained research model is ready for local analysis."
+            if not missing
+            else (
+                "The interface and knowledge assistant are ready, but genuine "
+                "prediction is disabled until the missing private model files "
+                "are supplied."
+            )
+        ),
+    }
 
 
 @lru_cache(maxsize=1)
@@ -133,6 +202,14 @@ async def predict(
     clinical: str = Form(...),
     image: UploadFile = File(...),
 ):
+    readiness = prediction_readiness()
+    if not readiness["ready"]:
+        names = ", ".join(item["name"] for item in readiness["missing"])
+        raise HTTPException(
+            status_code=503,
+            detail=f"Prediction is not ready. Missing: {names}.",
+        )
+
     if image.content_type not in {"image/png", "image/jpeg"}:
         raise HTTPException(422, "Upload a PNG or JPEG image.")
 
@@ -156,6 +233,14 @@ async def predict(
         )
     except (ValueError, json.JSONDecodeError) as exc:
         raise HTTPException(422, str(exc)) from exc
+    except (FileNotFoundError, OSError, RuntimeError) as exc:
+        raise HTTPException(
+            status_code=503,
+            detail=(
+                "The trained model could not be loaded. Check the model "
+                "readiness panel and private artifact files."
+            ),
+        ) from exc
 
     with torch.inference_mode():
         image_logit = context.model.forward_image(
@@ -190,27 +275,139 @@ async def predict(
         },
     }
 
+
+@app.get("/api/model/status")
+async def model_status():
+    return prediction_readiness()
+
+
+@app.post("/api/explain-results")
+async def explain_results(request: PredictionExplanationRequest):
+    allowed_image = {
+        "tumour_pattern_detected",
+        "no_tumour_pattern_detected",
+    }
+    if request.image.predicted_class not in allowed_image:
+        raise HTTPException(422, "The image result class is not valid.")
+    if request.clinical.predicted_class not in {"N0", "N+"}:
+        raise HTTPException(422, "The clinical result class is not valid.")
+
+    question = (
+        "Explain these two research-model outputs separately in clear language. "
+        f"The Camelyon image pathway predicted "
+        f"{request.image.predicted_class.replace('_', ' ')} with a score of "
+        f"{request.image.probability:.4f}. The SEER clinical pathway predicted "
+        f"{request.clinical.predicted_class} with an N+ score of "
+        f"{request.clinical.probability:.4f}. Explain what each output means, "
+        "why they may agree or differ, and their limitations. State clearly "
+        "that Camelyon and SEER are unpaired datasets, these are not results "
+        "from one matched patient, the scores must not be combined, and this "
+        "research system is not a medical diagnosis."
+    )
+    try:
+        return await run_in_threadpool(
+            answer_question,
+            question,
+            level=request.level,
+        )
+    except FileNotFoundError as exc:
+        raise HTTPException(503, "The knowledge database is not ready.") from exc
+    except RuntimeError as exc:
+        detail = (
+            "The Groq API key is not configured on this computer."
+            if "GROQ_API_KEY" in str(exc)
+            else "The result explanation is temporarily unavailable."
+        )
+        raise HTTPException(503, detail) from exc
+    except Exception as exc:
+        raise HTTPException(
+            502,
+            "The result explanation could not be generated.",
+        ) from exc
+
 @app.get("/api/background")
 async def background():
-    knowledge_base = (
-        PROJECT_ROOT / "knowledge_base" / "breast_node_evidence.json"
-    )
-
-    documents = retrieve_evidence(
-        query=(
-            "Camelyon lymph-node image patches, regional-node status, "
-            "breast cancer staging, paired image and clinical research"
-        ),
-        knowledge_base_path=knowledge_base,
-        top_k=4,
-    )
-
     try:
-        return await run_in_threadpool(generate_background, documents)
+        evidence = await run_in_threadpool(
+            retrieve,
+            (
+                "Camelyon17 image patch central 32 SEER regional node N0 N+ "
+                "unpaired datasets separate outputs"
+            ),
+            top_k=5,
+        )
+        return {
+            "text": (
+                "The Camelyon17 pathway examines a small lymph-node image "
+                "patch and predicts whether metastatic tumour is present in "
+                "its labelled central region. The SEER pathway uses tabular "
+                "registry information from people already diagnosed with "
+                "breast cancer and predicts regional lymph-node status as N0 "
+                "or N+. The tasks are medically related through lymph-node "
+                "involvement, but they use different evidence. [S1, S2]\n\n"
+                "The datasets are unpaired: their rows are not the same "
+                "patients. Therefore, the two outputs must be reported "
+                "separately and cannot be combined into one patient risk. A "
+                "negative image patch only describes that sampled region, and "
+                "neither pathway provides a complete diagnosis or cancer "
+                "stage. [S3, S4, S5]"
+            ),
+            "sources": [
+                {
+                    "id": f"S{index}",
+                    "title": item["title"],
+                    "url": item["source_url"],
+                }
+                for index, item in enumerate(evidence, start=1)
+            ],
+        }
+    except FileNotFoundError as exc:
+        raise HTTPException(
+            status_code=503,
+            detail="The knowledge database is not ready.",
+        ) from exc
     except Exception as exc:
         raise HTTPException(
             status_code=502,
             detail="Background generation is temporarily unavailable.",
+        ) from exc
+
+
+@app.get("/api/knowledge/status")
+async def knowledge_status():
+    return database_stats()
+
+
+@app.post("/api/ask")
+async def ask_knowledge_base(request: KnowledgeQuestion):
+    try:
+        return await run_in_threadpool(
+            answer_question,
+            request.question,
+            level=request.level,
+        )
+    except FileNotFoundError as exc:
+        raise HTTPException(
+            status_code=503,
+            detail=(
+                "The knowledge database is not ready. Run "
+                "python -m rag_system.build_database."
+            ),
+        ) from exc
+    except RuntimeError as exc:
+        message = str(exc)
+        detail = (
+            "The Groq API key is not configured on this computer."
+            if "GROQ_API_KEY" in message
+            else "The teaching assistant is temporarily unavailable."
+        )
+        raise HTTPException(status_code=503, detail=detail) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except Exception as exc:
+        raise HTTPException(
+            status_code=502,
+            detail="The teaching assistant could not generate an answer.",
         ) from exc
 
 app.mount(

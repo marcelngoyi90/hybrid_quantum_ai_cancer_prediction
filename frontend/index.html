@@ -12,7 +12,7 @@
     <aside class="sidebar">
       <div class="brand">
         <span class="brand-mark">+</span>
-        <span>MY DATA</span>
+        <span>HYBRID Q AI</span>
       </div>
 
       <nav aria-label="Main navigation">
@@ -20,24 +20,37 @@
         <a class="nav-item" href="#clinical">Clinical information</a>
         <a class="nav-item" href="#image">Image</a>
         <a class="nav-item" href="#results">Results</a>
+        <a class="nav-item" href="#knowledge">Knowledge assistant</a>
       </nav>
 
-      <div class="sidebar-bottom">Research workspace</div>
+      <div class="sidebar-bottom">Evidence-grounded research workspace</div>
     </aside>
 
     <main class="workspace" id="analysis">
       <header class="topbar">
         <div>
-          <p class="eyebrow">DUAL PATHWAY ANALYSIS</p>
-          <h1>New analysis</h1>
+          <p class="eyebrow">HYBRID QUANTUM CANCER RESEARCH</p>
+          <h1>Dual-pathway analysis</h1>
           <p class="subtitle">
-            Enter clinical information and upload a lymph-node image patch.
+            Explore image and clinical pathways separately, then study the
+            evidence behind the results with the knowledge assistant.
           </p>
         </div>
-        <span class="status">● Analysis workspace</span>
+        <span class="status">● Research system online</span>
       </header>
 
       <div class="content">
+        <section id="model-readiness" class="readiness-card" aria-live="polite">
+          <div>
+            <span class="result-label">MODEL READINESS</span>
+            <h2 id="model-readiness-title">Checking local model files…</h2>
+            <p id="model-readiness-message">
+              The knowledge assistant remains available during this check.
+            </p>
+          </div>
+          <ul id="model-missing-files" hidden></ul>
+        </section>
+
         <div class="section-heading">
           <div>
             <h2>Patient information</h2>
@@ -315,6 +328,21 @@
           </section>
         </div>
 
+        <section id="result-explanation" class="card explanation-card" hidden>
+          <div class="background-heading">
+            <div>
+              <span class="result-label">EVIDENCE-GROUNDED EXPLANATION</span>
+              <h3>Understand these two results</h3>
+            </div>
+            <button id="explain-results" type="button">Explain results</button>
+          </div>
+          <p>
+            Only the two model outputs are sent for explanation. The scores are
+            explained separately and are never combined into one patient risk.
+          </p>
+          <p id="result-explanation-status" role="status" aria-live="polite"></p>
+        </section>
+
         <section class="card background-card">
           <div class="background-heading">
             <div>
@@ -337,6 +365,62 @@
             <p id="background-text"></p>
             <h4>Sources</h4>
             <ul id="background-sources"></ul>
+          </div>
+        </section>
+
+        <div class="section-heading" id="knowledge">
+          <div>
+            <h2>Knowledge assistant</h2>
+            <p>
+              Ask any question related to the project or its wider scientific
+              and technical subjects.
+            </p>
+          </div>
+          <span class="step">EVIDENCE-GROUNDED</span>
+        </div>
+
+        <section class="card knowledge-card">
+          <div class="knowledge-status-row">
+            <div>
+              <span class="knowledge-status-dot" aria-hidden="true"></span>
+              <strong id="knowledge-status-title">Checking knowledge database…</strong>
+            </div>
+            <span id="knowledge-status-detail"></span>
+          </div>
+
+          <div class="assistant-controls">
+            <label>
+              Explanation level
+              <select id="assistant-level">
+                <option value="beginner">Complete beginner</option>
+                <option value="student" selected>University student</option>
+                <option value="technical">Technical</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="question-field">
+            Ask anything related to this research
+            <textarea
+              id="assistant-question"
+              maxlength="2000"
+              placeholder="Type your own question about cancer, pathology, datasets, AI, quantum computing, metrics, software or the project…"
+            ></textarea>
+          </label>
+
+          <div class="assistant-action">
+            <button id="ask-assistant" type="button">Ask the assistant</button>
+            <p id="assistant-status" role="status" aria-live="polite"></p>
+          </div>
+
+          <div id="assistant-response" hidden>
+            <h3>Answer</h3>
+            <p id="assistant-answer"></p>
+            <p class="research-warning">
+              Research education only—not medical diagnosis or treatment advice.
+            </p>
+            <h4>Supporting sources</h4>
+            <ul id="assistant-sources"></ul>
           </div>
         </section>
       </div>
