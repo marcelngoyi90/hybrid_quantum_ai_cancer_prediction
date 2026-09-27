@@ -26,3 +26,7 @@ artifacts/logs/
 # macOS and editor files
 .DS_Store
 .vscode/
+
+# Local secrets and generated RAG database
+.env
+rag_system/database/*.db
