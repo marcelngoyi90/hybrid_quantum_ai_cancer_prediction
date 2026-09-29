@@ -15,40 +15,15 @@ function field(id) {
 }
 
 async function loadModelStatus() {
-  const card = field("model-readiness");
-  const title = field("model-readiness-title");
-  const message = field("model-readiness-message");
-  const missingList = field("model-missing-files");
-
   try {
     const response = await fetch("/api/model/status");
     const result = await response.json();
     if (!response.ok) throw new Error("Could not check the model files.");
 
     modelReady = result.ready;
-    card.classList.add(modelReady ? "ready" : "unavailable");
-    title.textContent = modelReady
-      ? "Prediction model ready"
-      : "Prediction model files are incomplete";
-    message.textContent = result.message;
     runButton.disabled = !modelReady;
-
-    missingList.replaceChildren();
-    for (const item of result.missing) {
-      const row = document.createElement("li");
-      row.textContent = `${item.name}: ${item.path}`;
-      missingList.append(row);
-    }
-    missingList.hidden = result.missing.length === 0;
-    if (!modelReady) {
-      runStatus.textContent =
-        "Prediction is disabled until the listed private files are supplied.";
-    }
   } catch (error) {
     modelReady = false;
-    card.classList.add("unavailable");
-    title.textContent = "Could not verify the prediction model";
-    message.textContent = error.message;
     runButton.disabled = true;
   }
 }
@@ -271,50 +246,6 @@ explainResultsButton.addEventListener("click", async () => {
   }
 });
 
-const explainButton = field("explain-background");
-const backgroundStatus = field("background-status");
-const backgroundContent = field("background-content");
-const backgroundText = field("background-text");
-const backgroundSources = field("background-sources");
-
-explainButton.addEventListener("click", async () => {
-  explainButton.disabled = true;
-  backgroundStatus.textContent = "Loading background…";
-  backgroundContent.hidden = true;
-
-  try {
-    const response = await fetch("/api/background");
-    const result = await response.json();
-
-    if (!response.ok) {
-      throw new Error(result.detail || "Could not load background.");
-    }
-
-    backgroundText.textContent = result.text;
-    backgroundSources.replaceChildren();
-
-    for (const source of result.sources) {
-      const item = document.createElement("li");
-      const link = document.createElement("a");
-
-      link.href = source.url;
-      link.textContent = `${source.title} [${source.id}]`;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-
-      item.append(link);
-      backgroundSources.append(item);
-    }
-
-    backgroundContent.hidden = false;
-    backgroundStatus.textContent = "Generated background · review sources below";
-  } catch (error) {
-    backgroundStatus.textContent = error.message;
-  } finally {
-    explainButton.disabled = false;
-  }
-});
-
 const askButton = field("ask-assistant");
 const assistantQuestion = field("assistant-question");
 const assistantStatus = field("assistant-status");
@@ -327,20 +258,33 @@ async function loadKnowledgeStatus() {
   const title = field("knowledge-status-title");
   const detail = field("knowledge-status-detail");
 
-  try {
-    const response = await fetch("/api/knowledge/status");
-    const result = await response.json();
-    if (!response.ok || !result.ready) {
-      throw new Error("Knowledge database unavailable");
+  row.classList.remove("ready");
+  title.textContent = "Connecting to knowledge assistant";
+  detail.textContent = "Checking the local evidence database…";
+
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    try {
+      const response = await fetch("/api/knowledge/status", {
+        cache: "no-store",
+      });
+      const result = await response.json();
+      if (!response.ok || !result.ready) {
+        throw new Error("Knowledge database unavailable");
+      }
+      row.classList.add("ready");
+      title.textContent = "Knowledge assistant ready";
+      detail.textContent =
+        `${result.documents} documents · ${result.chunks} searchable sections`;
+      return;
+    } catch (error) {
+      if (attempt < 3) {
+        await new Promise((resolve) => setTimeout(resolve, 800));
+      }
     }
-    row.classList.add("ready");
-    title.textContent = "Knowledge assistant ready";
-    detail.textContent =
-      `${result.documents} documents · ${result.chunks} searchable sections`;
-  } catch (error) {
-    title.textContent = "Knowledge database unavailable";
-    detail.textContent = "Run: python -m rag_system.build_database";
   }
+
+  title.textContent = "Cannot reach the knowledge assistant";
+  detail.textContent = "Refresh the page after the local server has started.";
 }
 
 function showAssistantAnswer(result) {
