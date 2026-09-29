@@ -8,423 +8,202 @@
   <script src="app.js" defer></script>
 </head>
 <body>
-  <div class="dashboard">
-    <aside class="sidebar">
-      <div class="brand">
-        <span class="brand-mark">+</span>
-        <span>HYBRID Q AI</span>
+  <header class="site-header">
+    <a class="brand" href="#analysis" aria-label="Hybrid Q AI home">
+      <span class="brand-flower" aria-hidden="true">✣</span>
+      <span>HYBRID Q AI</span>
+    </a>
+    <p>Research prototype</p>
+    <span class="status">● System online</span>
+  </header>
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-visual" aria-hidden="true">
+      <span class="hero-ring"></span>
+      <span class="hero-cross">+</span>
+      <span class="hero-caption">CAMELYON17<br>＋ SEER</span>
+    </div>
+    <div class="hero-copy">
+      <p class="eyebrow">EVIDENCE-GROUNDED CANCER RESEARCH</p>
+      <h1 id="hero-title">Dual-pathway<br>AI analysis</h1>
+      <div class="hero-footer">
+        <p>Explore image and clinical predictions separately, then study the evidence behind both pathways.</p>
+        <span>RESEARCH ONLY</span>
       </div>
+    </div>
+  </section>
 
-      <nav aria-label="Main navigation">
-        <a class="nav-item active" href="#analysis">Analysis</a>
-        <a class="nav-item" href="#clinical">Clinical information</a>
-        <a class="nav-item" href="#image">Image</a>
-        <a class="nav-item" href="#results">Results</a>
-        <a class="nav-item" href="#knowledge">Knowledge assistant</a>
-      </nav>
-
-      <div class="sidebar-bottom">Evidence-grounded research workspace</div>
-    </aside>
-
-    <main class="workspace" id="analysis">
-      <header class="topbar">
-        <div>
-          <p class="eyebrow">HYBRID QUANTUM CANCER RESEARCH</p>
-          <h1>Dual-pathway analysis</h1>
-          <p class="subtitle">
-            Explore image and clinical pathways separately, then study the
-            evidence behind the results with the knowledge assistant.
-          </p>
-        </div>
-        <span class="status">● Research system online</span>
-      </header>
-
-      <div class="content">
-        <section id="model-readiness" class="readiness-card" aria-live="polite">
+  <main class="page" id="analysis">
+    <div class="dashboard-grid">
+      <section class="card clinical-card" id="clinical">
+        <div class="card-heading">
           <div>
-            <span class="result-label">MODEL READINESS</span>
-            <h2 id="model-readiness-title">Checking local model files…</h2>
-            <p id="model-readiness-message">
-              The knowledge assistant remains available during this check.
-            </p>
+            <span class="result-label">CLINICAL PATHWAY</span>
+            <h2>Clinical information</h2>
+            <p>Enter the SEER-style registry features used by the model.</p>
           </div>
-          <ul id="model-missing-files" hidden></ul>
-        </section>
-
-        <div class="section-heading">
-          <div>
-            <h2>Patient information</h2>
-            <p>Complete the fields used by the clinical pathway.</p>
-          </div>
-          <span class="step">01 / 03</span>
         </div>
 
-        <section class="card" id="clinical">
-          <div class="card-heading">
-            <div class="icon">＋</div>
-            <div>
-              <h3>Clinical details</h3>
-              <p>Breast cancer registry features</p>
-            </div>
-          </div>
-
-          <div class="form-grid">
-            <label>
-              Age at diagnosis
-              <input
-                id="age"
-                type="number"
-                min="18"
-                max="90"
-                step="1"
-                required
-                placeholder="e.g. 57"
-              >
-            </label>
-
-            <label>
-              Tumour size (mm)
-              <input
-                id="tumour-size"
-                type="number"
-                min="0"
-                max="400"
-                step="1"
-                required
-                placeholder="e.g. 28"
-              >
-            </label>
-
-            <label>
-              Race category
-              <select id="race" required>
-                <option value="">Select race</option>
-                <option>American Indian/Alaska Native</option>
-                <option>Asian or Pacific Islander</option>
-                <option>Black</option>
-                <option>Unknown</option>
-                <option>White</option>
-              </select>
-            </label>
-
-            <label>
-              Hispanic origin
-              <select id="origin" required>
-                <option value="">Select origin</option>
-                <option>Non-Spanish-Hispanic-Latino</option>
-                <option>Spanish-Hispanic-Latino</option>
-              </select>
-            </label>
-
-            <label>
-              Primary breast site
-              <select id="primary-site" required>
-                <option value="">Select site</option>
-                <option>C50.0-Nipple</option>
-                <option>C50.1-Central portion of breast</option>
-                <option>C50.2-Upper-inner quadrant of breast</option>
-                <option>C50.3-Lower-inner quadrant of breast</option>
-                <option>C50.4-Upper-outer quadrant of breast</option>
-                <option>C50.5-Lower-outer quadrant of breast</option>
-                <option>C50.6-Axillary tail of breast</option>
-                <option>C50.8-Overlapping lesion of breast</option>
-                <option>C50.9-Breast, NOS</option>
-              </select>
-            </label>
-
-            <label>
-              Histological type (ICD-O-3 code)
-              <input
-                id="histology"
-                type="text"
-                inputmode="numeric"
-                maxlength="4"
-                pattern="[0-9]{4}"
-                required
-                placeholder="e.g. 8500"
-              >
-            </label>
-
-            <label>
-              Laterality
-              <select id="laterality" required>
-                <option value="">Select laterality</option>
-                <option>Bilateral, single primary</option>
-                <option>Left - origin of primary</option>
-                <option>Only one side - side unspecified</option>
-                <option
-                  value="Paired site, but no information concerning laterality"
-                >
-                  Paired site, but no information concerning laterality
-                </option>
-                <option>Right - origin of primary</option>
-              </select>
-            </label>
-
-            <label>
-              Tumour grade
-              <select id="grade" required>
-                <option value="">Select grade</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="unknown">Unknown</option>
-              </select>
-            </label>
-
-            <label>
-              ER status
-              <select id="er" class="receptor" required>
-                <option value="">Select ER status</option>
-                <option>Borderline/Unknown</option>
-                <option>Negative</option>
-                <option>Positive</option>
-                <option>Recode not available</option>
-              </select>
-            </label>
-
-            <label>
-              PR status
-              <select id="pr" class="receptor" required>
-                <option value="">Select PR status</option>
-                <option>Borderline/Unknown</option>
-                <option>Negative</option>
-                <option>Positive</option>
-                <option>Recode not available</option>
-              </select>
-            </label>
-
-            <label>
-              HER2 status
-              <select id="her2" class="receptor" required>
-                <option value="">Select HER2 status</option>
-                <option>Borderline/Unknown</option>
-                <option>Negative</option>
-                <option>Positive</option>
-                <option>Recode not available</option>
-              </select>
-            </label>
-
-            <label>
-              T stage
-              <select id="t-stage" required>
-                <option value="">Select T stage</option>
-                <option>T0</option>
-                <option>T1</option>
-                <option>T2</option>
-                <option>T3</option>
-                <option>T4</option>
-                <option>TX</option>
-                <option>Tis</option>
-                <option value="unknown">Unknown</option>
-              </select>
-            </label>
-
-            <label>
-              M stage
-              <select id="m-stage" required>
-                <option value="">Select M stage</option>
-                <option>M0</option>
-                <option>M1</option>
-                <option value="unknown">Unknown</option>
-              </select>
-            </label>
-          </div>
-
-          <div class="derived-info">
-            <span>
-              Derived breast subtype:
-              <strong id="subtype">—</strong>
-            </span>
-            <span>
-              Tumour-size status:
-              <strong>measured</strong>
-            </span>
-          </div>
-
-          <label
-            id="manual-subtype-field"
-            class="manual-subtype"
-            hidden
-          >
-            Breast subtype
-            <select id="manual-subtype">
-              <option value="">Select subtype</option>
-              <option>HR+/HER2+</option>
-              <option>HR+/HER2-</option>
-              <option>HR-/HER2+</option>
-              <option>HR-/HER2-</option>
-              <option>Recode not available</option>
-              <option>Unknown</option>
+        <div class="form-grid">
+          <label>Age at diagnosis
+            <input id="age" type="number" min="18" max="90" step="1" required placeholder="e.g. 57">
+          </label>
+          <label>Tumour size (mm)
+            <input id="tumour-size" type="number" min="0" max="400" step="1" required placeholder="e.g. 28">
+          </label>
+          <label>Race category
+            <select id="race" required>
+              <option value="">Select race</option>
+              <option>American Indian/Alaska Native</option><option>Asian or Pacific Islander</option>
+              <option>Black</option><option>Unknown</option><option>White</option>
             </select>
           </label>
-        </section>
-
-        <div class="section-heading" id="image">
-          <div>
-            <h2>Image</h2>
-            <p>Upload a lymph-node histopathology patch.</p>
-          </div>
-          <span class="step">02 / 03</span>
+          <label>Hispanic origin
+            <select id="origin" required>
+              <option value="">Select origin</option>
+              <option>Non-Spanish-Hispanic-Latino</option><option>Spanish-Hispanic-Latino</option>
+            </select>
+          </label>
+          <label>Primary breast site
+            <select id="primary-site" required>
+              <option value="">Select site</option>
+              <option>C50.0-Nipple</option><option>C50.1-Central portion of breast</option>
+              <option>C50.2-Upper-inner quadrant of breast</option><option>C50.3-Lower-inner quadrant of breast</option>
+              <option>C50.4-Upper-outer quadrant of breast</option><option>C50.5-Lower-outer quadrant of breast</option>
+              <option>C50.6-Axillary tail of breast</option><option>C50.8-Overlapping lesion of breast</option>
+              <option>C50.9-Breast, NOS</option>
+            </select>
+          </label>
+          <label>Histological type (ICD-O-3)
+            <input id="histology" type="text" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" required placeholder="e.g. 8500">
+          </label>
+          <label>Laterality
+            <select id="laterality" required>
+              <option value="">Select laterality</option><option>Bilateral, single primary</option>
+              <option>Left - origin of primary</option><option>Only one side - side unspecified</option>
+              <option value="Paired site, but no information concerning laterality">Paired site, laterality unknown</option>
+              <option>Right - origin of primary</option>
+            </select>
+          </label>
+          <label>Tumour grade
+            <select id="grade" required>
+              <option value="">Select grade</option><option value="1">1</option><option value="2">2</option>
+              <option value="3">3</option><option value="4">4</option><option value="unknown">Unknown</option>
+            </select>
+          </label>
+          <label>ER status
+            <select id="er" class="receptor" required>
+              <option value="">Select ER status</option><option>Borderline/Unknown</option>
+              <option>Negative</option><option>Positive</option><option>Recode not available</option>
+            </select>
+          </label>
+          <label>PR status
+            <select id="pr" class="receptor" required>
+              <option value="">Select PR status</option><option>Borderline/Unknown</option>
+              <option>Negative</option><option>Positive</option><option>Recode not available</option>
+            </select>
+          </label>
+          <label>HER2 status
+            <select id="her2" class="receptor" required>
+              <option value="">Select HER2 status</option><option>Borderline/Unknown</option>
+              <option>Negative</option><option>Positive</option><option>Recode not available</option>
+            </select>
+          </label>
+          <label>T stage
+            <select id="t-stage" required>
+              <option value="">Select T stage</option><option>T0</option><option>T1</option><option>T2</option>
+              <option>T3</option><option>T4</option><option>TX</option><option>Tis</option><option value="unknown">Unknown</option>
+            </select>
+          </label>
+          <label>M stage
+            <select id="m-stage" required>
+              <option value="">Select M stage</option><option>M0</option><option>M1</option><option value="unknown">Unknown</option>
+            </select>
+          </label>
         </div>
 
-        <section class="card upload-card">
+        <div class="derived-info">Derived breast subtype: <strong id="subtype">—</strong></div>
+        <label id="manual-subtype-field" class="manual-subtype" hidden>Breast subtype
+          <select id="manual-subtype">
+            <option value="">Select subtype</option><option>HR+/HER2+</option><option>HR+/HER2-</option>
+            <option>HR-/HER2+</option><option>HR-/HER2-</option><option>Recode not available</option><option>Unknown</option>
+          </select>
+        </label>
+      </section>
+
+      <aside class="side-column">
+        <section class="card upload-card" id="image">
+          <span class="result-label">IMAGE PATHWAY</span>
           <div class="upload-symbol">▧</div>
-          <h3>Choose an image</h3>
-          <p>PNG or JPEG. The image will be previewed here.</p>
-
-          <label class="upload-button" for="image-file">
-            Browse files
-          </label>
-
-          <input
-            id="image-file"
-            type="file"
-            accept="image/png,image/jpeg"
-          >
-
-          <div
-            id="image-preview"
-            class="image-preview"
-            hidden
-          ></div>
+          <h2>Upload image patch</h2>
+          <p>Choose a 96 × 96 PNG or JPEG lymph-node histopathology patch.</p>
+          <label class="upload-button" for="image-file">Browse files</label>
+          <input id="image-file" type="file" accept="image/png,image/jpeg">
+          <div id="image-preview" class="image-preview" hidden></div>
         </section>
 
-        <div class="run-controls">
-          <button id="run-analysis" type="button">
-            Run analysis
-          </button>
-          <p id="run-status" role="status" aria-live="polite"></p>
-        </div>
-
-        <div class="section-heading" id="results">
-          <div>
-            <h2>Results</h2>
-            <p>The two pathways will appear separately.</p>
-          </div>
-          <span class="step">03 / 03</span>
-        </div>
-
-        <div class="results-grid">
-          <section class="card result-card">
-            <span class="result-label">IMAGE PATHWAY</span>
-            <h3 id="image-result-title">
-              Awaiting image analysis
-            </h3>
-            <p id="image-result-detail">
-              Patch-level tumour-pattern result will appear here.
-            </p>
-          </section>
-
-          <section class="card result-card">
-            <span class="result-label">CLINICAL PATHWAY</span>
-            <h3 id="clinical-result-title">
-              Awaiting clinical analysis
-            </h3>
-            <p id="clinical-result-detail">
-              Regional-node prediction will appear here.
-            </p>
-          </section>
-        </div>
-
-        <section id="result-explanation" class="card explanation-card" hidden>
-          <div class="background-heading">
-            <div>
-              <span class="result-label">EVIDENCE-GROUNDED EXPLANATION</span>
-              <h3>Understand these two results</h3>
-            </div>
-            <button id="explain-results" type="button">Explain results</button>
-          </div>
-          <p>
-            Only the two model outputs are sent for explanation. The scores are
-            explained separately and are never combined into one patient risk.
-          </p>
-          <p id="result-explanation-status" role="status" aria-live="polite"></p>
+        <section class="card run-card">
+          <button id="run-analysis" type="button">Run both pathways</button>
+          <p id="run-status" role="status" aria-live="polite">Complete the form and upload an image.</p>
         </section>
+      </aside>
+    </div>
 
-        <section class="card background-card">
-          <div class="background-heading">
-            <div>
-              <span class="result-label">SOURCE BACKGROUND</span>
-              <h3>How the two tasks relate</h3>
-            </div>
-
-            <button id="explain-background" type="button">
-              Explain background
-            </button>
-          </div>
-
-          <p
-            id="background-status"
-            role="status"
-            aria-live="polite"
-          ></p>
-
-          <div id="background-content" hidden>
-            <p id="background-text"></p>
-            <h4>Sources</h4>
-            <ul id="background-sources"></ul>
-          </div>
-        </section>
-
-        <div class="section-heading" id="knowledge">
-          <div>
-            <h2>Knowledge assistant</h2>
-            <p>
-              Ask any question related to the project or its wider scientific
-              and technical subjects.
-            </p>
-          </div>
-          <span class="step">EVIDENCE-GROUNDED</span>
-        </div>
-
-        <section class="card knowledge-card">
-          <div class="knowledge-status-row">
-            <div>
-              <span class="knowledge-status-dot" aria-hidden="true"></span>
-              <strong id="knowledge-status-title">Checking knowledge database…</strong>
-            </div>
-            <span id="knowledge-status-detail"></span>
-          </div>
-
-          <div class="assistant-controls">
-            <label>
-              Explanation level
-              <select id="assistant-level">
-                <option value="beginner">Complete beginner</option>
-                <option value="student" selected>University student</option>
-                <option value="technical">Technical</option>
-              </select>
-            </label>
-          </div>
-
-          <label class="question-field">
-            Ask anything related to this research
-            <textarea
-              id="assistant-question"
-              maxlength="2000"
-              placeholder="Type your own question about cancer, pathology, datasets, AI, quantum computing, metrics, software or the project…"
-            ></textarea>
-          </label>
-
-          <div class="assistant-action">
-            <button id="ask-assistant" type="button">Ask the assistant</button>
-            <p id="assistant-status" role="status" aria-live="polite"></p>
-          </div>
-
-          <div id="assistant-response" hidden>
-            <h3>Answer</h3>
-            <p id="assistant-answer"></p>
-            <p class="research-warning">
-              Research education only—not medical diagnosis or treatment advice.
-            </p>
-            <h4>Supporting sources</h4>
-            <ul id="assistant-sources"></ul>
-          </div>
-        </section>
+    <section class="results-section" id="results">
+      <div class="section-title"><span class="result-label">MODEL OUTPUTS</span><h2>Results</h2></div>
+      <div class="results-grid">
+        <article class="card result-card image-result">
+          <span class="result-label">IMAGE PATHWAY</span>
+          <h3 id="image-result-title">Awaiting image analysis</h3>
+          <p id="image-result-detail">Patch-level tumour-pattern result will appear here.</p>
+        </article>
+        <article class="card result-card clinical-result">
+          <span class="result-label">CLINICAL PATHWAY</span>
+          <h3 id="clinical-result-title">Awaiting clinical analysis</h3>
+          <p id="clinical-result-detail">Regional-node prediction will appear here.</p>
+        </article>
       </div>
-    </main>
-  </div>
+      <div id="result-explanation" class="explanation-bar" hidden>
+        <div><strong>Need help interpreting the outputs?</strong><p>The assistant explains each pathway separately using retrieved evidence.</p></div>
+        <button id="explain-results" type="button">Explain results</button>
+        <p id="result-explanation-status" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="card knowledge-card" id="knowledge">
+      <div class="knowledge-intro">
+        <div>
+          <span class="result-label">EVIDENCE-GROUNDED RAG</span>
+          <h2>Knowledge assistant</h2>
+          <p>Ask about the project, datasets, pathology, evaluation metrics, AI, or quantum computing.</p>
+        </div>
+        <div class="knowledge-status-row">
+          <span class="knowledge-status-dot" aria-hidden="true"></span>
+          <div><strong id="knowledge-status-title">Checking knowledge database…</strong><span id="knowledge-status-detail"></span></div>
+        </div>
+      </div>
+      <div class="assistant-grid">
+        <label class="question-field">Your question
+          <textarea id="assistant-question" maxlength="2000" placeholder="Ask a question about this research…"></textarea>
+        </label>
+        <div class="assistant-side">
+          <label>Explanation level
+            <select id="assistant-level">
+              <option value="beginner">Complete beginner</option>
+              <option value="student" selected>University student</option>
+              <option value="technical">Technical</option>
+            </select>
+          </label>
+          <button id="ask-assistant" type="button">Ask the assistant</button>
+          <p id="assistant-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+      <div id="assistant-response" hidden>
+        <h3>Answer</h3><p id="assistant-answer"></p>
+        <p class="research-warning">Research education only—not medical diagnosis or treatment advice.</p>
+        <h4>Supporting sources</h4><ul id="assistant-sources"></ul>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
