@@ -36,6 +36,28 @@ def calculate_sha256(
     return digest.hexdigest()
 
 
+def calculate_json_sha256(
+    path,
+):
+    """Hash JSON text consistently across Windows and Unix checkouts."""
+    path = Path(
+        path
+    )
+    text = path.read_text(
+        encoding="utf-8",
+    )
+    normalized = text.replace(
+        "\r\n",
+        "\n",
+    ).replace(
+        "\r",
+        "\n",
+    )
+    return hashlib.sha256(
+        normalized.encode("utf-8")
+    ).hexdigest()
+
+
 def build_run_identity(
     joint_config_path,
     preprocessor_state_path,
@@ -80,12 +102,12 @@ def build_run_identity(
             ]
         ),
         "joint_config_sha256": (
-            calculate_sha256(
+            calculate_json_sha256(
                 joint_config_path
             )
         ),
         "preprocessor_state_sha256": (
-            calculate_sha256(
+            calculate_json_sha256(
                 preprocessor_state_path
             )
         ),

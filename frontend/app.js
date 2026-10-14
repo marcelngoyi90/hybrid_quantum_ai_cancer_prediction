@@ -1,10 +1,7 @@
 const imageInput = document.querySelector("#image-file");
 const preview = document.querySelector("#image-preview");
-const subtypeOutput = document.querySelector("#subtype");
-const manualSubtypeField = document.querySelector("#manual-subtype-field");
-const manualSubtype = document.querySelector("#manual-subtype");
-const runButton = document.querySelector("#run-analysis");
 const runStatus = document.querySelector("#run-status");
+const imageRunButton = document.querySelector("#run-image-analysis");
 
 let imageReady = false;
 let modelReady = false;
@@ -14,6 +11,7 @@ function field(id) {
   return document.getElementById(id);
 }
 
+
 async function loadModelStatus() {
   try {
     const response = await fetch("/api/model/status");
@@ -21,45 +19,12 @@ async function loadModelStatus() {
     if (!response.ok) throw new Error("Could not check the model files.");
 
     modelReady = result.ready;
-    runButton.disabled = !modelReady;
+    imageRunButton.disabled = !modelReady;
   } catch (error) {
     modelReady = false;
-    runButton.disabled = true;
+    imageRunButton.disabled = true;
   }
 }
-
-function updateSubtype() {
-  const er = field("er").value;
-  const pr = field("pr").value;
-  const her2 = field("her2").value;
-  const values = [er, pr, her2];
-
-  if (values.some(value => value === "")) {
-    subtypeOutput.textContent = "—";
-    manualSubtypeField.hidden = true;
-    manualSubtype.required = false;
-    return;
-  }
-
-  if (!values.every(value => ["Positive", "Negative"].includes(value))) {
-    subtypeOutput.textContent = "Select below";
-    manualSubtypeField.hidden = false;
-    manualSubtype.required = true;
-    return;
-  }
-
-  manualSubtypeField.hidden = true;
-  manualSubtype.required = false;
-  manualSubtype.value = "";
-
-  const hr = er === "Positive" || pr === "Positive" ? "HR+" : "HR-";
-  const her2Label = her2 === "Positive" ? "HER2+" : "HER2-";
-  subtypeOutput.textContent = `${hr}/${her2Label}`;
-}
-
-document.querySelectorAll(".receptor").forEach(select => {
-  select.addEventListener("change", updateSubtype);
-});
 
 imageInput.addEventListener("change", () => {
   const file = imageInput.files[0];
@@ -105,99 +70,36 @@ imageInput.addEventListener("change", () => {
   image.src = url;
 });
 
-function clinicalInput() {
-  return {
-    age: Number(field("age").value),
-    tumour_size: Number(field("tumour-size").value),
-    race: field("race").value,
-    origin: field("origin").value,
-    primary_site: field("primary-site").value,
-    histology: field("histology").value.trim(),
-    laterality: field("laterality").value,
-    grade: field("grade").value,
-    er: field("er").value,
-    pr: field("pr").value,
-    her2: field("her2").value,
-    t_stage: field("t-stage").value,
-    m_stage: field("m-stage").value,
-    breast_subtype: manualSubtype.value,
-  };
-}
-
-runButton.addEventListener("click", async () => {
+imageRunButton.addEventListener("click", async () => {
   if (!modelReady) {
-    runStatus.textContent =
-      "Prediction is unavailable because private model files are missing.";
+    runStatus.textContent = "The image model is not ready.";
     return;
   }
-  const inputs = document.querySelectorAll(
-    '#clinical input[required], #clinical select[required]'
-  );
-
-  for (const input of inputs) {
-    if (!input.reportValidity()) {
-      input.focus();
-      return;
-    }
-  }
-
-  if (manualSubtype.required && !manualSubtype.reportValidity()) {
-    manualSubtype.focus();
-    return;
-  }
-
   if (!imageReady || !imageInput.files[0]) {
     runStatus.textContent = "Choose a readable 96 × 96 image first.";
     return;
   }
-
-  runButton.disabled = true;
-  runStatus.textContent = "Running analysis…";
-
-  const form = new FormData();
-  form.append("clinical", JSON.stringify(clinicalInput()));
-  form.append("image", imageInput.files[0]);
-
+  imageRunButton.disabled = true;
+  runStatus.textContent = "Analysing image…";
+  field("result-explanation").hidden = true;
+  latestPrediction = null;
   try {
-    const response = await fetch("/api/predict", {
-      method: "POST",
-      body: form,
-    });
-
+    const form = new FormData();
+    form.append("image", imageInput.files[0]);
+    const response = await fetch("/api/predict-image", { method: "POST", body: form });
     const result = await response.json();
-
-    if (!response.ok) {
-      throw new Error(result.detail || "Analysis failed.");
-    }
-
-    const image = result.image_pathway;
-    const clinical = result.clinical_pathway;
+    if (!response.ok) throw new Error(result.detail || "Image analysis failed.");
     latestPrediction = result;
-
-    field("image-result-title").textContent =
-      image.predicted_class === "tumour_pattern_detected"
-        ? "Tumour pattern detected"
-        : "No tumour pattern detected";
-
-    field("image-result-detail").textContent =
-      `Image score: ${(image.tumour_pattern_probability * 100).toFixed(4)}%. ` +
-      `Threshold: ${(image.threshold * 100).toFixed(1)}%. ` +
-      "Result applies to the central region of this patch.";
-
-    field("clinical-result-title").textContent =
-      `Predicted ${clinical.predicted_class}`;
-
-    field("clinical-result-detail").textContent =
-      `N+ score: ${(clinical.n_positive_probability * 100).toFixed(2)}%. ` +
-      `Threshold: ${(clinical.threshold * 100).toFixed(1)}%.`;
-
-    runStatus.textContent = `Analysis complete · model seed ${result.model_seed}`;
+    const image = result.image_pathway;
+    field("image-result-title").textContent = image.predicted_class === "tumour_pattern_detected" ? "Tumour pattern detected" : "No tumour pattern detected";
+    field("image-result-detail").textContent = `Image score: ${(image.tumour_pattern_probability * 100).toFixed(4)}%. Threshold: ${(image.threshold * 100).toFixed(1)}%. Result applies to the central region of this patch.`;
+    runStatus.textContent = "Image analysis complete.";
     field("result-explanation").hidden = false;
     field("results").scrollIntoView({ behavior: "smooth" });
   } catch (error) {
     runStatus.textContent = error.message;
   } finally {
-    runButton.disabled = !modelReady;
+    imageRunButton.disabled = !modelReady;
   }
 });
 
@@ -208,11 +110,10 @@ explainResultsButton.addEventListener("click", async () => {
   if (!latestPrediction) return;
   explainResultsButton.disabled = true;
   resultExplanationStatus.textContent =
-    "Retrieving evidence and explaining both outputs separately…";
+    "Retrieving evidence and explaining the available results…";
 
   try {
     const image = latestPrediction.image_pathway;
-    const clinical = latestPrediction.clinical_pathway;
     const response = await fetch("/api/explain-results", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -220,10 +121,6 @@ explainResultsButton.addEventListener("click", async () => {
         image: {
           predicted_class: image.predicted_class,
           probability: image.tumour_pattern_probability,
-        },
-        clinical: {
-          predicted_class: clinical.predicted_class,
-          probability: clinical.n_positive_probability,
         },
         level: field("assistant-level").value,
       }),
@@ -235,7 +132,7 @@ explainResultsButton.addEventListener("click", async () => {
 
     showAssistantAnswer(result);
     assistantQuestion.value =
-      "Explain the latest image and clinical pathway results.";
+      "Explain the latest image result.";
     resultExplanationStatus.textContent =
       "Explanation is ready in the Knowledge assistant section.";
     field("knowledge").scrollIntoView({ behavior: "smooth" });

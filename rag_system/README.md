@@ -1,5 +1,19 @@
 # RAG knowledge system
 
+## Current website workflow
+
+The website now provides image-only analysis: upload a 96 × 96 PNG or JPEG
+lymph-node histopathology patch and click **Analyse image**. No clinical form
+is required. `/api/predict-image` runs only the trained joint model's image
+branch and returns a patch prediction; it does not run the downstream quantum
+classifier. Existing clinical scripts and research results remain available.
+
+**Explain results** generates a short explanation of that image prediction,
+including that even a high model score can be incorrect. The knowledge
+assistant still supports broader project questions and source citations.
+The SEER preprocessor and trained checkpoint remain private local artifacts;
+the API key belongs in the ignored `.env` file.
+
 This directory contains the evidence-grounded retrieval-augmented generation
 (RAG) system for the project. It can teach a beginner, support an oral defence,
 and explain project predictions and results using cited evidence.

@@ -325,6 +325,9 @@ def preprocess_record(
     for feature in (
         preprocessor.categorical_features
     ):
+        if record[feature] is None:
+            categorical_values.append(int(preprocessor.missing_category_index))
+            continue
         value = str(record[feature]).strip()
         vocabulary = (
             preprocessor.category_vocabularies[

@@ -56,7 +56,7 @@ class PathwayResult(BaseModel):
 
 class PredictionExplanationRequest(BaseModel):
     image: PathwayResult
-    clinical: PathwayResult
+    clinical: PathwayResult | None = None
     level: Literal["beginner", "student", "technical"] = "student"
 
 
@@ -157,6 +157,10 @@ def prepare_clinical_record(data, preprocessor):
         value = data.get(input_name)
         vocabulary = preprocessor.category_vocabularies[feature]
 
+        if input_name in {"race", "origin", "primary_site", "laterality", "histology", "t_stage", "m_stage"} and value is None:
+            record[feature] = None
+            continue
+
         if not isinstance(value, str) or value not in vocabulary:
             raise ValueError(f"Select a valid value for {input_name}.")
 
@@ -195,6 +199,35 @@ def prepare_image(contents):
         raise ValueError("The uploaded file is not a readable image.") from exc
 
     return build_transform(training=False)(image).unsqueeze(0)
+
+
+@app.post("/api/predict-image")
+async def predict_image(image: UploadFile = File(...)):
+    if not prediction_readiness()["ready"]:
+        raise HTTPException(503, "Prediction is not ready. Model files are missing.")
+    if image.content_type not in {"image/png", "image/jpeg"}:
+        raise HTTPException(422, "Upload a PNG or JPEG image.")
+    contents = await image.read(4_000_001)
+    if len(contents) > 4_000_000:
+        raise HTTPException(413, "The image file is too large.")
+    try:
+        tensor = prepare_image(contents)
+        context = model_context()
+        with torch.inference_mode():
+            logit = context.model.forward_image(tensor.to(context.device)).reshape(-1)[0]
+            score = float(torch.sigmoid(logit).item())
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+    except (FileNotFoundError, OSError, RuntimeError) as exc:
+        raise HTTPException(503, "The trained image model could not be loaded.") from exc
+    return {
+        "model_seed": SEED,
+        "image_pathway": {
+            "tumour_pattern_probability": round(score, 6),
+            "threshold": IMAGE_THRESHOLD,
+            "predicted_class": "tumour_pattern_detected" if score >= IMAGE_THRESHOLD else "no_tumour_pattern_detected",
+        },
+    }
 
 
 @app.post("/api/predict")
@@ -257,6 +290,12 @@ async def predict(
 
     return {
         "model_seed": SEED,
+        "input_warning": (
+            "Omitted registry fields are encoded as missing. "
+            "Performance of this simplified form has not been evaluated."
+            if any(data.get(name) is None for name in ("race", "origin", "primary_site", "laterality", "histology", "t_stage", "m_stage"))
+            else ""
+        ),
         "image_pathway": {
             "tumour_pattern_probability": round(image_score, 6),
             "threshold": IMAGE_THRESHOLD,
@@ -289,7 +328,7 @@ async def explain_results(request: PredictionExplanationRequest):
     }
     if request.image.predicted_class not in allowed_image:
         raise HTTPException(422, "The image result class is not valid.")
-    if request.clinical.predicted_class not in {"N0", "N+"}:
+    if request.clinical is not None and request.clinical.predicted_class not in {"N0", "N+"}:
         raise HTTPException(422, "The clinical result class is not valid.")
 
     question = (
@@ -297,18 +336,29 @@ async def explain_results(request: PredictionExplanationRequest):
         f"The Camelyon image pathway predicted "
         f"{request.image.predicted_class.replace('_', ' ')} with a score of "
         f"{request.image.probability:.4f}. The SEER clinical pathway predicted "
-        f"{request.clinical.predicted_class} with an N+ score of "
-        f"{request.clinical.probability:.4f}. Explain what each output means, "
+        f"{request.clinical.predicted_class if request.clinical else 'not evaluated'} with an N+ score of "
+        f"{request.clinical.probability if request.clinical else 'not available'}. Explain what each evaluated output means, "
         "why they may agree or differ, and their limitations. State clearly "
         "that Camelyon and SEER are unpaired datasets, these are not results "
         "from one matched patient, the scores must not be combined, and this "
         "research system is not a medical diagnosis."
     )
+    if request.clinical is None:
+        question = (
+            "Explain this image-only research result in clear language: "
+            f"{request.image.predicted_class.replace('_', ' ')} with a model score of {request.image.probability * 100:.2f}%. "
+            "It describes the central region of one 96 by 96 lymph-node histopathology patch. "
+            "No clinical pathway was evaluated. Do not invent clinical findings. "
+            "Explain the prediction without treating it as confirmed tumour. "
+            "A high model score can still be wrong and is not measured accuracy. "
+            "Keep the explanation to this image; a negative patch does not establish a cancer-free patient."
+        )
     try:
         return await run_in_threadpool(
             answer_question,
             question,
             level=request.level,
+            concise_result=request.clinical is None,
         )
     except FileNotFoundError as exc:
         raise HTTPException(503, "The knowledge database is not ready.") from exc

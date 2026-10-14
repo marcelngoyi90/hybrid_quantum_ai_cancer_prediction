@@ -115,6 +115,7 @@ def answer_question(
     level: str = "student",
     database_path: Path = DEFAULT_DATABASE,
     top_k: int = 7,
+    concise_result: bool = False,
 ) -> dict:
     question = str(question).strip()
     if not question:
@@ -133,7 +134,17 @@ def answer_question(
     user_content = "\n\n".join(
         [
             "Answer in clear English.",
-            LEVEL_INSTRUCTIONS[level],
+            (
+                "Explain only this image prediction to a nontechnical reader in 3–4 short sentences, "
+                "at most 100 words. No introduction, headings, exam framing, analogy, lists, "
+                "SEER discussion or clinical-pathway discussion. Say the model predicted a pattern; "
+                "never state that tumour is confirmed. Present the supplied score as a model score, "
+                "not diagnostic certainty or measured accuracy. Explicitly say even a high score "
+                "can be wrong. Limit scope to this patch and mention expert review for confirmation. "
+                "For a negative prediction, explain that it does not rule out cancer elsewhere. "
+                "Use only one supporting citation group at the end."
+                if concise_result else LEVEL_INSTRUCTIONS[level]
+            ),
             f"Question:\n{question}",
             (
                 f"Retrieved evidence:\n{format_evidence(evidence)}"
@@ -153,7 +164,7 @@ def answer_question(
             {"role": "user", "content": user_content},
         ],
         temperature=0.15,
-        max_completion_tokens=1400,
+        max_completion_tokens=350 if concise_result else 1400,
     )
     answer = response.choices[0].message.content
     if not answer or not answer.strip():
