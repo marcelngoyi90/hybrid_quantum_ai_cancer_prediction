@@ -21,116 +21,20 @@
     <div class="hero-visual" aria-hidden="true">
       <span class="hero-ring"></span>
       <span class="hero-cross">+</span>
-      <span class="hero-caption">CAMELYON17<br>＋ SEER</span>
+      <span class="hero-caption">CAMELYON17</span>
     </div>
     <div class="hero-copy">
       <p class="eyebrow">EVIDENCE-GROUNDED CANCER RESEARCH</p>
-      <h1 id="hero-title">Dual-pathway<br>AI analysis</h1>
+      <h1 id="hero-title">Image-based<br>AI analysis</h1>
       <div class="hero-footer">
-        <p>Explore image and clinical predictions separately, then study the evidence behind both pathways.</p>
+        <p>Upload a lymph-node tissue patch and explore the evidence behind its image prediction.</p>
         <span>RESEARCH ONLY</span>
       </div>
     </div>
   </section>
 
   <main class="page" id="analysis">
-    <div class="dashboard-grid">
-      <section class="card clinical-card" id="clinical">
-        <div class="card-heading">
-          <div>
-            <span class="result-label">CLINICAL PATHWAY</span>
-            <h2>Clinical information</h2>
-            <p>Enter the SEER-style registry features used by the model.</p>
-          </div>
-        </div>
-
-        <div class="form-grid">
-          <label>Age at diagnosis
-            <input id="age" type="number" min="18" max="90" step="1" required placeholder="e.g. 57">
-          </label>
-          <label>Tumour size (mm)
-            <input id="tumour-size" type="number" min="0" max="400" step="1" required placeholder="e.g. 28">
-          </label>
-          <label>Race category
-            <select id="race" required>
-              <option value="">Select race</option>
-              <option>American Indian/Alaska Native</option><option>Asian or Pacific Islander</option>
-              <option>Black</option><option>Unknown</option><option>White</option>
-            </select>
-          </label>
-          <label>Hispanic origin
-            <select id="origin" required>
-              <option value="">Select origin</option>
-              <option>Non-Spanish-Hispanic-Latino</option><option>Spanish-Hispanic-Latino</option>
-            </select>
-          </label>
-          <label>Primary breast site
-            <select id="primary-site" required>
-              <option value="">Select site</option>
-              <option>C50.0-Nipple</option><option>C50.1-Central portion of breast</option>
-              <option>C50.2-Upper-inner quadrant of breast</option><option>C50.3-Lower-inner quadrant of breast</option>
-              <option>C50.4-Upper-outer quadrant of breast</option><option>C50.5-Lower-outer quadrant of breast</option>
-              <option>C50.6-Axillary tail of breast</option><option>C50.8-Overlapping lesion of breast</option>
-              <option>C50.9-Breast, NOS</option>
-            </select>
-          </label>
-          <label>Histological type (ICD-O-3)
-            <input id="histology" type="text" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" required placeholder="e.g. 8500">
-          </label>
-          <label>Laterality
-            <select id="laterality" required>
-              <option value="">Select laterality</option><option>Bilateral, single primary</option>
-              <option>Left - origin of primary</option><option>Only one side - side unspecified</option>
-              <option value="Paired site, but no information concerning laterality">Paired site, laterality unknown</option>
-              <option>Right - origin of primary</option>
-            </select>
-          </label>
-          <label>Tumour grade
-            <select id="grade" required>
-              <option value="">Select grade</option><option value="1">1</option><option value="2">2</option>
-              <option value="3">3</option><option value="4">4</option><option value="unknown">Unknown</option>
-            </select>
-          </label>
-          <label>ER status
-            <select id="er" class="receptor" required>
-              <option value="">Select ER status</option><option>Borderline/Unknown</option>
-              <option>Negative</option><option>Positive</option><option>Recode not available</option>
-            </select>
-          </label>
-          <label>PR status
-            <select id="pr" class="receptor" required>
-              <option value="">Select PR status</option><option>Borderline/Unknown</option>
-              <option>Negative</option><option>Positive</option><option>Recode not available</option>
-            </select>
-          </label>
-          <label>HER2 status
-            <select id="her2" class="receptor" required>
-              <option value="">Select HER2 status</option><option>Borderline/Unknown</option>
-              <option>Negative</option><option>Positive</option><option>Recode not available</option>
-            </select>
-          </label>
-          <label>T stage
-            <select id="t-stage" required>
-              <option value="">Select T stage</option><option>T0</option><option>T1</option><option>T2</option>
-              <option>T3</option><option>T4</option><option>TX</option><option>Tis</option><option value="unknown">Unknown</option>
-            </select>
-          </label>
-          <label>M stage
-            <select id="m-stage" required>
-              <option value="">Select M stage</option><option>M0</option><option>M1</option><option value="unknown">Unknown</option>
-            </select>
-          </label>
-        </div>
-
-        <div class="derived-info">Derived breast subtype: <strong id="subtype">—</strong></div>
-        <label id="manual-subtype-field" class="manual-subtype" hidden>Breast subtype
-          <select id="manual-subtype">
-            <option value="">Select subtype</option><option>HR+/HER2+</option><option>HR+/HER2-</option>
-            <option>HR-/HER2+</option><option>HR-/HER2-</option><option>Recode not available</option><option>Unknown</option>
-          </select>
-        </label>
-      </section>
-
+    <div class="dashboard-grid image-only-layout">
       <aside class="side-column">
         <section class="card upload-card" id="image">
           <span class="result-label">IMAGE PATHWAY</span>
@@ -143,8 +47,8 @@
         </section>
 
         <section class="card run-card">
-          <button id="run-analysis" type="button">Run both pathways</button>
-          <p id="run-status" role="status" aria-live="polite">Complete the form and upload an image.</p>
+          <button id="run-image-analysis" type="button">Analyse image</button>
+          <p id="run-status" role="status" aria-live="polite">Upload an image to begin.</p>
         </section>
       </aside>
     </div>
@@ -157,14 +61,9 @@
           <h3 id="image-result-title">Awaiting image analysis</h3>
           <p id="image-result-detail">Patch-level tumour-pattern result will appear here.</p>
         </article>
-        <article class="card result-card clinical-result">
-          <span class="result-label">CLINICAL PATHWAY</span>
-          <h3 id="clinical-result-title">Awaiting clinical analysis</h3>
-          <p id="clinical-result-detail">Regional-node prediction will appear here.</p>
-        </article>
       </div>
       <div id="result-explanation" class="explanation-bar" hidden>
-        <div><strong>Need help interpreting the outputs?</strong><p>The assistant explains each pathway separately using retrieved evidence.</p></div>
+        <div><strong>Need help interpreting the result?</strong><p>The assistant explains the image result using retrieved evidence.</p></div>
         <button id="explain-results" type="button">Explain results</button>
         <p id="result-explanation-status" role="status" aria-live="polite"></p>
       </div>
