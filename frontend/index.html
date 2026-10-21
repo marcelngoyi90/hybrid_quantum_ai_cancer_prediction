@@ -23,11 +23,16 @@
       <span class="hero-cross">+</span>
       <span class="hero-caption">CAMELYON17</span>
     </div>
+
     <div class="hero-copy">
       <p class="eyebrow">EVIDENCE-GROUNDED CANCER RESEARCH</p>
       <h1 id="hero-title">Image-based<br>AI analysis</h1>
+
       <div class="hero-footer">
-        <p>Upload a lymph-node tissue patch and explore the evidence behind its image prediction.</p>
+        <p>
+          Upload a lymph-node tissue patch and explore the evidence
+          behind its image prediction.
+        </p>
         <span>RESEARCH ONLY</span>
       </div>
     </div>
@@ -40,32 +45,74 @@
           <span class="result-label">IMAGE PATHWAY</span>
           <div class="upload-symbol">▧</div>
           <h2>Upload image patch</h2>
-          <p>Choose a 96 × 96 PNG or JPEG lymph-node histopathology patch.</p>
-          <label class="upload-button" for="image-file">Browse files</label>
-          <input id="image-file" type="file" accept="image/png,image/jpeg">
+          <p>
+            Choose a 96 × 96 PNG or JPEG lymph-node histopathology
+            patch.
+          </p>
+
+          <label class="upload-button" for="image-file">
+            Browse files
+          </label>
+
+          <input
+            id="image-file"
+            type="file"
+            accept="image/png,image/jpeg"
+          >
+
           <div id="image-preview" class="image-preview" hidden></div>
         </section>
 
         <section class="card run-card">
-          <button id="run-image-analysis" type="button">Analyse image</button>
-          <p id="run-status" role="status" aria-live="polite">Upload an image to begin.</p>
+          <button id="run-image-analysis" type="button">
+            Analyse image
+          </button>
+
+          <p id="run-status" role="status" aria-live="polite">
+            Upload an image to begin.
+          </p>
         </section>
       </aside>
     </div>
 
     <section class="results-section" id="results">
-      <div class="section-title"><span class="result-label">MODEL OUTPUTS</span><h2>Results</h2></div>
+      <div class="section-title">
+        <span class="result-label">MODEL OUTPUTS</span>
+        <h2>Results</h2>
+      </div>
+
       <div class="results-grid">
         <article class="card result-card image-result">
           <span class="result-label">IMAGE PATHWAY</span>
-          <h3 id="image-result-title">Awaiting image analysis</h3>
-          <p id="image-result-detail">Patch-level tumour-pattern result will appear here.</p>
+
+          <h3 id="image-result-title">
+            Awaiting image analysis
+          </h3>
+
+          <p id="image-result-detail">
+            Patch-level tumour-pattern result will appear here.
+          </p>
         </article>
       </div>
+
       <div id="result-explanation" class="explanation-bar" hidden>
-        <div><strong>Need help interpreting the result?</strong><p>The assistant explains the image result using retrieved evidence.</p></div>
-        <button id="explain-results" type="button">Explain results</button>
-        <p id="result-explanation-status" role="status" aria-live="polite"></p>
+        <div>
+          <strong>Need help interpreting the result?</strong>
+          <p>
+            The assistant explains the image result using retrieved
+            evidence.
+          </p>
+        </div>
+
+        <button id="explain-results" type="button">
+          Explain results
+        </button>
+
+        <p
+          id="result-explanation-status"
+          role="status"
+          aria-live="polite"
+        ></p>
       </div>
     </section>
 
@@ -74,33 +121,112 @@
         <div>
           <span class="result-label">EVIDENCE-GROUNDED RAG</span>
           <h2>Knowledge assistant</h2>
-          <p>Ask about the project, datasets, pathology, evaluation metrics, AI, or quantum computing.</p>
+          <p>
+            Ask about the project, datasets, pathology, evaluation
+            metrics, AI, or quantum computing.
+          </p>
         </div>
+
         <div class="knowledge-status-row">
-          <span class="knowledge-status-dot" aria-hidden="true"></span>
-          <div><strong id="knowledge-status-title">Checking knowledge database…</strong><span id="knowledge-status-detail"></span></div>
+          <span
+            class="knowledge-status-dot"
+            aria-hidden="true"
+          ></span>
+
+          <div>
+            <strong id="knowledge-status-title">
+              Checking knowledge database…
+            </strong>
+
+            <span id="knowledge-status-detail"></span>
+          </div>
         </div>
       </div>
+
       <div class="assistant-grid">
-        <label class="question-field">Your question
-          <textarea id="assistant-question" maxlength="2000" placeholder="Ask a question about this research…"></textarea>
+        <label class="question-field">
+          Your question
+
+          <textarea
+            id="assistant-question"
+            maxlength="2000"
+            placeholder="Ask a question about this research…"
+          ></textarea>
         </label>
+
         <div class="assistant-side">
-          <label>Explanation level
+          <label>
+            Explanation level
+
             <select id="assistant-level">
               <option value="beginner">Complete beginner</option>
-              <option value="student" selected>University student</option>
+              <option value="student" selected>
+                University student
+              </option>
               <option value="technical">Technical</option>
             </select>
           </label>
-          <button id="ask-assistant" type="button">Ask the assistant</button>
-          <p id="assistant-status" role="status" aria-live="polite"></p>
+
+          <button id="ask-assistant" type="button">
+            Ask the assistant
+          </button>
+
+          <p
+            id="assistant-status"
+            role="status"
+            aria-live="polite"
+          ></p>
         </div>
       </div>
+
       <div id="assistant-response" hidden>
-        <h3>Answer</h3><p id="assistant-answer"></p>
-        <p class="research-warning">Research education only—not medical diagnosis or treatment advice.</p>
-        <h4>Supporting sources</h4><ul id="assistant-sources"></ul>
+        <div
+          id="assistant-result-context"
+          class="assistant-result-context"
+          hidden
+        >
+          <span class="result-label">IMAGE PATHWAY</span>
+          <h3 id="assistant-result-title"></h3>
+        </div>
+
+        <div class="answer-heading">
+          <h3 id="assistant-answer-heading">Answer</h3>
+
+          <div class="audio-controls">
+            <button
+              id="listen-answer"
+              type="button"
+              disabled
+              aria-pressed="false"
+            >
+              Listen to answer
+            </button>
+
+            <button
+              id="stop-answer"
+              type="button"
+              disabled
+            >
+              Stop
+            </button>
+          </div>
+        </div>
+
+        <p id="assistant-answer"></p>
+
+        <p
+          id="audio-status"
+          role="status"
+          aria-live="polite"
+        ></p>
+
+        <p class="research-warning">
+          Research education only—not medical diagnosis or treatment
+          advice.
+        </p>
+
+        <h4>Supporting sources</h4>
+        <ul id="assistant-sources"></ul>
       </div>
     </section>
   </main>
